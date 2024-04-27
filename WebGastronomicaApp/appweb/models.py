@@ -60,6 +60,15 @@ class Pedidos(models.Model):
     def __str__(self):
         return str(self.ID_Pedido)
 
+class Boletas(models.Model):
+    ID_Boleta = models.IntegerField(primary_key=True, help_text="Id de la boleta")
+    ID_Pedido = models.ForeignKey(Pedidos, on_delete=models.CASCADE, help_text="Id del pedido")
+    Fecha = models.DateField(help_text="Fecha de emision de la boleta")
+    Costo_Total = models.IntegerField(help_text="Valor total de atención")
+
+    def __str__(self):
+        return str(self.ID_Boleta)
+    
 
 class Descripción_Pedidos(models.Model):
     ID_Pedido = models.ForeignKey(Pedidos, on_delete=models.CASCADE, help_text="Id de pedido")
