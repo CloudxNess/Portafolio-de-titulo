@@ -11,3 +11,6 @@ def menu(request):
 
 def reservamesa(request):
     return render(request, "reservamesa.html")
+
+def login (request):
+    return render(request,"login.html")

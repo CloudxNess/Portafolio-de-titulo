@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block contenido %}
+
+
+
+    <div class="container">
+        <div class="row" style="height: 810px;">
+            <div class="col-8" style="margin: auto; margin-top: 10px">
+            <div class="card"  >
+                <div class="card-header text-center" >
+                    LOGIN
+                  </div>
+                <div class="card-body">
+                    {% load crispy_forms_tags %}   
+
+                    <form class="row" id="loginForm" action="" method="POST" >
+                        
+                        {% csrf_token %}
+                        {{form | crispy }}
+
+                          <div class="mb-3">
+                            <label class="form-label">Forgot Password?</label>
+                          </div>
+                        <div class="col-12" >
+                          <button type="submit" style="width: 100%" class="btn btn-primary">Login</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    {% endblock  %}
