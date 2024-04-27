@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Reserva_Mesa)
 admin.site.register(Mesa)
 admin.site.register(Pedidos)
+admin.site.register(Ingredientes)

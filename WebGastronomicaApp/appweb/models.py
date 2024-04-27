@@ -2,6 +2,16 @@ from django.db import models
 
 # Create your models here
 
+class Ingredientes(models.Model):
+    ID_Ingrediente = models.IntegerField(primary_key=True,help_text="Id del ingrediente")
+    nombre = models.CharField(max_length=50 , help_text="nombre del ingrediente")
+    Costo = models.IntegerField(help_text="Valor del ingrediente")
+    unidad_medida = models.CharField(max_length=4 , help_text="Unidad de medida del ingrediente")
+
+    def __str__(self):
+        return self.nombre
+
+
 class Mesa (models.Model):
     ID_Mesa = models.IntegerField(primary_key=True, help_text="Id de la mesa")
     Nombre_Mesa = models.CharField(max_length=10, help_text="Identificador de la mesa")
