@@ -19,3 +19,6 @@ WebGastronomicaApp/WebGastronomicaApp/__pycache__/__init__.cpython-311.pyc
 WebGastronomicaApp/WebGastronomicaApp/__pycache__/settings.cpython-311.pyc
 WebGastronomicaApp/WebGastronomicaApp/__pycache__/urls.cpython-311.pyc
 WebGastronomicaApp/WebGastronomicaApp/__pycache__/wsgi.cpython-311.pyc
+WebGastronomicaApp/appweb/__pycache__/models.cpython-311.pyc
+WebGastronomicaApp/appweb/__pycache__/admin.cpython-311.pyc
+*.pyc
