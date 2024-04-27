@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+    
+<div class="container" style="height: 810px;">
+        <div class="row">
+            <div class="col-8" style="margin: auto; margin-top: 10px" >
+            <div class="card"  >
+                <div class="card-header text-center" >
+                    Registro
+                  </div>
+                <div class="card-body">
+                 
+                    <form class="row" id="FormularioProfesional" action="" method="POST" >
+                        {% csrf_token %}                   
+                        <div class="form-group">
+                          <label for="nombre">Nombre:</label>
+                          <input type="text" class="form-control" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="nombre">Apellido:</label>
+                          <input type="text" class="form-control" name="apellido" required>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="nombre">Correo:</label>
+                          <input type="text" class="form-control" name="correo" required>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="nombre">Password:</label>
+                          <input type="password" class="form-control" name="password" required>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="nombre">Repita su Password:</label>
+                          <input type="password" class="form-control" name="password1" required>
+                        </div>
+                      
+                        <div class="col-12" >
+                          <button type="submit" style="width: 100%" class="btn btn-primary">Registrar Nuevo Usuario</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+  
+  
+ {% endblock %}

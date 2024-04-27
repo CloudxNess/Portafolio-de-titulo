@@ -14,3 +14,7 @@ def reservamesa(request):
 
 def login (request):
     return render(request,"registration/login.html")
+
+
+def registrouser (request):
+    return render(request,"registration/registro.html")

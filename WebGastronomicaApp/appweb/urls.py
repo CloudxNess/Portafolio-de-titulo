@@ -7,6 +7,7 @@ urlpatterns = [
      path('menu',menu , name="menu"),
      path('reservamesa',reservamesa , name="reservamesa"),
      path('login',login,name='login'),
+     path('registrouser',registrouser,name='registrouser'),
      
      
 ]
