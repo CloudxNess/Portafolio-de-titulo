@@ -2,6 +2,18 @@ from django.db import models
 
 # Create your models here
 
+class Platos(models.Model):
+    ID_Plato = models.IntegerField(primary_key=True,help_text="Id del plato")
+    Nombre = models.CharField(max_length=50 , help_text="Nombre del plato")
+    Costo = models.IntegerField(help_text="Valor del plato")
+    Region = models.CharField(max_length=50, help_text="Región a la cual pertenece el plato")
+    Cantidad_Comensales = models.IntegerField(help_text="Cantidad de personas que pueden comer de este plato")
+    Descripcion = models.TextField(max_length=200, help_text="Breve descripción del plato")
+
+    def __str__(self):
+        return self.Nombre
+    
+
 class Ingredientes(models.Model):
     ID_Ingrediente = models.IntegerField(primary_key=True,help_text="Id del ingrediente")
     nombre = models.CharField(max_length=50 , help_text="nombre del ingrediente")
