@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here
+
 class Mesa (models.Model):
     ID_Mesa = models.IntegerField(primary_key=True, help_text="Id de la mesa")
     Nombre_Mesa = models.CharField(max_length=10, help_text="Identificador de la mesa")
@@ -9,6 +10,15 @@ class Mesa (models.Model):
 
     def __str__(self):
         return self.Nombre_Mesa
+
+class Pedidos(models.Model):
+    ID_Pedido = models.IntegerField(primary_key=True, help_text="Id del pedido")
+    ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, help_text="Id de la mesa")
+    Estado = models.CharField(max_length=20, help_text="Estado en el cual se encuentra el pedido")
+    Correo_Sol = models.EmailField(help_text="Correo electronico del usuario")
+
+    def __str__(self):
+        return str(self.ID_Pedido)
 
 
 class Reserva_Mesa(models.Model):
