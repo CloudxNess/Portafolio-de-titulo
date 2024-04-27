@@ -61,6 +61,15 @@ class Pedidos(models.Model):
         return str(self.ID_Pedido)
 
 
+class Descripción_Pedidos(models.Model):
+    ID_Pedido = models.ForeignKey(Pedidos, on_delete=models.CASCADE, help_text="Id de pedido")
+    ID_Platos = models.ForeignKey(Platos, on_delete=models.CASCADE, help_text="Id del plato")
+    Costo = models.IntegerField(help_text="Valor total del pedido")      
+
+    def __int__(self):
+        return self.costo
+    
+
 class Reserva_Mesa(models.Model):
     ID_reserva = models.IntegerField()
     nombre = models.CharField(max_length=50 , help_text="Ingrese Nombre")
