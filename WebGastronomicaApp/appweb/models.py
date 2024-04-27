@@ -11,6 +11,14 @@ class Ingredientes(models.Model):
     def __str__(self):
         return self.nombre
 
+class Bodega(models.Model):
+    ID_Ing_Bod = models.IntegerField(primary_key=True,help_text="Id del ingrediente en la bodega")
+    Cantidad = models.IntegerField(help_text="Cantidad de ingredientes en bodega")
+    ID_Ingrediente = models.ForeignKey(Ingredientes, on_delete=models.CASCADE, help_text="Id del ingrediente")
+
+    def __int__ (self):
+        return str(self.ID_Ing_Bod)
+
 
 class Mesa (models.Model):
     ID_Mesa = models.IntegerField(primary_key=True, help_text="Id de la mesa")
