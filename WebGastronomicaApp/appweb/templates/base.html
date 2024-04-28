@@ -12,6 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <link rel="stylesheet"  href="{% static 'design/design.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 
@@ -25,20 +26,76 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        
+        {% if user.is_authenticated and user.is_superuser == False %}
+        
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Bienvenido {{user.username}}
+          </a>
+          
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login </a>
+            <a class="nav-link" href="">Compra en Linea</a>
+          </li>
+          
+        </ul>
+
+        {% elif user.is_authenticated and user.is_superuser %}
+        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Bienvenido {{user.username}}
+          </a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Crud Usuarios
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Crear Usuario </a></li> <!-- Crear Usuario -->
+              <li><a class="dropdown-item" href="">Eliminar Usuario</a></li> <!-- Eliminar Usuario -->
+              <li><a class="dropdown-item" href="">Listar Usuarios</a></li> <!-- Lista de Usuarios Creados -->
+              <li><a class="dropdown-item" href="">Editar Usuarios</a></li><!-- Editar Campos de Usuarios Creados -->
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Crud Platos
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Crear Plato </a></li> <!-- Crear Usuario -->
+              <li><a class="dropdown-item" href="">Eliminar Plato</a></li> <!-- Eliminar Usuario -->
+              <li><a class="dropdown-item" href="">Listar Platos</a></li> <!-- Lista de Usuarios Creados -->
+              <li><a class="dropdown-item" href="">Editar Platos</a></li><!-- Editar Campos de Usuarios Creados -->
+            </ul>
+          </li>
+
+
+          
+     
+          <li class="nav-item">
+            <a class="nav-link" href="">Disponibilidad de Mesas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'reservamesa' %}">Reservar Mesa</a>
+            <a class="nav-link" href="">Inventario de Bodega</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+            <a class="nav-link" href="">Reporte de Negocios</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        {% else %}
+    
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+
+
+      {% endif %}
+
+
+          {% if user.is_authenticated %}
+
+          <a href="{% url 'logout' %}" class="btn btn-dark""  >Cerrar Sesion</a> 
+          {% endif %}
+
         </form>
       </div>
     </div>
