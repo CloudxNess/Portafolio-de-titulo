@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+{% load static%}
+<div class="container" style="height: 805px;">
+
+   
+      <div class="cont-profesionales col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>Mesas</h3>
+
+
+        <div class="cont-listado row">
+          {% for x in Mesas %}
+        
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="prof int">
+              <figure>
+                <a href="#">          
+                  
+            
+                  {% if x.Estado_Ocupado %}
+                  <a href="#" ><img width="150" height="150" src="{% static 'image/mesaa.png' %}"
+                    class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">  </a>   
+                    {% elif x.Estado_Reservado  %}
+                    <img width="150" height="150" src="{% static 'image/mesab.png' %}"
+                    class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">
+                    {% else %}
+                    <img width="150" height="150" src="{% static 'image/mesac.png' %}"
+                    class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">
+
+                  {% endif %}                 
+              
+                 
+                  </a>
+                <h4 class="nombre" style="margin-left:12%;">{{x.Nombre_Mesa}} </h4>
+                <span class="cargo" style="display: none;">O_O</span>
+              </figure>
+            </div>
+          </div>
+       
+          {% endfor %}
+      </div>
+    </div>
+  
+
+
+
+
+
+
+{% endblock %}
