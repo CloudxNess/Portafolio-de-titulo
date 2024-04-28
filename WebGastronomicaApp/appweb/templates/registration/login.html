@@ -17,7 +17,7 @@
                 <div class="card-body">
                     {% load crispy_forms_tags %}   
 
-                    <form class="row" id="loginForm" action="" method="POST" >
+                    <form class="row" id="formularioLogin" action="" method="POST" >
                         
                         {% csrf_token %}
                         {{form | crispy }}

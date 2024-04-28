@@ -11,7 +11,7 @@
                   </div>
                 <div class="card-body">
                  
-                    <form class="row" id="FormularioProfesional" action="" method="POST" >
+                    <form class="row" id="FormularioColaborador" action="" method="POST" >
                         {% csrf_token %}                   
                         <div class="form-group">
                           <label for="nombre">Nombre:</label>
@@ -36,7 +36,7 @@
                           <label for="nombre">Repita su Password:</label>
                           <input type="password" class="form-control" name="password1" required>
                         </div>
-                      
+                      <br>
                         <div class="col-12" >
                           <button type="submit" style="width: 100%" class="btn btn-primary">Registrar Nuevo Usuario</button>
                         </div>
