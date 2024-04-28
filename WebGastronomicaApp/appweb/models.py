@@ -104,4 +104,4 @@ class Reserva_Mesa(models.Model):
     ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, help_text="Id de la mesa")
 
     def __str__(self):
-        return self.ID_reserva 
+        return str(self.ID_reserva) 
