@@ -108,6 +108,20 @@
 
   <main>
 
+       
+    {% if messages %}
+      {% for x in messages %}
+        <script>
+          Swal.fire({
+            "title": "mensaje",
+            "text": "{{x}}",
+            "icon": "{{x.tags}}"
+          })
+        </script>
+
+      {% endfor %}
+   {% endif %}  
+
     <div id="contenido"></div>
   
       {% block contenido %}
