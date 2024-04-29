@@ -3,8 +3,11 @@ from .forms import *
 from  django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
+
+
 
 def splash(request):
     return render(request,"splash.html")
@@ -23,6 +26,8 @@ def reservamesa(request):
 def login (request):
     return render(request,"registration/login.html")
 
+
+@login_required(login_url="/accounts/login")
 def registro (request):
 
     data = {
