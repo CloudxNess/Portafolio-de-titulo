@@ -53,7 +53,7 @@ def registro (request):
             data["mensaje"] = "hubo un error"
         
         messages.success(request,"Usuario Creado Exitosamente")
-        return redirect(to="registro")
+        return redirect(to="index")
 
     return render(request,"registration/registro.html")
 
