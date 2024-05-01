@@ -1,21 +1,23 @@
 from django.db import models
 
-# Create your models here
+## No se sabe si se usa la tabla
 
+tipo_usuario_choices = ("GAR", "Garzon") , ("COC", "Cocinero")
 
 class Usuarios(models.Model):
+
     Rut = models.CharField(primary_key=True, max_length=15, help_text="Rut usuario")
     Correo = models.EmailField(unique=True, help_text="Correo electronico del usuario")
     Nombre = models.CharField(max_length=50, help_text="Nombre del usuario")
     Direccion = models.CharField(max_length=100, help_text="Dirección del usuario")
     Telefono = models.IntegerField(help_text="Numero telefonico del usuario")
-    Contraseña = models.CharField(max_length=30,help_text="Contraseña del usuario")
-    Tipo_Usuario = models.CharField(max_length=20, help_text="Tipo de usuario")
-
+    Contrasena = models.CharField(max_length=30,help_text="Contraseña del usuario")
+    Tipo_Usuario = models.CharField(max_length=20, choices=tipo_usuario_choices, default='Garzón')
+ 
     def __str__(self):
         return str(self.Rut)
 
-
+## No se sabe si se usa la tabla
 
 class Platos(models.Model):
     ID_Plato = models.IntegerField(primary_key=True,help_text="Id del plato")
