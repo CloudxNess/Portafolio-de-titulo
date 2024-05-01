@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Ingredientes</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Unidad</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for i in mis_ingredientes %}
+      <tr>
+        <th scope="row"> {{ i.ID_Ingrediente }} </th>
+        <td> {{ i.Cantidad }} </td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  {% endblock %}

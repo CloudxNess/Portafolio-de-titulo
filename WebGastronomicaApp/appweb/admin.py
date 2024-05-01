@@ -19,13 +19,13 @@ class PedidoAdmin(admin.ModelAdmin):
 
 
 class IngredientesAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'Costo']
+    list_display = ['nombre', 'Costo', 'unidad_medida']
     search_fields = ['nombre', 'Costo']
 
 
 class BodegaAdmin(admin.ModelAdmin):
-    list_display = ['ID_Ing_Bod', 'Cantidad']
-    search_fields = ['ID_Ing_Bod']
+    list_display = ['ID_Ingrediente', 'Cantidad']
+    search_fields = ['ID_Ingrediente']
 
 
 class PlatosAdmin(admin.ModelAdmin):

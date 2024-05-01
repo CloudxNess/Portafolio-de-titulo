@@ -12,6 +12,7 @@ urlpatterns = [
      path('registro',registro,name='registro'),
      path('registro_cli',registro_cli,name='registro_cli'),
      path('mesas',mesas,name='mesas'),
-     path('agregarplato', agregarplato, name='agregarplato')
+     path('agregarplato', agregarplato, name='agregarplato'),
+     path('listaringredientes', listaringredientes, name='listaringredientes' )
      
 ]

@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import platosform
-
+from .models import *
 # Create your views here.
 
 
@@ -141,3 +141,14 @@ def mesas (request):
 
 
     return render(request, "mesas.html", data)
+
+
+def listaringredientes (request):
+
+    ingredientes = Bodega.objects.all()
+    data = {
+        'mis_ingredientes' : ingredientes
+    }
+
+    return render(request,"mantenedor/admin/listaringredientes.html", data)
+
