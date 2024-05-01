@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static%}
 
 {% block contenido %}
 
-{% load static%}
+
 <div class="container-fluid" style="display: flexbox;">
     <div class="row">
 
@@ -20,42 +22,23 @@
 
         <!-- Columna Derecha: Formulario -->
         <div class="col-md-6" style="display: flexbox;">
-            <form>
-                <div style="text-align: center;"><h1> Reserva Tu Hora</h1> </div>
-                <div class="form-group">
-                    <label for="nombre"><b>Nombre</b></label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+            <div class="container mt-4">
+                <h3 style="text-align: center;">{{mensaje}}</h3>
+                <div class="row justify-content-center">
+                <div class="col-5">
+                <form id="form_reserva_mesa method="POST" action="" enctype="multipart/form-data" style="margin-bottom: 10%;">
+                  <h1 class="mt-4" style="text-align: center;" >Reserva tu Hora</h1>
+
+                  {% csrf_token %}
+              
+                  {{formremesa | crispy}}
+                  <div class="d-grid gap-2 col-6 mx-auto">
+                  <button type="submit"  class="btn btn-primary" >Enviar</button>
+                  </div>
+                </form>
                 </div>
-                <div class="form-group" style="margin-top: 3%;">
-                    <label for="correo"><b>Correo Electrónico</b></label>
-                    <input type="email" class="form-control" id="correo" placeholder="Ingrese su correo electrónico">
                 </div>
-                <div class="form-group" style="margin-top: 3%;">
-                    <label for="fecha"><b>Fecha</b></label>
-                    <input type="date" class="form-control" id="fecha">
-                </div>
-                <div class="form-group" style="margin-top: 3%;">
-                    <label for="hora"><b>Hora</b></label>
-                    <input type="time" class="form-control" id="hora">
-                </div>
-                <div class="form-group" style="margin-top: 3%;">
-                    <label for="comensales"><b>Número de Comensales</b></label>
-                    <select class="form-control" id="comensales">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        
-                    </select>
-                </div>
-                <div style="margin-left: 40%; margin-top: 10%;">
-                <button type="submit" class="btn btn-primary" style="text-align: center;"><h2>Reservar</h2></button>
-            </div>    
-            </form>
+              </div>
         </div>
 
     </div>
