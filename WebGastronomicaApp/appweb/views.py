@@ -27,6 +27,14 @@ def login (request):
     return render(request,"registration/login.html")
 
 
+def agregarplato(request):
+
+    data = {"form_agregarplato" : platosform}
+
+
+    return render(request, "mantenedor/garzon/agregarplato.html" )
+
+
 @login_required(login_url="/accounts/login")
 def registro (request):
 

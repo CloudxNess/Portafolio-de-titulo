@@ -11,3 +11,8 @@ class mesaform(forms.ModelForm):
     class Meta:
         model = Mesa
         fields = "__all__"
+
+class platosform(forms.ModelForm):
+    class Meta:
+        model = Platos
+        fields = "__all__"
