@@ -19,6 +19,7 @@ class Usuarios(models.Model):
 
 ## No se sabe si se usa la tabla
 
+
 class Platos(models.Model):
     ID_Plato = models.IntegerField(primary_key=True,help_text="Id del plato")
     Nombre = models.CharField(max_length=50 , help_text="Nombre del plato")
@@ -26,6 +27,7 @@ class Platos(models.Model):
     Region = models.CharField(max_length=50, help_text="Región a la cual pertenece el plato")
     Cantidad_Comensales = models.IntegerField(help_text="Cantidad de personas que pueden comer de este plato")
     Descripcion = models.TextField(max_length=200, help_text="Breve descripción del plato")
+    imagen = models.ImageField(upload_to="Platos", null=True)
 
     def __str__(self):
         return self.Nombre
@@ -39,6 +41,7 @@ class Ingredientes(models.Model):
 
     def __str__(self):
         return self.nombre
+
 
 class Bodega(models.Model):
     ID_Ing_Bod = models.IntegerField(primary_key=True,help_text="Id del ingrediente en la bodega")
