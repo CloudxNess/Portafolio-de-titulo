@@ -36,6 +36,7 @@ def agregarplato(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def registro (request):
 
     data = {
