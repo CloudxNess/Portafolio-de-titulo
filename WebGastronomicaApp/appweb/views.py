@@ -34,7 +34,7 @@ def agregarplato(request):
 
 
     if request.method=="POST":
-            formulario = platosform(data=request.POST)
+            formulario = platosform(data=request.POST,files=request.FILES)
 
             if formulario.is_valid():
                 formulario.save()
