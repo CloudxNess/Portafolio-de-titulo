@@ -23,19 +23,21 @@ def menu(request):
 
 def reservamesa(request):
     
-    data= {"formremesa" : reservamesaform}
+    data= {"formremesa" : reservamesaform }
 
     if request.method=="POST":
             formulario = reservamesaform(data=request.POST)
 
             if formulario.is_valid():
                 formulario.save()
+                data["mensaje"] = "Reserva Exitosa"
             else:
                 data["mensaje"] = "Error"
                 data["formremesa"] = formulario
 
 
     return render(request, "reservamesa.html", data)
+
 
 def login (request):
     return render(request,"registration/login.html")

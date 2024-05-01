@@ -101,13 +101,13 @@ class Descripción_Pedidos(models.Model):
     
 
 class Reserva_Mesa(models.Model):
-    ID_reserva = models.IntegerField()
+    ID_reserva = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50)
     correo = models.EmailField()
     fecha = models.DateField()
     hora = models.TimeField()
     cantidad_comensales = models.IntegerField()
-    ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE)
+    ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, default="1")
 
     def __str__(self):
         return str(self.ID_reserva) 
