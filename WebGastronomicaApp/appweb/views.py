@@ -4,6 +4,7 @@ from  django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
+from .forms import platosform
 
 # Create your views here.
 
@@ -32,7 +33,17 @@ def agregarplato(request):
     data = {"form_agregarplato" : platosform}
 
 
-    return render(request, "mantenedor/garzon/agregarplato.html" )
+    if request.method=="POST":
+            formulario = platosform(data=request.POST)
+
+            if formulario.is_valid():
+                formulario.save()
+            else:
+                data["mensaje"] = "Error"
+                data["form_agregarplato"] = formulario
+
+
+    return render(request, "mantenedor/garzon/agregarplato.html", data )
 
 
 @login_required(login_url="/accounts/login")

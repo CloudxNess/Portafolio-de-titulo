@@ -21,12 +21,12 @@ class Usuarios(models.Model):
 
 
 class Platos(models.Model):
-    ID_Plato = models.IntegerField(primary_key=True,help_text="Id del plato")
-    Nombre = models.CharField(max_length=50 , help_text="Nombre del plato")
-    Costo = models.IntegerField(help_text="Valor del plato")
-    Region = models.CharField(max_length=50, help_text="Región a la cual pertenece el plato")
-    Cantidad_Comensales = models.IntegerField(help_text="Cantidad de personas que pueden comer de este plato")
-    Descripcion = models.TextField(max_length=200, help_text="Breve descripción del plato")
+    ID_Plato = models.IntegerField(primary_key=True,)
+    Nombre = models.CharField(max_length=50)
+    Costo = models.IntegerField()
+    Region = models.CharField(max_length=50)
+    Cantidad_Comensales = models.IntegerField()
+    Descripcion = models.TextField(max_length=200)
     imagen = models.ImageField(upload_to="Platos", null=True)
 
     def __str__(self):

@@ -1,61 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block contenido %}
-{% load static%}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Plato</title>
-    <!-- Agrega el enlace a Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Nuevo Plato</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <form action="/submit-dish" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="nombrePlato">Ingrese nombre del plato:</label>
-                        <input type="text" class="form-control" id="nombrePlato" name="nombrePlato" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="regionPlato">Región del plato:</label>
-                        <input type="text" class="form-control" id="regionPlato" name="regionPlato" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="precioPlato">Precio del plato $:</label>
-                        <input type="number" class="form-control" id="precioPlato" name="precioPlato" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cantidadPersonas">Para cuantas personas:</label>
-                        <select class="form-control" id="cantidadPersonas" name="cantidadPersonas">
-                            <option value="1">1 Persona</option>
-                            <option value="2">2 Personas</option>
-                            <option value="3">3 Personas</option>
-                            <option value="4">4 Personas</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcionPlato">Descripción:</label>
-                        <textarea class="form-control" id="descripcionPlato" name="descripcionPlato" rows="4" required>Favor agregue una descripción del producto</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="fotoPlato">Subir Foto del plato:</label>
-                        <input type="file" class="form-control-file" id="fotoPlato" name="fotoPlato" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
-                </form>
-            </div>
-        </div>
+<div class="container mt-5">
+  <h3 style="text-align: center;">{{mensaje}}</h3>
+  <div class="row justify-content-center">
+  <div class="col-5">
+  <form id="form_agregarplato" method="POST" action="" enctype="multipart/form-data">
+    <h1 class="mt-4" style="text-align: center;">Agregar Plato</h1>
+    {% csrf_token %}
+
+    {{form_agregarplato | crispy}}
+    <div class="d-grid gap-2 col-6 mx-auto">
+    <button type="submit"  class="btn btn-primary" >Enviar</button>
     </div>
-
-   
+  </form>
+  </div>
+  </div>
+</div>
 </body>
-</html>
+
 
 
 {% endblock %}
