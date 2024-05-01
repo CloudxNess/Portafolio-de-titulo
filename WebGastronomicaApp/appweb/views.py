@@ -44,17 +44,20 @@ def registro (request):
 
     if request.method == "POST":
         nombre=request.POST.get("nombre")
+        usuario=request.POST.get("usuario")
         apellido=request.POST.get("apellido")
         correo=request.POST.get("correo")
         password=request.POST.get("password")
+        grupo1=request.POST.get("grupo")
         
         usu = User()
         usu.set_password(password)
-        usu.username = nombre
+        usu.username = usuario
         usu.email = correo
         usu.first_name = nombre
         usu.last_name = apellido
-        grupo = Group.objects.get(name="Cocinero")
+        grupo = Group.objects.get(name=grupo1)
+        print (grupo)
     
         try:
             usu.save()
@@ -80,13 +83,14 @@ def registro_cli (request):
 
     if request.method == "POST":
         nombre=request.POST.get("nombre")
+        usuario=request.POST.get("usuario")
         apellido=request.POST.get("apellido")
         correo=request.POST.get("correo")
         password=request.POST.get("password")
         
         usu = User()
         usu.set_password(password)
-        usu.username = nombre
+        usu.username = usuario
         usu.email = correo
         usu.first_name = nombre
         usu.last_name = apellido

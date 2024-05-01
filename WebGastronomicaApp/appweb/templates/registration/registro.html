@@ -18,6 +18,10 @@
                           <input type="text" class="form-control" name="nombre" required>
                         </div>
                         <div class="form-group">
+                          <label for="usuario">Usuario:</label>
+                          <input type="text" class="form-control" name="usuario" required>
+                        </div>
+                        <div class="form-group">
                           <label for="nombre">Apellido:</label>
                           <input type="text" class="form-control" name="apellido" required>
                         </div>
@@ -39,11 +43,11 @@
 
                         <div class="form-group">
                           <label for="tipocolab" class="form-label">Tipo Colaborador</label>
-                          <select id="tipocolab" class="form-select">
+                          <select id="tipocolab" class="form-select" name="grupo">
                             <option selected>Seleccione</option>
-                            <option>Garzon</option>
-                            <option>Cocinero</option>
-                            <option>Administrador</option>
+                            <option value="Garzon">Garzon</option>
+                            <option value="Cocinero">Cocinero</option>
+                            <option value="Administrador">Administrador</option>
                           </select>
                         </div>
                       
