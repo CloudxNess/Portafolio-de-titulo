@@ -107,7 +107,7 @@ class Reserva_Mesa(models.Model):
     fecha = models.DateField()
     hora = models.TimeField()
     cantidad_comensales = models.IntegerField()
-    ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, default="1")
+    ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, default="0")
 
     def __str__(self):
         return str(self.ID_reserva) 
