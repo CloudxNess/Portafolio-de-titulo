@@ -24,4 +24,8 @@ class reservamesaform(forms.ModelForm):
         fields = ["nombre", "correo", "fecha", "hora", "cantidad_comensales"]
 
         widgets = {
-            "fecha" : forms.DateInput(attrs={'type': 'date'}, format=('%Y-%m-%d')) }
+            "fecha" : forms.DateInput(attrs={'type': 'date'}, format=('%Y-%m-%d')),
+            "hora" : forms.TimeInput(attrs={'type': 'time'}, format=('%H-%M')) 
+              }
+
+       
