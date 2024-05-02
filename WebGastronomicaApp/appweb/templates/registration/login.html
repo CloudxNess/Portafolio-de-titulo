@@ -7,33 +7,28 @@
 
 
 
-    <div class="container">
-        <div class="row" style="height: 810px;">
-            <div class="col-8" style="margin: auto; margin-top: 10px">
-            <div class="card"  >
-                <div class="card-header text-center" >
-                    LOGIN
-                  </div>
-                <div class="card-body">
-                    {% load crispy_forms_tags %}   
-
-                    <form class="row" id="formularioLogin" action="" method="POST" >
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <img src="{% static 'image/TecnoFood.png' %} " alt="Ilustración" class="img-fluid" style="margin-left: 25%; width: 300px; height: 300px;">
+      <div style="margin-left: 30%;"> <b><h1>TecnoFood</h1></b></div>
+      <form class="row" id="formularioLogin" action="" method="POST" >
                         
-                        {% csrf_token %}
-                        {{form | crispy }}
+        {% csrf_token %}
+        {{form | crispy }}
 
-                          <div class="mb-3">
-                            <label class="form-label">Forgot Password?</label>
-                          </div>
-                        <div class="col-12" >
-                          <button type="submit" style="width: 100%" class="btn btn-primary">Login</button>
-                        </div>
-                      </form>
-                </div>
-            </div>
+          <div class="mb-3">
+            <label class="form-label">Forgot Password?</label>
+          </div>
+        <div class="col-12" >
+          <button type="submit" style="width: 100%" class="btn btn-primary">Login</button>
         </div>
+      </form>
+
     </div>
-    </div>
+  </div>
+</div>
+
 
 
     {% endblock  %}
