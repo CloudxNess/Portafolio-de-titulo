@@ -1,27 +1,46 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+<div class="row">
+  <div class="col-6">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Ingredientes</th>
+            <th scope="col">Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
 
+            {% for i in mis_ingredientes %}
+          <tr>
+            <th scope="row"> {{ i.ID_Ingrediente }} </th>
+            <td> {{ i.Cantidad }} </td>
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+  <div class="col-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Ingredientes</th>
+          <th scope="col">Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Ingredientes</th>
-        <th scope="col">Cantidad</th>
-        <th scope="col">Unidad</th>
-      </tr>
-    </thead>
-    <tbody>
-
-        {% for i in mis_ingredientes %}
-      <tr>
-        <th scope="row"> {{ i.ID_Ingrediente }} </th>
-        <td> {{ i.Cantidad }} </td>
-        
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-
+          {% for e in mis_peticiones %}
+        <tr>
+          <th scope="row"> {{ e.nombre }} </th>
+          <td> {{ e.unidad_medida }} </td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
   {% endblock %}

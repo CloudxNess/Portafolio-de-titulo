@@ -7,6 +7,11 @@ class agregarform(forms.ModelForm):
         fields = "__all__"
 
 
+class agregaringreform(forms.ModelForm):
+    class Meta:
+        model = Ingredientes
+        fields = ["nombre", "Costo", "unidad_medida"]
+
 class mesaform(forms.ModelForm):
     class Meta:
         model = Mesa

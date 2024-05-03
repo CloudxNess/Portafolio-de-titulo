@@ -32,7 +32,7 @@ class Platos(models.Model):
     def __str__(self):
         return self.Nombre
     
-
+## el id deberia ser ID_Ingrediente = models.AutoField(primary_key=True,help_text="Id del ingrediente")
 class Ingredientes(models.Model):
     ID_Ingrediente = models.IntegerField(primary_key=True,help_text="Id del ingrediente")
     nombre = models.CharField(max_length=50 , help_text="nombre del ingrediente")
@@ -42,7 +42,7 @@ class Ingredientes(models.Model):
     def __str__(self):
         return self.nombre
 
-
+## el ID_Ing_Bod deberia ser  ID_Ing_Bod = models.AutoField(primary_key=True,help_text="Id del ingrediente en la bodega")
 class Bodega(models.Model):
     ID_Ing_Bod = models.IntegerField(primary_key=True,help_text="Id del ingrediente en la bodega")
     Cantidad = models.IntegerField(help_text="Cantidad de ingredientes en bodega")

@@ -159,11 +159,32 @@ def mesas (request):
 
 
 def listaringredientes (request):
-
+    peticiones = Ingredientes.objects.all()
     ingredientes = Bodega.objects.all()
     data = {
-        'mis_ingredientes' : ingredientes
+        'mis_ingredientes' : ingredientes ,
+        'mis_peticiones' : peticiones
     }
 
-    return render(request,"mantenedor/admin/listaringredientes.html", data)
 
+    return render(request,"mantenedor/admin/listaringredientes.html", data )
+
+## no va a funcionar porque se tienen que colocar los ID, se tienen que editar los models.py para  
+## intentar hacer la doble insersion sin ID desde esta oage, insertar en la de ingredientes y la de 
+## la Bodega :3   
+def agregaringredientes(request):
+
+    data = {"form_agregaringrediente" : agregaringreform}
+
+
+    if request.method=="POST":
+            formulario = agregaringreform(data=request.POST)
+
+            if formulario.is_valid():
+                formulario.save()
+            else:
+                data["mensaje"] = "Error"
+                data["form_agregaringrediente"] = formulario
+
+
+    return render(request, "mantenedor/admin/agregaringrediente.html", data )
