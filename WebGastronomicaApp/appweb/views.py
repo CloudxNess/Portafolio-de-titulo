@@ -189,3 +189,21 @@ def agregaringredientes(request):
 
 
     return render(request, "mantenedor/admin/agregaringrediente.html", data )
+
+
+
+
+def listarusuarios(request):
+
+    Usuarios_local = User.objects.all()
+
+    data = {
+        "Usuarios" : Usuarios_local
+    }
+
+
+    return render(request,"mantenedor/admin/listarusuarios.html",data)   
+
+
+
+
