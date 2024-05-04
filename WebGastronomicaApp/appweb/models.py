@@ -21,7 +21,7 @@ class Usuarios(models.Model):
 
 
 class Platos(models.Model):
-    ID_Plato = models.IntegerField(primary_key=True,)
+    ID_Plato = models.AutoField(primary_key=True, help_text="Id del plato")
     Nombre = models.CharField(max_length=50)
     Costo = models.IntegerField()
     Region = models.CharField(max_length=50)
@@ -32,9 +32,9 @@ class Platos(models.Model):
     def __str__(self):
         return self.Nombre
     
-## el id deberia ser ID_Ingrediente = models.AutoField(primary_key=True,help_text="Id del ingrediente")
+
 class Ingredientes(models.Model):
-    ID_Ingrediente = models.IntegerField(primary_key=True,help_text="Id del ingrediente")
+    ID_Ingrediente = models.AutoField(primary_key=True,help_text="Id del ingrediente")
     nombre = models.CharField(max_length=50 , help_text="nombre del ingrediente")
     Costo = models.IntegerField(help_text="Valor del ingrediente")
     unidad_medida = models.CharField(max_length=4 , help_text="Unidad de medida del ingrediente")
@@ -42,9 +42,9 @@ class Ingredientes(models.Model):
     def __str__(self):
         return self.nombre
 
-## el ID_Ing_Bod deberia ser  ID_Ing_Bod = models.AutoField(primary_key=True,help_text="Id del ingrediente en la bodega")
+
 class Bodega(models.Model):
-    ID_Ing_Bod = models.IntegerField(primary_key=True,help_text="Id del ingrediente en la bodega")
+    ID_Ing_Bod = models.AutoField(primary_key=True,help_text="Id del ingrediente en la bodega")
     Cantidad = models.IntegerField(help_text="Cantidad de ingredientes en bodega")
     ID_Ingrediente = models.ForeignKey(Ingredientes, on_delete=models.CASCADE, help_text="Id del ingrediente")
     
@@ -54,7 +54,7 @@ class Bodega(models.Model):
     
 
 class Receta(models.Model):
-    ID_Ingrediente_Receta = models.IntegerField(primary_key=True,help_text="Id del ingrediente")
+    ID_Ingrediente_Receta = models.AutoField(primary_key=True,help_text="Id del ingrediente") 
     ID_Plato = models.ForeignKey(Platos, on_delete=models.CASCADE, help_text="Id del plato")
     ID_Ingrediente_Bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, help_text="Id del ingrediente en bodega")
     Cantidad_Ingredientes = models.IntegerField(help_text="Cantidad de ingredientes necesarios")
@@ -64,7 +64,7 @@ class Receta(models.Model):
 
 
 class Mesa (models.Model):
-    ID_Mesa = models.IntegerField(primary_key=True, help_text="Id de la mesa")
+    ID_Mesa = models.AutoField(primary_key=True, help_text="Id de la mesa")
     Nombre_Mesa = models.CharField(max_length=10, help_text="Identificador de la mesa")
     Estado_Ocupado = models.BooleanField()
     Estado_Reservado = models.BooleanField()
@@ -73,7 +73,7 @@ class Mesa (models.Model):
         return self.Nombre_Mesa
 
 class Pedidos(models.Model):
-    ID_Pedido = models.IntegerField(primary_key=True, help_text="Id del pedido")
+    ID_Pedido = models.AutoField(primary_key=True, help_text="Id del pedido")
     ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, help_text="Id de la mesa")
     Estado = models.CharField(max_length=20, help_text="Estado en el cual se encuentra el pedido")
     Correo_Sol = models.EmailField(help_text="Correo electronico del usuario")
@@ -82,7 +82,7 @@ class Pedidos(models.Model):
         return str(self.ID_Pedido)
 
 class Boletas(models.Model):
-    ID_Boleta = models.IntegerField(primary_key=True, help_text="Id de la boleta")
+    ID_Boleta = models.AutoField(primary_key=True, help_text="Id de la boleta")
     ID_Pedido = models.ForeignKey(Pedidos, on_delete=models.CASCADE, help_text="Id del pedido")
     Fecha = models.DateField(help_text="Fecha de emision de la boleta")
     Costo_Total = models.IntegerField(help_text="Valor total de atención")
@@ -101,7 +101,7 @@ class Descripción_Pedidos(models.Model):
     
 
 class Reserva_Mesa(models.Model):
-    ID_reserva = models.AutoField(primary_key=True)
+    ID_reserva = models.AutoField(primary_key=True, help_text="Id de la reserva")
     nombre = models.CharField(max_length=50)
     correo = models.EmailField()
     fecha = models.DateField()

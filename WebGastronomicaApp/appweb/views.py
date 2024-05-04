@@ -182,6 +182,7 @@ def agregaringredientes(request):
 
             if formulario.is_valid():
                 formulario.save()
+                data["mensaje"] = "Ingrediente agregado correctamente"
             else:
                 data["mensaje"] = "Error"
                 data["form_agregaringrediente"] = formulario
