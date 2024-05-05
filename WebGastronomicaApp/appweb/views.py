@@ -72,6 +72,9 @@ def registro (request):
     if request.method == "POST":
         nombre=request.POST.get("nombre")
         usuario=request.POST.get("usuario")
+        rut=request.POST.get("rut")
+        direccion=request.POST.get("direccion")
+        telefono=request.POST.get("telefono")
         apellido=request.POST.get("apellido")
         correo=request.POST.get("correo")
         password=request.POST.get("password")
@@ -80,6 +83,9 @@ def registro (request):
         usu = User()
         usu.set_password(password)
         usu.username = usuario
+        usu.rut=rut
+        usu.direccion=direccion
+        usu.telefono=telefono
         usu.email = correo
         usu.first_name = nombre
         usu.last_name = apellido
