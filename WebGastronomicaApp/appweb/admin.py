@@ -53,6 +53,11 @@ class UsuariosAdmin(admin.ModelAdmin):
     search_fields = ['Nombre', 'Rut', 'Tipo_Usuario']
 
 
+class Sol_Ingredientesadmin(admin.ModelAdmin):
+    list_display = ['ID_Solicitud_Ingrediente']
+    search_fields = ['ID_Solicitud_Ingrediente']
+
+
 admin.site.register(Reserva_Mesa, Reserva_MesaAdmin)
 admin.site.register(Mesa, MesaAdmin)
 admin.site.register(Pedidos, PedidoAdmin)
@@ -63,3 +68,4 @@ admin.site.register(Receta, RecetaAdmin)
 admin.site.register(Descripción_Pedidos, Descripción_PedidosAdmin)
 admin.site.register(Boletas, BoletasAdmin)
 admin.site.register(Usuarios, UsuariosAdmin)
+admin.site.register(Sol_Ingredientes, Sol_Ingredientesadmin)

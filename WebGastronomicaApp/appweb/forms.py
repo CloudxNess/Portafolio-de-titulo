@@ -12,6 +12,14 @@ class agregaringreform(forms.ModelForm):
         model = Ingredientes
         fields = ["nombre", "Costo", "unidad_medida"]
 
+
+class Sol_Ingredientesform(forms.ModelForm):
+    class Meta:
+        model = Sol_Ingredientes
+        fields = ["Ingrediente", "Cantidad"]
+
+
+
 class agregaringrebodeform(forms.ModelForm):
     class Meta:
         model = Bodega

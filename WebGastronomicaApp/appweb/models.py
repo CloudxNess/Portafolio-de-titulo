@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 ## No se sabe si se usa la tabla
 
@@ -111,3 +112,14 @@ class Reserva_Mesa(models.Model):
 
     def __str__(self):
         return str(self.ID_reserva) 
+    
+
+class Sol_Ingredientes(models.Model):
+    ID_Solicitud_Ingrediente = models.AutoField(primary_key=True,help_text="Id de la solicitud")
+    Ingrediente = models.ForeignKey(Ingredientes,on_delete=models.CASCADE, default="0")
+    Cantidad = models.IntegerField(help_text="Cantidad solicitada")
+    fecha_y_hora = models.DateTimeField(default=timezone.now)
+
+    def __int__(self):
+        return self.ID_Solicitud_Ingrediente
+		

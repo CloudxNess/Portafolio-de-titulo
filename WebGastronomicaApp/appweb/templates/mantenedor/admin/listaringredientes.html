@@ -28,14 +28,16 @@
         <tr>
           <th scope="col">Ingredientes</th>
           <th scope="col">Cantidad</th>
+          <th scope="col">Fecha</th>
         </tr>
       </thead>
       <tbody>
 
           {% for e in mis_peticiones %}
         <tr>
-          <th scope="row"> {{ e.nombre }} </th>
-          <td> {{ e.unidad_medida }} </td>
+          <th scope="row"> {{ e.Ingrediente }} </th>
+          <td> {{ e.Cantidad }} </td>
+          <td> {{ e.fecha_y_hora }} </td>
           
         </tr>
         {% endfor %}

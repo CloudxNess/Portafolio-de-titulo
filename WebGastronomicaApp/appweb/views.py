@@ -159,7 +159,7 @@ def mesas (request):
 
 
 def listaringredientes (request):
-    peticiones = Ingredientes.objects.all()
+    peticiones = Sol_Ingredientes.objects.all()
     ingredientes = Bodega.objects.all()
     data = {
         'mis_ingredientes' : ingredientes ,
@@ -193,6 +193,26 @@ def agregaringredientes(request):
     return render(request, "mantenedor/admin/agregaringrediente.html", data )
 
 
+
+def sol_ingredientes(request):
+
+    data = {"form_solicitaringrediente" : Sol_Ingredientesform}
+    bodegas = Bodega.objects.all()
+
+    
+
+    if request.method=="POST":
+            formulario = Sol_Ingredientesform(data=request.POST)
+
+            if formulario.is_valid():
+                formulario.save()
+
+            else:
+                data["mensaje"] = "Error"
+                data["form_solicitaringrediente"] = formulario
+
+
+    return render(request, "mantenedor/cocinero/Solicitudingredientes.html", {'data': data, 'bodegas': bodegas} )
 
 
 def listarusuarios(request):
