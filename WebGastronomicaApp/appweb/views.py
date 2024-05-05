@@ -232,7 +232,7 @@ def listarusuarios(request):
     return render(request,"mantenedor/admin/listarusuarios.html",data)   
 
 
-def menu(request):
+def menuadmin(request):
 
     Menu_local = Platos.objects.all()
 
@@ -240,7 +240,7 @@ def menu(request):
         "Menu" : Menu_local
     }
 
-    return render(request,"mantenedor/admin/menu.html", data)
+    return render(request,"mantenedor/admin/menuadmin.html", data)
 
 
 
@@ -251,7 +251,17 @@ def modificarmenu(request, NombreBuscado):
     data = {
 
         'form': platosform(instance=platom)
-    }
+    } 
+
+    if request.method == "POST":
+        formulario = platosform(data=request.POST, instance=platom, files=request.FILES)
+
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="menuadmin")
+        else:
+            data["mensaje"] = "Error"
+            data["form"] = formulario
 
     return render(request,"mantenedor/admin/modificarmenu.html", data)
 

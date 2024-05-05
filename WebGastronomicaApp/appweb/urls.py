@@ -17,6 +17,8 @@ urlpatterns = [
      path('agregaringredientes', agregaringredientes, name='agregaringrediente' ),
      path('listarusuarios',listarusuarios,name='listarusuarios'),
      path('sol_ingredientes',sol_ingredientes,name='sol_ingredientes'),
-     path('DescargarReporteExcel', DescargarReporteExcel, name='DescargarReporteExcel')
-     
+     path('DescargarReporteExcel', DescargarReporteExcel, name='DescargarReporteExcel'),
+     path('menuadmin', menuadmin , name='menuadmin'),
+     path('modificarmenu/<NombreBuscado>', modificarmenu, name='modificarmenu')
+    
 ]
