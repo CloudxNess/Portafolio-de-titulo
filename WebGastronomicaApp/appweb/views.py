@@ -276,7 +276,7 @@ def DescargarReporteExcel(request):
     ws.append(['Ingrediente ID','Cantidad','ID Nombre'])
 
     for x in ingrediente :
-        ws.append([ingrediente.ID_Ing_Bod, ingrediente.Cantidad, ingrediente.ID_Ingrediente.nombre])
+        ws.append([x.ID_Ing_Bod, x.Cantidad,x.ID_Ingrediente.nombre])
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename=datos.xlsx'
         wb.save(response)
