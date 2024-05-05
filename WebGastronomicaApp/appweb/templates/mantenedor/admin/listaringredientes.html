@@ -3,7 +3,9 @@
 {% block contenido %}
 <div class="row">
   <div class="col-6">
+    
     <table class="table">
+      
         <thead>
           <tr>
             <th scope="col">Ingredientes</th>
@@ -40,7 +42,12 @@
         </tr>
         {% endfor %}
       </tbody>
+      
     </table>
+   
   </div>
 </div>
+
+<a href="{% url 'libros:ReporteIngredienteBodega' %}" class="btn btn-secondary btn-bg" >Descargar Reporte Excel</a>
+
   {% endblock %}
