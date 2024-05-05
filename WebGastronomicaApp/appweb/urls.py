@@ -16,12 +16,7 @@ urlpatterns = [
      path('listaringredientes', listaringredientes, name='listaringredientes' ),
      path('agregaringredientes', agregaringredientes, name='agregaringrediente' ),
      path('listarusuarios',listarusuarios,name='listarusuarios'),
-<<<<<<< Updated upstream
-     path('sol_ingredientes',sol_ingredientes,name='sol_ingredientes')
-=======
-     path('menu', menu, name='menu'),
-     path('modificarmenu/<NombreBuscado>', modificarmenu, name='modificarmenu')
->>>>>>> Stashed changes
-    
+     path('sol_ingredientes',sol_ingredientes,name='sol_ingredientes'),
+     path('DescargarReporteExcel', DescargarReporteExcel, name='DescargarReporteExcel')
      
 ]

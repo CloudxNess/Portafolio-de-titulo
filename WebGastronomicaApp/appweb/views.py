@@ -6,6 +6,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import platosform
 from .models import *
+from django.http import HttpResponse
+from openpyxl import Workbook
+
+
+
 # Create your views here.
 
 
@@ -250,3 +255,19 @@ def modificarmenu(request, NombreBuscado):
 
     return render(request,"mantenedor/admin/modificarmenu.html", data)
 
+
+def DescargarReporteExcel(request):
+     
+    ingrediente=Bodega.objects.all()
+
+    wb = Workbook ()
+    ws = wb.active
+
+    ws.append(['Ingrediente ID','Cantidad','ID Nombre'])
+
+    for x in ingrediente :
+        ws.append([ingrediente.ID_Ing_Bod, ingrediente.Cantidad, ingrediente.ID_Ingrediente.nombre])
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=datos.xlsx'
+        wb.save(response)
+        return response
