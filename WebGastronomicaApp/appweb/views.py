@@ -181,8 +181,10 @@ def agregaringredientes(request):
             formulario = agregaringreform(data=request.POST)
 
             if formulario.is_valid():
-                formulario.save()
+                ingrediente = formulario.save()
                 data["mensaje"] = "Ingrediente agregado correctamente"
+                bodega = Bodega.objects.create(ID_Ingrediente=ingrediente, Cantidad=0)
+
             else:
                 data["mensaje"] = "Error"
                 data["form_agregaringrediente"] = formulario
