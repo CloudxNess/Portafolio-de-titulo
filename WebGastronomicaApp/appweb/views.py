@@ -6,9 +6,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import platosform
 from .models import *
-from openpyxl import Workbook
-from django.http.response import HttpResponse
-
 # Create your views here.
 
 
@@ -212,27 +209,3 @@ def listarusuarios(request):
 
 
 
-def DescargarReporteExcel (TemplateView):
-    def get(self,request,*args,**kwargs):
-        ingredientes = Bodega.objects.all()
-        wb = Workbook()
-        ws = wb.active
-        ws ['B1'] = 'Reporte De Ingredientes'
-
-        ws.merge_cells('B1:E1')
-        ws['B3'] = 'Ingredientes'
-        ws['C3'] = 'Cantidad'
-
-        cont= 2
-
-        for ingrediente in ingredientes :
-            ws.cell(row = cont, column = 2).value = ingrediente.ingredientes
-            ws.cell(row = cont, column = 3).value = ingrediente.cantidad
-            cont+=1
-
-        nombre_archivo = "ReporteIngredienteBodega.xlsx"
-        response = HttpResponse(content_type ="application/ms-excel")
-        content = "attachment; filename {0}".format(nombre_archivo)
-        response['Content-Disposition'] = content
-        wb.save(response)
-        return response
