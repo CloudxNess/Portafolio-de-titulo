@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from  django.contrib.auth.models import User, Group
 from django.contrib import messages
@@ -227,5 +227,26 @@ def listarusuarios(request):
     return render(request,"mantenedor/admin/listarusuarios.html",data)   
 
 
+def menu(request):
 
+    Menu_local = Platos.objects.all()
+
+    data = {
+        "Menu" : Menu_local
+    }
+
+    return render(request,"mantenedor/admin/menu.html", data)
+
+
+
+def modificarmenu(request, NombreBuscado):
+
+    platom = get_object_or_404(Platos, Nombre=NombreBuscado)
+
+    data = {
+
+        'form': platosform(instance=platom)
+    }
+
+    return render(request,"mantenedor/admin/modificarmenu.html", data)
 
