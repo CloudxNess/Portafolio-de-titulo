@@ -8,6 +8,7 @@ from .forms import platosform
 from .models import *
 from django.http import HttpResponse
 from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill
 
 
 
@@ -267,17 +268,40 @@ def modificarmenu(request, NombreBuscado):
 
 
 def DescargarReporteExcel(request):
-     
-    ingrediente=Bodega.objects.all()
+    ingrediente = Bodega.objects.all()
 
-    wb = Workbook ()
+    wb = Workbook()
     ws = wb.active
 
-    ws.append(['Ingrediente ID','Cantidad','ID Nombre'])
+    ws.append(['ID','Ingrediente','Cantidad'])
 
-    for x in ingrediente :
-        ws.append([x.ID_Ing_Bod, x.Cantidad,x.ID_Ingrediente.nombre])
-        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename=Reporte_Inventario.xlsx'
-        wb.save(response)
-        return response
+    
+
+    header_font = Font(bold=True)
+    header_fill = PatternFill(start_color='00FF00', end_color='00FF00', fill_type='solid')
+
+    for cell in ws[1]:
+        cell.font = header_font
+        cell.fill = header_fill
+
+    for x in ingrediente:
+        ws.append([x.ID_Ing_Bod,x.ID_Ingrediente.nombre, x.Cantidad, ])
+
+
+    for column in ws.columns:
+        max_length = 0
+        column_letter = column[0].column_letter
+        for cell in column:
+            try:
+                if len(str(cell.value)) > max_length:
+                    max_length = len(cell.value)
+            except:
+                pass
+        adjusted_width = max(max_length, 15) + 2
+        ws.column_dimensions[column_letter].width = adjusted_width
+
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=Reporte_Inventario.xlsx'
+    wb.save(response)
+    
+    return response
