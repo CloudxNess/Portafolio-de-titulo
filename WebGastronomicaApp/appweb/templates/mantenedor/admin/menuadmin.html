@@ -18,8 +18,8 @@
             <th scope="row"> {{ m.Nombre }} </th>
             <td> ${{ m.Costo }} </td>
             <td> {{ m.Descripcion }} </td>
-            <td> <a href="" class="btn btn-success"> Disponible </a>  </td>
-            <td> <a href="" class="btn btn-danger"> No Disponible </a>  </td>
+            <td> <a href="{% url 'activaplato' m.Nombre %}" class="btn btn-success"> Disponible </a>  </td>
+            <td> <a href="{% url 'desactivaplato' m.Nombre %}" class="btn btn-danger"> No Disponible </a>  </td>
             <td> <a href="{% url 'modificarmenu' m.Nombre %}" class="btn btn-primary"> Editar </a>  </td>
           </tr>
           {% endfor %}

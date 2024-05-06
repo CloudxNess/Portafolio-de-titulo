@@ -268,6 +268,27 @@ def modificarmenu(request, NombreBuscado):
     return render(request,"mantenedor/admin/modificarmenu.html", data)
 
 
+
+
+def activaplato(request, NombreBuscado):
+
+    platom = get_object_or_404(Platos, Nombre=NombreBuscado)
+    platom.Disponibilidad=(1) 
+    platom.save()    
+    return redirect(to="menuadmin" )
+
+
+
+def desactivaplato(request, NombreBuscado):
+
+    platom = get_object_or_404(Platos, Nombre=NombreBuscado)
+    platom.Disponibilidad=(0) 
+    platom.save()    
+    return redirect(to="menuadmin" )
+
+
+
+
 def DescargarReporteExcel(request):
     ingrediente = Bodega.objects.all()
 
