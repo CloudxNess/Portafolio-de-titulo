@@ -14,7 +14,7 @@
     {% for x in MenuP %}
     <div class="col-md-3 mb-3">
         <div class="card h-100" style="width: 18rem; max-height: 400px;">
-            <img src="{{ x.imagen.url }}" class="card-img-top" alt="{{ x.Nombre }}">
+            <img src="{{ x.imagen.url }}" class="card-img-top" alt="{{ x.Nombre }}" style="max-height: 200px; object-fit: cover;">
             <div class="card-body">
                 <h5 class="card-title">{{ x.Nombre }}</h5>
                 <p class="card-text">{{ x.Descripcion }}</p>
