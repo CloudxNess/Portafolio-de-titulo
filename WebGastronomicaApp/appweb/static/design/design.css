@@ -211,4 +211,11 @@
       margin-left: 0;
     }
   
+
+    .contenedor-splash {
+      display: flex;
+      justify-content: center; /* Centra horizontalmente */
+      align-items: center; /* Centra verticalmente */
+      height: 100vh; /* Usa el 100% del alto de la ventana */
+      }
   }

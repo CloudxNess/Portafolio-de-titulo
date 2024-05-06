@@ -3,25 +3,28 @@
 {% block contenido %}
 
 
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Producto</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Descripcion</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-            {% for m in MenuP %}
-          <tr>
-            <th scope="row"> {{ m.Nombre }} </th>
-            <td> ${{ m.Costo }} </td>
-            <td> {{ m.Descripcion }} </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-    </table>
+
+<div class="container">
+  <div class="row" style="text-align: center;">
+    <div class="col">
+      <h2>Menu</h2>
+    </div>
+  </div>
+  <div class="row">
+    {% for x in MenuP %}
+    <div class="col-md-3 mb-3">
+        <div class="card h-100" style="width: 18rem; max-height: 400px;">
+            <img src="{{ x.imagen.url }}" class="card-img-top" alt="{{ x.Nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ x.Nombre }}</h5>
+                <p class="card-text">{{ x.Descripcion }}</p>
+                <p class="card-text">Costo: ${{ x.Costo }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
  
   
  
