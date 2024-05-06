@@ -233,6 +233,7 @@ def listarusuarios(request):
     return render(request,"mantenedor/admin/listarusuarios.html",data)   
 
 
+
 def menuadmin(request):
 
     Menu_local = Platos.objects.all()
@@ -305,3 +306,28 @@ def DescargarReporteExcel(request):
     wb.save(response)
     
     return response
+    for x in ingrediente :
+        ws.append([x.ID_Ing_Bod, x.Cantidad,x.ID_Ingrediente.nombre])
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=Reporte_Inventario.xlsx'
+        wb.save(response)
+        return response
+    
+
+
+def menu(request):
+
+    Menu_platos = Platos.objects.all().filter(Disponibilidad=True)
+
+    data = {
+        "MenuP" : Menu_platos
+    }
+
+    return render(request,"menu.html", data)
+
+
+
+    
+   
+    
+    

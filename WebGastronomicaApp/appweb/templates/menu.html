@@ -3,6 +3,27 @@
 {% block contenido %}
 
 
- <H1>  Hola Mundo 2</H1>
-
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Descripcion</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for m in MenuP %}
+          <tr>
+            <th scope="row"> {{ m.Nombre }} </th>
+            <td> ${{ m.Costo }} </td>
+            <td> {{ m.Descripcion }} </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+ 
+  
+ 
+ 
 {% endblock %}

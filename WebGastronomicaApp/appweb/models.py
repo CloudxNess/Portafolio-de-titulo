@@ -28,6 +28,7 @@ class Platos(models.Model):
     Region = models.CharField(max_length=50)
     Cantidad_Comensales = models.IntegerField()
     Descripcion = models.TextField(max_length=200)
+    Disponibilidad = models.BooleanField()
     imagen = models.ImageField(upload_to="Platos", null=True)
 
     def __str__(self):

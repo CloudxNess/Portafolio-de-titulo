@@ -34,7 +34,7 @@ class mesaform(forms.ModelForm):
 class platosform(forms.ModelForm):
     class Meta:
         model = Platos
-        fields = "__all__"
+        fields = ["Nombre", "Costo", "Region","Cantidad_Comensales", "Descripcion", "imagen"]
 
 
 class reservamesaform(forms.ModelForm):
