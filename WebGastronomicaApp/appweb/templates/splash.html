@@ -16,15 +16,21 @@
 
 </head>
 <body>
+  <script>
+    setTimeout(function() {
+      window.location.href = "{% url 'index' %}";
+    }, 2000); // tiempo  de redireccion calculado en milisegundos 
+  </script>
+  
 
 
 
   <div class="contenedor">
-    <div class="imagen">
-        <img src="{% static 'image/TecnoFood.png' %}" class="rotate-in-center">
+    <div class="position-absolute top-50 start-50">>
+        <img src="{% static 'image/TecnoFood.png' %}" class="rotate-in-center" >
     </div>
     <div class="texto" >
-        <p style="text-align: center;">Aquí va tu cadena de texto.</p>
+        <p style="text-align: center;">Bienvenido a Tecno Food</p>
     </div>
   </div>
 

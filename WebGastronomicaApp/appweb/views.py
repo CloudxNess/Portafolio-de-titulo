@@ -9,6 +9,7 @@ from .models import *
 from django.http import HttpResponse
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
+from itertools import groupby
 
 
 
@@ -343,6 +344,9 @@ def menu(request):
     data = {
         "MenuP" : Menu_platos
     }
+    
+
+
 
     return render(request,"menu.html", data)
 
@@ -350,5 +354,17 @@ def menu(request):
 
     
    
+def menu(request):
     
+    Menu_Platos = Platos.objects.filter(Disponibilidad=True).order_by('Region')
+
+    platos_por_region = {}
+    for region, MenuP in groupby(Menu_Platos, key=lambda x: x.Region):
+        platos_por_region[region] = list(MenuP)
+
+    data = {
+        "platos_por_region": platos_por_region
+    }
+
+    return render(request, "menu.html", data)    
     
