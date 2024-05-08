@@ -52,10 +52,8 @@
               Crud Usuarios
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Crear Usuario </a></li> <!-- Crear Usuario -->
-              <li><a class="dropdown-item" href="">Eliminar Usuario</a></li> <!-- Eliminar Usuario -->
-              <li><a class="dropdown-item" href="">Listar Usuarios</a></li> <!-- Lista de Usuarios Creados -->
-              <li><a class="dropdown-item" href="">Editar Usuarios</a></li><!-- Editar Campos de Usuarios Creados -->
+              <li><a class="dropdown-item" href="{% url 'registrouser' %}">Crear Usuario </a></li> <!-- Crear Usuario -->
+              <li><a class="dropdown-item" href="{% url 'listarusuarios' %}">Listar Usuarios</a></li> <!-- Lista de Usuarios Creados -->
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -63,10 +61,8 @@
               Crud Platos
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Crear Plato </a></li> <!-- Crear Usuario -->
-              <li><a class="dropdown-item" href="">Eliminar Plato</a></li> <!-- Eliminar Usuario -->
-              <li><a class="dropdown-item" href="">Listar Platos</a></li> <!-- Lista de Usuarios Creados -->
-              <li><a class="dropdown-item" href="">Editar Platos</a></li><!-- Editar Campos de Usuarios Creados -->
+              <li><a class="dropdown-item" href="{% url 'agregarplato' %}">Crear Plato </a></li> <!-- Crear Usuario -->
+              <li><a class="dropdown-item" href="{% url 'menuadmin' %}">Listar Platos</a></li> <!-- Lista de Usuarios Creados -->
             </ul>
           </li>
 
@@ -74,10 +70,10 @@
           
      
           <li class="nav-item">
-            <a class="nav-link" href="">Disponibilidad de Mesas</a>
+            <a class="nav-link" href="{% url 'mesas' %}">Disponibilidad de Mesas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Inventario de Bodega</a>
+            <a class="nav-link" href="{% url 'listaringredientes' %}">Inventario de Bodega</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">Reporte de Negocios</a>
