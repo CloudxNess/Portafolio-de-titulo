@@ -337,20 +337,6 @@ def DescargarReporteExcel(request):
     
 
 
-def menu(request):
-
-    Menu_platos = Platos.objects.all().filter(Disponibilidad=True)
-
-    data = {
-        "MenuP" : Menu_platos
-    }
-    
-
-
-
-    return render(request,"menu.html", data)
-
-
 
     
    
