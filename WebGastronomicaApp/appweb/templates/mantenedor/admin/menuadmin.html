@@ -1,30 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block contenido %}
 
+<div class="container mt-5" style="height: 760px;">
+    <div class="text-center">
+        <h2 class="mt-4"> Disponibilidad de Platos </h2>
+    </div>
+
     <table class="table">
         <thead>
-          <tr>
-            <th scope="col">Producto</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col"></th>
-          </tr>
+            <tr class="border border-3 border border-black black-row">
+                <th scope="col"><b>Producto</b></th>
+                <th scope="col"><b>Precio</b></th>
+                <th scope="col"><b>Region</b></th>
+                <th scope="col"><b>Acciones</b></th>
+            </tr>
         </thead>
         <tbody>
-
             {% for m in Menu %}
-          <tr>
-            <th scope="row"> {{ m.Nombre }} </th>
-            <td> ${{ m.Costo }} </td>
-            <td> {{ m.Descripcion }} </td>
-            <td> <a href="{% url 'activaplato' m.Nombre %}" class="btn btn-success"> Disponible </a>  </td>
-            <td> <a href="{% url 'desactivaplato' m.Nombre %}" class="btn btn-danger"> No Disponible </a>  </td>
-            <td> <a href="{% url 'modificarmenu' m.Nombre %}" class="btn btn-primary"> Editar </a>  </td>
-          </tr>
-          {% endfor %}
+            <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
+                <th scope="row">{{ m.Nombre }}</th>
+                <td>${{ m.Costo }}</td>
+                <td>{{ m.Region }}</td>
+                <td class="text-right">
+                    <div class="btn-group justify-content-end">
+                        <a href="{% url 'activaplato' m.Nombre %}" class="btn btn-primary btn-sm">Disponible</a>
+                        <a href="{% url 'desactivaplato' m.Nombre %}" class="btn btn-danger btn-sm">No Disponible</a>
+                        <a href="{% url 'modificarmenu' m.Nombre %}" class="btn btn-secondary btn-sm">Editar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
- 
-  
-  {% endblock %}
+</div>
+{% endblock %}

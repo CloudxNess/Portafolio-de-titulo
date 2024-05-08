@@ -187,7 +187,10 @@
       height: 100vh; /* Usa el 100% del alto de la ventana */
       }
 
-
+      .black-row {
+        background-color: black;
+        color: white; /* Para asegurar que el texto sea visible en el fondo negro */
+    }
 
 
 
