@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+
 <div class="row">
   <div class="col-6">
     <table class="table">
+      <h1 style="text-align: center;"><b>Stock de Bodega</b></h1>
         <thead>
           <tr>
             <th scope="col">Ingredientes</th>
@@ -11,12 +13,15 @@
           </tr>
         </thead>
         <tbody>
-
             {% for i in mis_ingredientes %}
-          <tr>
+          <tr {% if i.Cantidad < 20 %}
+                  class="table-danger"
+              {% elif i.Cantidad > 20 %}
+                  class="table-warning"
+            {% endif %}>
             <th scope="row"> {{ i.ID_Ingrediente }} </th>
             <td> {{ i.Cantidad }} </td>
-            
+            <td><a href="" class="btn btn-primary btn-sm" style="margin-left: 45%;">Agregar Stock </button> </td>
           </tr>
           {% endfor %}
         </tbody>
@@ -24,6 +29,7 @@
   </div>
   <div class="col-6">
     <table class="table">
+      <h1 style="text-align: center; margin-top: 1%;"><b>Solicitud de Ingredientes</b></h1>
       <thead>
         <tr>
           <th scope="col">Ingredientes</th>
@@ -32,13 +38,12 @@
         </tr>
       </thead>
       <tbody>
-
           {% for e in mis_peticiones %}
         <tr>
           <th scope="row"> {{ e.Ingrediente }} </th>
           <td> {{ e.Cantidad }} </td>
           <td> {{ e.fecha_y_hora }} </td>
-          
+          <td><a href="" class="btn btn-primary btn-sm" style="margin-left: 45%;">Aprobar Solicitud </button> </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -46,4 +51,4 @@
   </div>
 </div>
 <a href="{% url 'DescargarReporteExcel' %}" class="btn btn-secondary btn-bg" >Descargar Reporte Excel</a>
-  {% endblock %}
+{% endblock %}
