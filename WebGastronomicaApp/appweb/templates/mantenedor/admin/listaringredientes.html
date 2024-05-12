@@ -67,10 +67,10 @@
   <div class="col-5"><a href="{% url 'DescargarReporteExcel' %}" class="btn btn-secondary btn-bg" style="margin-left: 0%;">Descargar Reporte Excel</a>
   </div>
   <div class="col-4">
-    <div style="display: inline-block; margin-left: 10px; margin-bottom: 5px; width: 20px; height: 20px; background-color: #dc3545;"></div>
+    <div style="display: inline-block; margin-left: 10px; margin-bottom: 5px; width: 20px; height: 20px; background-color: #f8d7da;"></div>
   <span>Bajo Stock</span>
   <br>
-  <div style="display: inline-block; margin-left: 10px; margin-bottom: 5px; width: 20px; height: 20px; background-color: #28a745;"></div>
+  <div style="display: inline-block; margin-left: 10px; margin-bottom: 5px; width: 20px; height: 20px; background-color: #fff3cd;"></div>
   <span>Stock Suficiente</span>
 
 
@@ -93,11 +93,12 @@
       </div>
       <div class="modal-body">
         <!-- Contenido del modal -->
-        <form id="formCantidad{{ bodega.ID_Ing_Bod }}">
+       <form id="formCantidad{{ i.ID_Ing_Bod }}" method="POST" action="{% url 'actualizar_ingrediente' i.ID_Ing_Bod %}">
+          {% csrf_token %}
           <p><b>Ingrediente:</b> {{ i.ID_Ingrediente }}</p>
-          <label for="cantidad{{ bodega.ID_Ing_Bod }}">Nueva Cantidad:</label>
-          <input type="number" id="cantidad{{ bodega.ID_Ing_Bod }}" name="cantidad" min="0" required>
-          <a href="{% url 'actualizar_ingrediente' %}" class="btn btn-primary btn-sm">Actualizar Stock</a>
+          <label for="cantidad{{ i.ID_Ing_Bod }}">Nueva Cantidad:</label>
+          <input type="number" id="cantidad{{ i.ID_Ing_Bod }}" name="cantidad" min="-100" required>
+          <button type="submit" class="btn btn-primary btn-sm">Actualizar Stock</button>
         </form>
         
         

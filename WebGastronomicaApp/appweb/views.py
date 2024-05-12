@@ -177,9 +177,7 @@ def listaringredientes (request):
 
     return render(request,"mantenedor/admin/listaringredientes.html", data )
 
-## no va a funcionar porque se tienen que colocar los ID, se tienen que editar los models.py para  
-## intentar hacer la doble insersion sin ID desde esta oage, insertar en la de ingredientes y la de 
-## la Bodega :3   
+  
 def agregaringredientes(request):
 
     data = {"form_agregaringrediente" : agregaringreform}
@@ -391,15 +389,12 @@ def modificarIngrediente(request, NombreBuscado):
 
     return render(request,"mantenedor/admin/listaringredientes.html", data)
 
+ 
 
+def actualizar_ingrediente(request, ingredientebusca):
 
-def actualizar_ingrediente(request):
-    if request.method == 'POST' and request.is_ajax():
-        ingrediente_id = request.POST.get('id')
-        nueva_cantidad = request.POST.get('cantidad')
-        ingrediente = get_object_or_404(Bodega, pk=ingrediente_id)
-        ingrediente.Cantidad = nueva_cantidad
-        ingrediente.save()
-        return JsonResponse({'mensaje': 'Cantidad actualizada correctamente'})
-    else:
-        return JsonResponse({'error': 'No se pudo actualizar la cantidad'}, status=400)
+    ingre = get_object_or_404(Bodega, ID_Ing_Bod=ingredientebusca)
+    cantidadAgregar = request.POST.get("cantidad")
+    ingre.Cantidad = int(cantidadAgregar) + ingre.Cantidad
+    ingre.save()    
+    return redirect(to="listaringredientes" )
