@@ -193,8 +193,10 @@
     }
 
 
-
-   
+    .intense-red {
+      background-color: #ff0000; /* Color rojo intenso */
+  }
+  
 
 
 

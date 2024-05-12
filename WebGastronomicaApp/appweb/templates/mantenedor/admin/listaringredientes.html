@@ -7,21 +7,24 @@
     <table class="table">
       <h1 style="text-align: center;"><b>Stock de Bodega</b></h1>
         <thead>
+          
           <tr>
             <th scope="col">Ingredientes</th>
             <th scope="col">Cantidad</th>
+            <th>Unidad de Medida</th>
           </tr>
         </thead>
         <tbody>
             {% for i in mis_ingredientes %}
 
           <tr {% if i.Cantidad < 20 %}
-                  class="table-danger"
+              class="table-danger intense-red"
               {% elif i.Cantidad > 20 %}
                   class="table-warning"
             {% endif %}>
             <th scope="row"> {{ i.ID_Ingrediente }} </th>
             <td> {{ i.Cantidad }} </td>
+            <td>Unidad de Medida</td>
             <td>
               <button type="button" class="btn btn-primary btn-sm" style="margin-left: 45%;" data-bs-toggle="modal" data-bs-target="#modalAgregarStock{{ i.ID_Ingrediente }}">Agregar Stock</button>
             </td>
@@ -29,8 +32,12 @@
 
     
           {% endfor %}
+          
         </tbody>
       </table>
+
+      
+
   </div>
   <div class="col-6">
     <table class="table">
@@ -55,7 +62,23 @@
     </table>
   </div>
 </div>
-<a href="{% url 'DescargarReporteExcel' %}" class="btn btn-secondary btn-bg" >Descargar Reporte Excel</a>
+
+<div class="row">
+  <div class="col-5"><a href="{% url 'DescargarReporteExcel' %}" class="btn btn-secondary btn-bg" style="margin-left: 0%;">Descargar Reporte Excel</a>
+  </div>
+  <div class="col-4">
+    <div style="display: inline-block; margin-left: 10px; margin-bottom: 5px; width: 20px; height: 20px; background-color: #dc3545;"></div>
+  <span>Bajo Stock</span>
+  <br>
+  <div style="display: inline-block; margin-left: 10px; margin-bottom: 5px; width: 20px; height: 20px; background-color: #28a745;"></div>
+  <span>Stock Suficiente</span>
+
+
+</div>
+</div>
+
+
+
 
 
 
