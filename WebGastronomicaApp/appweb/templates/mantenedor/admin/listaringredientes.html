@@ -70,13 +70,19 @@
       </div>
       <div class="modal-body">
         <!-- Contenido del modal -->
-        <p><b>Ingrediente:</b> {{ i.ID_Ingrediente }}</p>
-        <p><b>Cantidad actual: </b> {{ i.Cantidad }}</p>
+        <form id="formCantidad{{ bodega.ID_Ing_Bod }}">
+          <p><b>Ingrediente:</b> {{ i.ID_Ingrediente }}</p>
+          <label for="cantidad{{ bodega.ID_Ing_Bod }}">Nueva Cantidad:</label>
+          <input type="number" id="cantidad{{ bodega.ID_Ing_Bod }}" name="cantidad" min="0" required>
+          <a href="{% url 'actualizar_ingrediente' %}" class="btn btn-primary btn-sm">Actualizar Stock</a>
+        </form>
+        
+        
         <!-- Aquí puedes agregar un formulario para ingresar la cantidad de stock a agregar -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Actualizar Stock</button>
+       
       </div>
     </div>
   </div>

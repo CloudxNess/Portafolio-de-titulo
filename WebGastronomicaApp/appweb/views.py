@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 from itertools import groupby
+from django.http import JsonResponse
 
 
 
@@ -389,3 +390,16 @@ def modificarIngrediente(request, NombreBuscado):
             data["form"] = formulario
 
     return render(request,"mantenedor/admin/listaringredientes.html", data)
+
+
+
+def actualizar_ingrediente(request):
+    if request.method == 'POST' and request.is_ajax():
+        ingrediente_id = request.POST.get('id')
+        nueva_cantidad = request.POST.get('cantidad')
+        ingrediente = get_object_or_404(Bodega, pk=ingrediente_id)
+        ingrediente.Cantidad = nueva_cantidad
+        ingrediente.save()
+        return JsonResponse({'mensaje': 'Cantidad actualizada correctamente'})
+    else:
+        return JsonResponse({'error': 'No se pudo actualizar la cantidad'}, status=400)
