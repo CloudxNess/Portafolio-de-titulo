@@ -47,4 +47,9 @@ class reservamesaform(forms.ModelForm):
             "hora" : forms.TimeInput(attrs={'type': 'time'}, format=('%H-%M')) 
               }
 
-       
+
+
+class BodegaForm(forms.ModelForm):
+    class Meta:
+        model = Bodega
+        fields = ['Cantidad']  # Campos que se pueden editar en el formulario

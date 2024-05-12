@@ -368,3 +368,24 @@ def menu(request):
 
     return render(request, "menu.html", data)    
     
+
+def modificarIngrediente(request, NombreBuscado):
+
+    ModificarI = get_object_or_404(Bodega, Nombre=NombreBuscado)
+
+    data = {
+
+        'form': BodegaForm(instance=ModificarI)
+    } 
+
+    if request.method == "POST":
+        formulario = BodegaForm(data=request.POST, instance=ModificarI, files=request.FILES)
+
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="listaringredientes")
+        else:
+            data["mensaje"] = "Error"
+            data["form"] = formulario
+
+    return render(request,"mantenedor/admin/listaringredientes.html", data)

@@ -14,6 +14,7 @@
         </thead>
         <tbody>
             {% for i in mis_ingredientes %}
+
           <tr {% if i.Cantidad < 20 %}
                   class="table-danger"
               {% elif i.Cantidad > 20 %}
@@ -21,8 +22,12 @@
             {% endif %}>
             <th scope="row"> {{ i.ID_Ingrediente }} </th>
             <td> {{ i.Cantidad }} </td>
-            <td><a href="" class="btn btn-primary btn-sm" style="margin-left: 45%;">Agregar Stock </button> </td>
+            <td>
+              <button type="button" class="btn btn-primary btn-sm" style="margin-left: 45%;" data-bs-toggle="modal" data-bs-target="#modalAgregarStock{{ i.ID_Ingrediente }}">Agregar Stock</button>
+            </td>
           </tr>
+
+    
           {% endfor %}
         </tbody>
       </table>
@@ -51,4 +56,38 @@
   </div>
 </div>
 <a href="{% url 'DescargarReporteExcel' %}" class="btn btn-secondary btn-bg" >Descargar Reporte Excel</a>
+
+
+
+{% for i in mis_ingredientes %}
+<!-- Modal para agregar stock -->
+<div class="modal fade" id="modalAgregarStock{{ i.ID_Ingrediente }}" tabindex="-1" role="dialog" aria-labelledby="modalAgregarStockLabel{{ i.ID_Ingrediente }}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAgregarStockLabel{{ i.ID_Ingrediente }}">Agregar Stock</h5>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Contenido del modal -->
+        <p><b>Ingrediente:</b> {{ i.ID_Ingrediente }}</p>
+        <p><b>Cantidad actual: </b> {{ i.Cantidad }}</p>
+        <!-- Aquí puedes agregar un formulario para ingresar la cantidad de stock a agregar -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Actualizar Stock</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+
+
+
+
+
+
 {% endblock %}

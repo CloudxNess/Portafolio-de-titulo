@@ -23,4 +23,5 @@ urlpatterns = [
      path('activaplato/<NombreBuscado>', activaplato, name='activaplato'), 
      path('desactivaplato/<NombreBuscado>', desactivaplato, name='desactivaplato'),
      path('menu', menu, name='menu'),
+     path('modificarIngrediente/<ID_ingrediente>',modificarIngrediente,name="modificarIngrediente")
 ]
