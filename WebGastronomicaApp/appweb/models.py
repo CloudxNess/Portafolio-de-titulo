@@ -120,6 +120,7 @@ class Sol_Ingredientes(models.Model):
     Ingrediente = models.ForeignKey(Ingredientes,on_delete=models.CASCADE, default="0")
     Cantidad = models.IntegerField(help_text="Cantidad solicitada")
     fecha_y_hora = models.DateTimeField(default=timezone.now)
+    Realizado = models.BooleanField(default=0)
 
     def __int__(self):
         return self.ID_Solicitud_Ingrediente

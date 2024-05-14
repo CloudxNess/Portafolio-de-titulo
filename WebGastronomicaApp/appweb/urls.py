@@ -23,5 +23,6 @@ urlpatterns = [
      path('activaplato/<NombreBuscado>', activaplato, name='activaplato'), 
      path('desactivaplato/<NombreBuscado>', desactivaplato, name='desactivaplato'),
      path('menu', menu, name='menu'),
-     path('actualizar_ingrediente/<ingredientebusca>', actualizar_ingrediente, name='actualizar_ingrediente'),
+     path('actualizar_ingrediente2/<ingredientebusca>', actualizar_ingrediente2, name='actualizar_ingrediente2'),
+     path('descuenta_ingrediente/<IdSolicitud>', descuenta_ingrediente, name='descuenta_ingrediente'),
 ]

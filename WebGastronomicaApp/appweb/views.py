@@ -391,10 +391,22 @@ def modificarIngrediente(request, NombreBuscado):
 
  
 
-def actualizar_ingrediente(request, ingredientebusca):
+def actualizar_ingrediente2(request, ingredientebusca):
 
     ingre = get_object_or_404(Bodega, ID_Ing_Bod=ingredientebusca)
     cantidadAgregar = request.POST.get("cantidad")
     ingre.Cantidad = int(cantidadAgregar) + ingre.Cantidad
     ingre.save()    
+    return redirect(to="listaringredientes" )
+
+
+def descuenta_ingrediente(request, IdSolicitud):
+
+    Soli = get_object_or_404(Sol_Ingredientes, ID_Solicitud_Ingrediente=IdSolicitud)
+    cantidadRestar = Soli.Cantidad
+    ingre = get_object_or_404(Bodega, ID_Ing_Bod=Soli.Ingrediente.ID_Ingrediente)
+    ingre.Cantidad = ingre.Cantidad - cantidadRestar
+    ingre.save()    
+    Soli.Realizado=(1)
+    Soli.save()
     return redirect(to="listaringredientes" )

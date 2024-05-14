@@ -11,7 +11,8 @@
           <tr>
             <th scope="col">Ingredientes</th>
             <th scope="col">Cantidad</th>
-            <th>Unidad de Medida</th>
+            <th scope="col">Unidad de Medida</th>
+            <th scope="col">Agregar Stock</th>
           </tr>
         </thead>
         <tbody>
@@ -24,9 +25,9 @@
             {% endif %}>
             <th scope="row"> {{ i.ID_Ingrediente }} </th>
             <td> {{ i.Cantidad }} </td>
-            <td>Unidad de Medida</td>
+            <td>{{ i.ID_Ingrediente.unidad_medida }}</td>
             <td>
-              <button type="button" class="btn btn-primary btn-sm" style="margin-left: 45%;" data-bs-toggle="modal" data-bs-target="#modalAgregarStock{{ i.ID_Ingrediente }}">Agregar Stock</button>
+              <button type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#modalAgregarStock{{ i.ID_Ingrediente }}">Agregar Stock</button>
             </td>
           </tr>
 
@@ -47,6 +48,8 @@
           <th scope="col">Ingredientes</th>
           <th scope="col">Cantidad</th>
           <th scope="col">Fecha</th>
+          <th scope="col">Estado</th>
+
         </tr>
       </thead>
       <tbody>
@@ -55,7 +58,8 @@
           <th scope="row"> {{ e.Ingrediente }} </th>
           <td> {{ e.Cantidad }} </td>
           <td> {{ e.fecha_y_hora }} </td>
-          <td><a href="" class="btn btn-primary btn-sm" style="margin-left: 45%;">Aprobar Solicitud </button> </td>
+          <td> {{ e.Realizado }} </td>
+          <td><a href="{% url 'descuenta_ingrediente' e.ID_Solicitud_Ingrediente %}" class="btn btn-primary btn-sm" style="margin-left: 45%;">Aprobar Solicitud </button> </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -93,11 +97,11 @@
       </div>
       <div class="modal-body">
         <!-- Contenido del modal -->
-       <form id="formCantidad{{ i.ID_Ing_Bod }}" method="POST" action="{% url 'actualizar_ingrediente' i.ID_Ing_Bod %}">
+       <form id="formCantidad{{ i.ID_Ing_Bod }}" method="POST" action="{% url 'actualizar_ingrediente2' i.ID_Ing_Bod %}">
           {% csrf_token %}
           <p><b>Ingrediente:</b> {{ i.ID_Ingrediente }}</p>
           <label for="cantidad{{ i.ID_Ing_Bod }}">Nueva Cantidad:</label>
-          <input type="number" id="cantidad{{ i.ID_Ing_Bod }}" name="cantidad" min="-100" required>
+          <input type="number" id="cantidad{{ i.ID_Ing_Bod }}" name="cantidad" min="0" required>
           <button type="submit" class="btn btn-primary btn-sm">Actualizar Stock</button>
         </form>
         
