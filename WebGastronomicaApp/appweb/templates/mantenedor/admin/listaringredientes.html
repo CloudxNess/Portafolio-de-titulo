@@ -47,6 +47,7 @@
         <tr>
           <th scope="col">Ingredientes</th>
           <th scope="col">Cantidad</th>
+          <th scope="col">Unidad de Medida</th>
           <th scope="col">Fecha</th>
           <th scope="col">Estado</th>
 
@@ -57,6 +58,7 @@
         <tr>
           <th scope="row"> {{ e.Ingrediente }} </th>
           <td> {{ e.Cantidad }} </td>
+          <td>{{e.Ingrediente.unidad_medida}}</td>
           <td> {{ e.fecha_y_hora }} </td>
           <td> {{ e.Realizado }} </td>
           <td><a href="{% url 'descuenta_ingrediente' e.ID_Solicitud_Ingrediente %}" class="btn btn-primary btn-sm" style="margin-left: 45%;">Aprobar Solicitud </button> </td>
