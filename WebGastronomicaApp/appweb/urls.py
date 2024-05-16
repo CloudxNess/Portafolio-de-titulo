@@ -5,7 +5,7 @@ from .views import *
 urlpatterns = [
      path('',splash , name="splash"),
      path('splash',splash,name="splash"),
-     path('home',home , name="index"),
+     path('home/',home , name="index"),
      path('menu',menu , name="menu"),
      path('reservamesa',reservamesa , name="reservamesa"),
      path('registrouser',registrouser,name='registrouser'),

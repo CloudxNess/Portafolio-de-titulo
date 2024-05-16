@@ -180,20 +180,34 @@ def listaringredientes (request):
   
 def agregaringredientes(request):
 
-    data = {"form_agregaringrediente" : agregaringreform}
+    
+    data = {
+        "mensaje":""
+    }
 
+    if request.method == "POST":
+        nombre=request.POST.get("nombre")
+        costo=request.POST.get("costo")
+        unidad=request.POST.get("unidad")
 
-    if request.method=="POST":
-            formulario = agregaringreform(data=request.POST)
-
-            if formulario.is_valid():
-                ingrediente = formulario.save()
-                data["mensaje"] = "Ingrediente agregado correctamente"
-                bodega = Bodega.objects.create(ID_Ingrediente=ingrediente, Cantidad=0)
-
-            else:
-                data["mensaje"] = "Error"
-                data["form_agregaringrediente"] = formulario
+        ingre = Ingredientes()
+        ingre.nombre=nombre
+        ingre.Costo=costo
+        ingre.unidad_medida=unidad
+        print(ingre.nombre)
+        print(ingre.Costo)
+        print(ingre.unidad_medida)
+        try:
+            ingre.save()
+            data["mensaje"] = "Ingrediente agregado correctamente"
+            bodega = Bodega.objects.create(ID_Ingrediente=ingre, Cantidad=0)
+            print("de pana choro")
+            
+        except:
+            data["mensaje"] = "hubo un error"
+        
+        messages.success(request,"Ingrediente agregado correctamente")
+        
 
 
     return render(request, "mantenedor/admin/agregaringrediente.html", data )
