@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block contenido %}
+
+<div class="container mt-5"style="height: 760px;">
+    <div class="text-center">
+      <h2 class="mt-4">Lista de Agendamientos</h2>  
+    </div>
+
+
+<table class="table">
+    <thead>
+      <tr class="border border-3  border border-black">
+        <th scope="col"><b>Numero Reserva</b></th>
+        <th scope="col"><b>Nombre</b></th>
+        <th scope="col"><b>Fecha</b></th>
+        <th scope="col"><b>Hora</b></th>
+        <th scope="col"><b>Cantidad</b></th>
+        <th scope="col"><b>Acciones</b></th>
+      </tr>
+
+    </thead>
+    <tbody>
+        {% for x in Agendamientos %}
+        
+        <tr class="border border-3 border border-black ;" >
+            <th scope="row" >{{x.ID_reserva}}</th>
+            <td>{{x.nombre}}</td>
+            <td>{{x.fecha}}</td>
+            <td>{{x.hora}}</td>
+            <td>{{x.cantidad_comensales}}</td>
+
+            <td>
+                <a href="" class="btn btn-primary btn-sm" >Ver </button>  
+                <a href="" class="btn btn-danger btn-sm" style="margin-left: 10px;" >Eliminar</a>
+      
+            </td>
+        
+
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+  {% endblock %}
+

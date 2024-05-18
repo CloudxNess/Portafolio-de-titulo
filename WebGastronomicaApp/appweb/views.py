@@ -424,3 +424,16 @@ def descuenta_ingrediente(request, IdSolicitud):
     Soli.Realizado=(1)
     Soli.save()
     return redirect(to="listaringredientes" )
+
+
+
+
+def listaragendamiento(request):
+
+    Agendamientos = Reserva_Mesa.objects.all()
+
+    data = {
+        "Agendamientos" : Agendamientos
+    }
+
+    return render(request,"mantenedor/admin/listar_agendamiento.html", data)
