@@ -25,22 +25,25 @@
     </thead>
     <tbody>
         {% for x in Agendamientos %}
+        {% if x.fecha == fecha_hoy  %}
         
-        <tr class="border border-3 border border-black ;" >
-            <th scope="row" >{{x.ID_reserva}}</th>
-            <td>{{x.nombre}}</td>
-            <td>{{x.fecha}}</td>
-            <td>{{x.hora}}</td>
-            <td>{{x.cantidad_comensales}}</td>
+          <tr class="border border-3 border border-black ;" >
+              <th scope="row" >{{x.ID_reserva}}</th>
+              <td>{{x.nombre}}</td>
+              <td>{{x.fecha}}</td>
+              <td>{{x.hora}}</td>
+              <td>{{x.cantidad_comensales}}</td>
 
-            <td>
-                <a href="" class="btn btn-primary btn-sm" >Ver </button>  
-                <a href="" class="btn btn-danger btn-sm" style="margin-left: 10px;" >Eliminar</a>
-      
-            </td>
+              <td>
+                  <a href="" class="btn btn-primary btn-sm" >Ver </button>  
+                  <a href="" class="btn btn-danger btn-sm" style="margin-left: 10px;" >Eliminar</a>
         
+              </td>
+          
 
-        </tr>
+            </tr>
+          {% else %}    
+          {% endif %}  
       {% endfor %}
 
     </tbody>

@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import platosform
 from .models import *
+from django.utils import timezone
 from django.http import HttpResponse
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
@@ -30,15 +31,22 @@ def menu(request):
 
 
 def reservamesa(request):
+    fecha_hoy = timezone.now().date()  
     
     data= {"formremesa" : reservamesaform }
 
     if request.method=="POST":
             formulario = reservamesaform(data=request.POST)
-
+            
             if formulario.is_valid():
-                formulario.save()
-                data["mensaje"] = "Reserva Exitosa"
+                fecha_reserva = formulario.cleaned_data.get('fecha')
+                
+                if fecha_reserva > fecha_hoy:
+                    formulario.save()
+                    data["mensaje"] = "Reserva Exitosa"
+                else:
+                    data["mensaje"] = "Error: La fecha de la reserva no puede ser el dia de hoy o anterior."
+                    data["formremesa"] = formulario
             else:
                 data["mensaje"] = "Error"
                 data["formremesa"] = formulario
@@ -431,9 +439,12 @@ def descuenta_ingrediente(request, IdSolicitud):
 def listaragendamiento(request):
 
     Agendamientos = Reserva_Mesa.objects.all()
+    fecha_hoy = timezone.now().date()  
 
     data = {
-        "Agendamientos" : Agendamientos
+        "Agendamientos" : Agendamientos,
+         'fecha_hoy': fecha_hoy,
+        
     }
 
     return render(request,"mantenedor/admin/listar_agendamiento.html", data)
