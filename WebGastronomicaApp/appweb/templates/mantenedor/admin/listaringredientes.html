@@ -27,7 +27,7 @@
             <td> {{ i.Cantidad }} </td>
             <td>{{ i.ID_Ingrediente.unidad_medida }}</td>
             <td>
-              <button type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#modalAgregarStock{{ i.ID_Ingrediente }}">Agregar Stock</button>
+              <button type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#modalAgregarStock{{ i.ID_Ingrediente.ID_Ingrediente }}">Agregar Stock</button>
             </td>
           </tr>
 
@@ -90,7 +90,7 @@
 
 {% for i in mis_ingredientes %}
 <!-- Modal para agregar stock -->
-<div class="modal fade" id="modalAgregarStock{{ i.ID_Ingrediente }}" tabindex="-1" role="dialog" aria-labelledby="modalAgregarStockLabel{{ i.ID_Ingrediente }}" aria-hidden="true">
+<div class="modal fade" id="modalAgregarStock{{ i.ID_Ingrediente.ID_Ingrediente }}" tabindex="-1" role="dialog" aria-labelledby="modalAgregarStockLabel{{ i.ID_Ingrediente.ID_Ingrediente }}" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
