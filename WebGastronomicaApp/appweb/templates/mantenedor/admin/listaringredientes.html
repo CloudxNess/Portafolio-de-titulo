@@ -55,14 +55,18 @@
       </thead>
       <tbody>
           {% for e in mis_peticiones %}
+          {% if e.Realizado == 0 %}
         <tr>
           <th scope="row"> {{ e.Ingrediente }} </th>
           <td> {{ e.Cantidad }} </td>
           <td>{{e.Ingrediente.unidad_medida}}</td>
           <td> {{ e.fecha_y_hora }} </td>
-          <td> {{ e.Realizado }} </td>
+          {% if e.Realizado == 0 %}
+          <td>Pendiente</td>
+          {% endif %}
           <td><a href="{% url 'descuenta_ingrediente' e.ID_Solicitud_Ingrediente %}" class="btn btn-primary btn-sm" style="margin-left: 45%;">Aprobar Solicitud </button> </td>
         </tr>
+        {% endif %}
         {% endfor %}
       </tbody>
     </table>

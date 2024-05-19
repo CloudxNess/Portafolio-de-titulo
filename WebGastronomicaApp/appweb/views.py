@@ -431,9 +431,9 @@ def descuenta_ingrediente(request, IdSolicitud):
         ingre.save()    
         Soli.Realizado=(1)
         Soli.save()
-        messages.success(request,"Solicitud aprobada (por challane)")
+        messages.success(request,"Solicitud aprobada")
     else:
-            messages.warning(request,"Stock no suficiente")
+            messages.error(request,"Sin Stock Suficiente, Considere Comprar Mas Ingredientes")
     return redirect(to="listaringredientes" )
 
 
