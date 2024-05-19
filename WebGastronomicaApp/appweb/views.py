@@ -428,9 +428,13 @@ def descuenta_ingrediente(request, IdSolicitud):
     cantidadRestar = Soli.Cantidad
     ingre = get_object_or_404(Bodega, ID_Ing_Bod=Soli.Ingrediente.ID_Ingrediente)
     ingre.Cantidad = ingre.Cantidad - cantidadRestar
-    ingre.save()    
-    Soli.Realizado=(1)
-    Soli.save()
+    if ingre.Cantidad >= 0:
+        ingre.save()    
+        Soli.Realizado=(1)
+        Soli.save()
+        messages.success(request,"Solicitud aprobada (por challane)")
+    else:
+            messages.warning(request,"Stock no suficiente")
     return redirect(to="listaringredientes" )
 
 
