@@ -26,4 +26,5 @@ urlpatterns = [
      path('actualizar_ingrediente2/<ingredientebusca>', actualizar_ingrediente2, name='actualizar_ingrediente2'),
      path('descuenta_ingrediente/<IdSolicitud>', descuenta_ingrediente, name='descuenta_ingrediente'),
      path('listaragendamiento', listaragendamiento, name='listaragendamiento' ),
+     path('mesasparapedido',mesasparapedido,name='mesasparapedido')
 ]

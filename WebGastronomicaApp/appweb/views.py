@@ -448,3 +448,16 @@ def listaragendamiento(request):
     }
 
     return render(request,"mantenedor/admin/listar_agendamiento.html", data)
+
+
+
+def mesasparapedido (request):
+
+    mesaspedido =  Mesa.objects.all()
+
+    data = {
+        "Mesas": mesaspedido,
+          }
+
+
+    return render(request, "mantenedor/garzon/mesasparapedido.html", data)
