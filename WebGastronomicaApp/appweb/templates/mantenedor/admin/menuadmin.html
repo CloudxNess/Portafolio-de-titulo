@@ -16,7 +16,7 @@
                 <th scope="col"><b>Precio</b></th>
                 <th scope="col"><b>Region</b></th>
                 <th scope="col"><b>Acciones</b></th>
-                <th scope="col"><b>Estado Actual</b></th>
+                <th scope="col"><b>Editar</b></th>
             </tr>
         </thead>
         <tbody>
@@ -27,17 +27,17 @@
                 <td>{{ m.Region }}</td>
                 <td class="text-right">
                     <div class="btn-group justify-content-end">
-                        <a href="{% url 'activaplato' m.Nombre %}" class="btn btn-primary btn-sm">Disponible</a>
-                        <a href="{% url 'desactivaplato' m.Nombre %}" class="btn btn-danger btn-sm">No Disponible</a>
-                        <a href="{% url 'modificarmenu' m.Nombre %}" class="btn btn-secondary btn-sm">Editar</a>
-                    </div>
-                {% if m.Disponibilidad == False %}   
-                   <td><b>No Disponible</b></td>
-                {% else %} 
-                    <td><b>Disponible</b></td>
+                        {% if m.Disponibilidad == False %}   
+                            <a href="{% url 'activaplato' m.Nombre %}" class="btn btn-primary btn-sm" style="width:90px;">Activar</a>
+                        {% else %} 
+                            <a href="{% url 'desactivaplato' m.Nombre %}" class="btn btn-danger btn-sm" style="width:90px;">Desactivar</a>
+     
+                        {% endif %}
 
-                {% endif %}
+                    </div>
                 </td>
+                <td> <a href="{% url 'modificarmenu' m.Nombre %}" class="btn btn-secondary btn-sm">Editar</a></td>
+                
             </tr>
             {% endfor %}
         </tbody>
