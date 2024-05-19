@@ -207,16 +207,15 @@ def agregaringredientes(request):
         print(ingre.unidad_medida)
         try:
             ingre.save()
-            data["mensaje"] = "Ingrediente agregado correctamente"
             bodega = Bodega.objects.create(ID_Ingrediente=ingre, Cantidad=0)
-            print("de pana choro")
+            messages.success(request,"Ingrediente agregado correctamente")
             
+           
         except:
             data["mensaje"] = "hubo un error"
         
-        messages.success(request,"Ingrediente agregado correctamente")
         
-
+        
 
     return render(request, "mantenedor/admin/agregaringrediente.html", data )
 
