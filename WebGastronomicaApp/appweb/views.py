@@ -74,7 +74,7 @@ def agregarplato(request):
                 data["form_agregarplato"] = formulario
 
 
-    return render(request, "mantenedor/garzon/agregarplato.html", data )
+    return render(request, "mantenedor/cocinero/agregarplato.html", data )
 
 
 @login_required(login_url="/accounts/login")

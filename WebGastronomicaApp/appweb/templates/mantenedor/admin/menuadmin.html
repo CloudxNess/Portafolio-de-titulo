@@ -16,6 +16,7 @@
                 <th scope="col"><b>Precio</b></th>
                 <th scope="col"><b>Region</b></th>
                 <th scope="col"><b>Acciones</b></th>
+                <th scope="col"><b>Estado Actual</b></th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,12 @@
                         <a href="{% url 'desactivaplato' m.Nombre %}" class="btn btn-danger btn-sm">No Disponible</a>
                         <a href="{% url 'modificarmenu' m.Nombre %}" class="btn btn-secondary btn-sm">Editar</a>
                     </div>
+                {% if m.Disponibilidad == False %}   
+                   <td><b>No Disponible</b></td>
+                {% else %} 
+                    <td><b>Disponible</b></td>
+
+                {% endif %}
                 </td>
             </tr>
             {% endfor %}
