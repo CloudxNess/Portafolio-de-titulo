@@ -33,10 +33,10 @@ def menu(request):
 def reservamesa(request):
     fecha_hoy = timezone.now().date()  
     
-    data= {"formremesa" : reservamesaform }
+    data= {"formremesa" : reservamesaForm }
 
     if request.method=="POST":
-            formulario = reservamesaform(data=request.POST)
+            formulario = reservamesaForm(data=request.POST)
             
             if formulario.is_valid():
                 fecha_reserva = formulario.cleaned_data.get('fecha')
