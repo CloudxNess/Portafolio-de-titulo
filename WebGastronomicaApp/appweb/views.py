@@ -461,3 +461,7 @@ def mesasparapedido (request):
 
 
     return render(request, "mantenedor/garzon/mesasparapedido.html", data)
+
+
+def ingresopedidomesa (request):
+    return render (request,"mantenedor/garzon/ingresopedidomesa.html")
