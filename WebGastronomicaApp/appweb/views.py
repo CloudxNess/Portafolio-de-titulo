@@ -43,7 +43,7 @@ def reservamesa(request):
                 
                 if fecha_reserva > fecha_hoy:
                     formulario.save()
-                    data["mensaje"] = "Reserva Exitosa"
+                    messages.success(request,"Reserva Enviada Exitosamente, Espere Confirmación")
                 else:
                     messages.warning(request,"Debe Reservar con un dia de anticipación")
                     data["formremesa"] = formulario
