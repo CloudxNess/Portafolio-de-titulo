@@ -45,7 +45,7 @@ def reservamesa(request):
                     formulario.save()
                     data["mensaje"] = "Reserva Exitosa"
                 else:
-                    data["mensaje"] = "Error: La fecha de la reserva no puede ser el dia de hoy o anterior."
+                    messages.warning(request,"Debe Reservar con un dia de anticipación")
                     data["formremesa"] = formulario
             else:
                 data["mensaje"] = "Error"
