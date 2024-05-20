@@ -442,12 +442,11 @@ def descuenta_ingrediente(request, IdSolicitud):
 def listaragendamiento(request):
 
     Agendamientos = Reserva_Mesa.objects.all()
-    fecha_hoy = timezone.now().date()  
+    fecha_hoy = timezone.localtime(timezone.now()).date()  
 
     data = {
         "Agendamientos" : Agendamientos,
-         'fecha_hoy': fecha_hoy,
-        
+         'fecha_hoy': fecha_hoy,     
     }
 
     return render(request,"mantenedor/admin/listar_agendamiento.html", data)
@@ -457,14 +456,36 @@ def listaragendamiento(request):
 def mesasparapedido (request):
 
     mesaspedido =  Mesa.objects.all()
-
     data = {
         "Mesas": mesaspedido,
           }
-
-
     return render(request, "mantenedor/garzon/mesasparapedido.html", data)
 
 
 def ingresopedidomesa (request):
     return render (request,"mantenedor/garzon/ingresopedidomesa.html")
+
+
+def actualizar_agendamiento(request, reserva):
+
+    Reserva = get_object_or_404(Reserva_Mesa, ID_reserva=reserva)
+    mesa = request.POST.get("mesa")
+    anterior = get_object_or_404(Mesa, ID_Mesa=Reserva.ID_Mesa.ID_Mesa)
+   
+    nueva = get_object_or_404(Mesa, ID_Mesa=mesa)
+    Reserva.ID_Mesa=nueva
+    if nueva.Estado_Reservado==(0):
+        anterior.Estado_Reservado=(0)
+        Reserva.save()
+        nueva.Estado_Reservado=(1)
+        nueva.save()
+        anterior.save()
+        messages.success(request,"Agendamiento Realizado")
+    elif nueva.ID_Mesa==0:
+        anterior.Estado_Reservado=(0)
+        Reserva.save()
+        anterior.save()
+    
+    else:
+        messages.error(request,"Mesa ya reservada")
+    return redirect(to="listaragendamiento" )
