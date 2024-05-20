@@ -46,6 +46,27 @@
 </div>
 
 
+<script>
+  document.getElementById('FormularioIngrediente').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      Swal.fire({
+          title: '¡Advertencia!',
+          text: "¿Estas Seguro de la Unidad De Medida?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, agregar',
+          cancelButtonText: 'No, Cancelar'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              this.submit(); 
+          }
+      })
+  });
+</script>
+
 
 
 {% endblock %}

@@ -205,6 +205,9 @@ def agregaringredientes(request):
         print(ingre.nombre)
         print(ingre.Costo)
         print(ingre.unidad_medida)
+
+       
+
         try:
             ingre.save()
             bodega = Bodega.objects.create(ID_Ingrediente=ingre, Cantidad=0)
