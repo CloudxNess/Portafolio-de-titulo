@@ -1,0 +1,24 @@
+Desarrollo Pendiente para Proyecto de título 
+
+    Agregar Sweet Alert de Confirmación de Acción(¿Unidad de Medida Correcta?)
+    Implementar Power Bi/ Matplotlib  para Inteligencia de Negocios  para Gráficos.
+    Iniciar sesión Segun Perfil de Usuario.
+    Implementar carrito de compras. 
+    Funciones de Cocinero.
+        Cambiar Estado de Preparación de Plato.(Solicitado-En Preparación-Listo para entrega).
+        Enviar Solicitud de Ingredientes.
+        Registrar Nuevo Plato.
+    Funciones de Perfil Mesa.
+        Cálculo de Boleta.
+        Carrito de Compra
+    Funciones de Garzon.
+        Término de Servicio
+        Agregar Pedido a la Mesa
+        Ver Estado de Mesa 
+        Inicio de Servicio
+    Funciones Cliente
+        Carrito de Compra
+    
+    Realizar Minutas de Reunión
+    Completar Matriz de Control de Cambios
+    Confirmar Reserva Mesa desde Administrador
