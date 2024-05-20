@@ -1,6 +1,7 @@
 Desarrollo Pendiente para Proyecto de título 
 
-    Agregar Sweet Alert de Confirmación de Acción(¿Unidad de Medida Correcta?)
+    Agregar Sweet Alert de Confirmación de Acción(¿Unidad de Medida Correcta?)    / Listo
+    Enviar Correo de Confirmacion para la Reserva de Mesa  / Listo
     Implementar Power Bi/ Matplotlib  para Inteligencia de Negocios  para Gráficos.
     Iniciar sesión Segun Perfil de Usuario.
     Implementar carrito de compras. 
@@ -22,3 +23,8 @@ Desarrollo Pendiente para Proyecto de título
     Realizar Minutas de Reunión
     Completar Matriz de Control de Cambios
     Confirmar Reserva Mesa desde Administrador
+
+
+
+Correo : ftecnofood@gmail.com
+Password: k p n z h w d v d q r c h z u t

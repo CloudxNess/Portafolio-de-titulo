@@ -12,6 +12,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 from itertools import groupby
 from django.http import JsonResponse
+from django.core.mail import send_mail
 
 
 
@@ -472,26 +473,39 @@ def ingresopedidomesa (request,Mesa):
     return render (request,"mantenedor/garzon/ingresopedidomesa.html",)
 
 
-def actualizar_agendamiento(request, reserva):
 
+
+
+
+def actualizar_agendamiento(request, reserva):     
     Reserva = get_object_or_404(Reserva_Mesa, ID_reserva=reserva)
     mesa = request.POST.get("mesa")
     anterior = get_object_or_404(Mesa, ID_Mesa=Reserva.ID_Mesa.ID_Mesa)
-   
     nueva = get_object_or_404(Mesa, ID_Mesa=mesa)
-    Reserva.ID_Mesa=nueva
-    if nueva.Estado_Reservado==(0):
-        anterior.Estado_Reservado=(0)
+
+    Reserva.ID_Mesa = nueva
+
+    if nueva.Estado_Reservado == 0:
+        anterior.Estado_Reservado = 0
         Reserva.save()
         nueva.Estado_Reservado=(1)
         nueva.save()
         anterior.save()
-        messages.success(request,"Agendamiento Realizado")
-    elif nueva.ID_Mesa==0:
+        messages.success(request, "Agendamiento Realizado con Exito...Enviando Correo de Confirmación al Cliente. ")
+        
+        # Aqui es como enviaremos el correo Electronico ,el formato se modifica aqui  #
+        send_mail(
+            'Agendamiento Realizado',
+            'La Reserva Se ha Realizado Con Exito' ,
+            'ftecnofood@gmail.com',
+            [Reserva.correo], 
+            fail_silently=False,
+        )
+    elif nueva.ID_Mesa == 0:
         anterior.Estado_Reservado=(0)
         Reserva.save()
         anterior.save()
-    
     else:
-        messages.error(request,"Mesa ya reservada")
-    return redirect(to="listaragendamiento" )
+        messages.error(request, "Mesa ya reservada")
+
+    return redirect(to="listaragendamiento") 
