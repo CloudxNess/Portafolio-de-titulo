@@ -462,17 +462,11 @@ def mesasparapedido (request):
     return render(request, "mantenedor/garzon/mesasparapedido.html", data)
 
 
-def ingresopedidomesa (request,NombreBuscado):
-
-    MesaI = get_object_or_404(Mesa, Nombre=NombreBuscado)
-
-    data = {
-
-        'form': mesaform(instance=MesaI)
-    } 
+def ingresopedidomesa (request,Mesa):
 
 
-    return render (request,"mantenedor/garzon/ingresopedidomesa.html",data)
+
+    return render (request,"mantenedor/garzon/ingresopedidomesa.html",)
 
 
 def actualizar_agendamiento(request, reserva):
