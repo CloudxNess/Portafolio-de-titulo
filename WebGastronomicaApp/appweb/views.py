@@ -468,9 +468,16 @@ def mesasparapedido (request):
 
 def ingresopedidomesa (request,Mesa):
 
+    Menu_local = Platos.objects.all()
+    
+    data = {
+        "Menu" : Menu_local ,
+        "mesa":Mesa
+        
+    }
 
 
-    return render (request,"mantenedor/garzon/ingresopedidomesa.html",)
+    return render (request,"mantenedor/garzon/ingresopedidomesa.html",data)
 
 
 

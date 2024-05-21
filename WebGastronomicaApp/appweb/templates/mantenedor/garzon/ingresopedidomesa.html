@@ -4,10 +4,44 @@
 
 {% block contenido %}
 
-<div class="container mt-5">
-  ssss
-</body>
+<div class="container-fluid" >
+    <div class="row">
+      <div class="text-center">
+        <h2 class="mt-4"> Mesa N° {{mesa}} </h2>
+      </div>
+      <div class="col-8">
+            <div class="text-center">
+                <h2 class="mt-4"> Menu de Platos </h2>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr class="border border-3 border border-black black-row">
+                        <th scope="col"><b>Producto</b></th>
+                        <th scope="col"><b>Precio</b></th>
+                        <th scope="col"><b>Agregar</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in Menu %}
+                    {% if m.Disponibilidad == 1 %}
+                      <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
+                          <th scope="row">{{ m.Nombre }}</th>
+                          <td>${{ m.Costo }}</td>
+                          <td> <a href="" class="btn btn-secondary btn-sm">Editar</a></td>
+                          
+                      </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+          <div class="col-4">
+
+            <h1> platitos aqui </h1>
 
 
-
+          </div>
+  </div>
+</div>
 {% endblock %}
