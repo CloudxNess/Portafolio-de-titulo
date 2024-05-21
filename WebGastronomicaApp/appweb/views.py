@@ -469,16 +469,50 @@ def mesasparapedido (request):
 def ingresopedidomesa (request,Mesa):
 
     Menu_local = Platos.objects.all()
-    
+    Pedidoss = Descripción_Pedidos.objects.all().filter(ID_Pedido=Mesa)
+    try:
+        pedido = Pedidos.objects.get(ID_Pedido=Mesa)
+    except Pedidos.DoesNotExist:
+        pedido = None
+
     data = {
         "Menu" : Menu_local ,
-        "mesa":Mesa
+        "mesa":Mesa,
+        "Pedido":Pedidoss,
+        "Pedi":pedido
         
     }
-
-
     return render (request,"mantenedor/garzon/ingresopedidomesa.html",data)
 
+
+def inicia_pedido (request, Mesaa):
+    mesita = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    pedido = Pedidos.objects.create(ID_Pedido=Mesaa,Correo_Sol="ftecnofood@gmail.com",ID_Mesa=mesita,Estado="Sin Solicitud")
+
+    return redirect("ingresopedidomesa",Mesa=Mesaa )
+
+
+def termina_pedido (request, Mesaa):
+    
+    pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
+    pedido.delete()
+    return redirect("ingresopedidomesa",Mesa=Mesaa )
+
+
+
+
+def pedidolista (request, Mesaa, Plato):
+    try:
+        pedido = Pedidos.objects.get(ID_Pedido=Mesaa)
+    except Pedidos.DoesNotExist:
+        messages.error(request,"No se a iniciado Servicio")
+        return redirect("ingresopedidomesa",Mesa=Mesaa )
+
+    platom = get_object_or_404(Platos, ID_Plato=Plato)
+    pedido= get_object_or_404(Pedidos, ID_Pedido=Mesaa)
+    solicitud = Descripción_Pedidos.objects.create(ID_Pedido=pedido,ID_Platos=platom,Costo=platom.Costo)
+
+    return redirect("ingresopedidomesa",Mesa=Mesaa )
 
 
 

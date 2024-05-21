@@ -29,4 +29,7 @@ urlpatterns = [
      path('mesasparapedido',mesasparapedido,name='mesasparapedido'),
      path('ingresopedidomesa/<Mesa>',ingresopedidomesa,name='ingresopedidomesa'),
      path('actualizar_agendamiento/<reserva>', actualizar_agendamiento, name='actualizar_agendamiento'),
+     path('inicia_pedido/<Mesaa>',inicia_pedido,name='inicia_pedido'),
+     path('termina_pedido/<Mesaa>',termina_pedido,name='termina_pedido'),
+     path('pedidolista/<Mesaa>/<Plato>',pedidolista,name='pedidolista'),
 ]

@@ -77,8 +77,8 @@ class Mesa (models.Model):
 class Pedidos(models.Model):
     ID_Pedido = models.AutoField(primary_key=True, help_text="Id del pedido")
     ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, help_text="Id de la mesa")
-    Estado = models.CharField(max_length=20, help_text="Estado en el cual se encuentra el pedido")
-    Correo_Sol = models.EmailField(help_text="Correo electronico del usuario")
+    Estado = models.CharField(default="Sin Solicitud",max_length=20, help_text="Estado en el cual se encuentra el pedido")
+    Correo_Sol = models.EmailField(null=True,help_text="Correo electronico del usuario")
 
     def __str__(self):
         return str(self.ID_Pedido)
