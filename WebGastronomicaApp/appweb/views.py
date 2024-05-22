@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import platosform
 from .models import *
+from django.db.models import Sum
 from django.utils import timezone
 from django.http import HttpResponse
 from openpyxl import Workbook
@@ -475,11 +476,16 @@ def ingresopedidomesa (request,Mesa):
     except Pedidos.DoesNotExist:
         pedido = None
 
+    total_cantidad = Pedidoss.aggregate(Sum('Costo'))['Costo__sum']
+    if total_cantidad is None:
+        total_cantidad = 0
+
     data = {
         "Menu" : Menu_local ,
         "mesa":Mesa,
         "Pedido":Pedidoss,
-        "Pedi":pedido
+        "Pedi":pedido,
+        "total_cantidad": total_cantidad,
         
     }
     return render (request,"mantenedor/garzon/ingresopedidomesa.html",data)
