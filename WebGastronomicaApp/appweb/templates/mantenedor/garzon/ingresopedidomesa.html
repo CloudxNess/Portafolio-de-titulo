@@ -3,71 +3,82 @@
 {% load crispy_forms_tags %}
 
 {% block contenido %}
-
-<div class="container-fluid" >
-    <div class="row">
-      <div class="text-center">
-        <h2 class="mt-4"> Mesa N° {{mesa}} </h2>
-        {% if Pedi == None %}   
+<div class="container-fluid">
+  <div class="text-center">
+    <h2 class="mt-4">Carrito Mesa N° {{mesa}} </h2>
+    {% if Pedi == None %}   
         <a href="{% url 'inicia_pedido' mesa %}" class="btn btn-secondary btn-sm">Iniciar Servicio</a>
-        {% else %} 
+    {% else %} 
         <a href="{% url 'termina_pedido' mesa %}" class="btn btn-secondary btn-sm">Termina Servicio</a>
+    {% endif %}
+  </div>
+  
+  <div class="row">
+    <!-- Columna de la izquierda -->
+    <div class="col-6 d-flex flex-column">
+      <div class="text-center">
+        <h2 class="mt-5 mb-5">Menu de Platos</h2>
+      </div>
+      <table class="table mt-3">
+        <thead>
+          <tr class="border border-3 border border-black black-row">
+            <th scope="col"><b>Producto</b></th>
+            <th scope="col"><b>Precio</b></th>
+            <th scope="col"><b>Agregar</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in Menu %}
+          {% if m.Disponibilidad == 1 %}
+            <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
+              <th scope="row">{{ m.Nombre }}</th>
+              <td>${{ m.Costo }}</td>
+              <td><a href="{% url 'pedidolista' mesa m.ID_Plato %}" class="btn btn-secondary btn-sm">Agregar</a></td>
+            </tr> 
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Columna de la derecha -->
+    <div class="col-6 d-flex flex-column">
+      <div class="text-center">
+        <h2 class="mt-4">Objetos Seleccionados</h2>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="text-right w-100">
+          <h2>Total: ${{total_cantidad}}</h2>
+        </div>
+      </div>
+      <table class="table mt-3">
+        <thead>
+          <tr class="border border-3 border border-black black-row">
+            <th scope="col"><b>Producto</b></th>
+            <th scope="col"><b>Precio</b></th>
+            <th scope="col"><b>Eliminar</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in Pedido %}
+            <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
+              <th scope="row">{{ x.ID_Platos.Nombre }}</th>
+              <td>${{ x.Costo }}</td>    
+              <td><button type="button" class="btn btn-outline-danger">Eliminar </button></td>                      
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="d-grid gap-2">
+        {% if Pedi == None %}  
+        <button class="btn btn-primary disabled" type="button">Enviar a Cocina</button>
+        {% else %} 
+        <button class="btn btn-primary" type="button">Enviar a Cocina</button>
         {% endif %}
       </div>
-      <div class="col-8">
-            <div class="text-center">
-                <h2 class="mt-4"> Menu de Platos </h2>
-            </div>
-
-            <table class="table">
-                <thead>
-                    <tr class="border border-3 border border-black black-row">
-                        <th scope="col"><b>Producto</b></th>
-                        <th scope="col"><b>Precio</b></th>
-                        <th scope="col"><b>Agregar</b></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for m in Menu %}
-                    {% if m.Disponibilidad == 1 %}
-                      <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
-                          <th scope="row">{{ m.Nombre }}</th>
-                          <td>${{ m.Costo }}</td>
-                          <td> <a href="{% url 'pedidolista' mesa m.ID_Plato %}" class="btn btn-secondary btn-sm">Agregar</a></td>
-                          
-                      </tr>
-                    {% endif %}
-                    {% endfor %}
-                </tbody>
-              </table>
-          </div>
-          <div class="col-4"> 
-             <!-- ############################# Lista de la derecha  ####################################################-->
-            <div class="text-center">
-              <h2 class="mt-4"> Objetos Seleccionados </h2>
-              <h2 class="mt-4"> Total: $ {{total_cantidad}} </h2>
-          </div>
-
-          <table class="table">
-              <thead>
-                  <tr class="border border-3 border border-black black-row">
-                      <th scope="col"><b>Producto</b></th>
-                      <th scope="col"><b>Precio</b></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {% for x in Pedido %}
-                    <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
-                        <th scope="row">{{ x.ID_Platos.Nombre }}</th>
-                        <td>${{ x.Costo }}</td>
-                        
-                    </tr>
-                  {% endfor %}
-              </tbody>
-            </table>
-
-
-          </div>
+    </div>
   </div>
 </div>
 {% endblock %}
+
+
