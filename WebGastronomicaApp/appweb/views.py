@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from .forms import *
 from  django.contrib.auth.models import User, Group
 from django.contrib import messages
@@ -509,6 +509,15 @@ def eliminapedidolista (request, Mesaa, pedido):
     
     pedidoelimina = get_object_or_404(Descripción_Pedidos, ID=pedido)
     pedidoelimina.delete()
+    return redirect("ingresopedidomesa",Mesa=Mesaa )
+
+
+def enviapedidococina (request, Mesaa):
+    
+    pedidos = get_list_or_404(Descripción_Pedidos, ID_Pedido=Mesaa)
+    for pedido in pedidos:
+        pedido.Sol_cocina = (1)
+        pedido.save()
     return redirect("ingresopedidomesa",Mesa=Mesaa )
 
 

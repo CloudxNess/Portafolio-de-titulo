@@ -73,7 +73,7 @@
         {% if Pedi == None %}  
         <button class="btn btn-primary disabled" type="button">Enviar a Cocina</button>
         {% else %} 
-        <button class="btn btn-primary" type="button">Enviar a Cocina</button>
+        <a href="{% url 'enviapedidococina' mesa %}"  class="btn btn-primary" >Enviar a Cocina</a>
         {% endif %}
       </div>
     </div>
