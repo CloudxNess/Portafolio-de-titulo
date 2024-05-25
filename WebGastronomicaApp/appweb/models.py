@@ -85,7 +85,7 @@ class Pedidos(models.Model):
 
 class Boletas(models.Model):
     ID_Boleta = models.AutoField(primary_key=True, help_text="Id de la boleta")
-    ID_Pedido = models.ForeignKey(Pedidos, on_delete=models.CASCADE, help_text="Id del pedido")
+    ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, help_text="Id del pedido")
     Fecha = models.DateField(help_text="Fecha de emision de la boleta")
     Costo_Total = models.IntegerField(help_text="Valor total de atención")
 
@@ -94,12 +94,15 @@ class Boletas(models.Model):
     
 
 class Descripción_Pedidos(models.Model):
+    ID = models.AutoField(primary_key=True, help_text="Id")
     ID_Pedido = models.ForeignKey(Pedidos, on_delete=models.CASCADE, help_text="Id de pedido")
     ID_Platos = models.ForeignKey(Platos, on_delete=models.CASCADE, help_text="Id del plato")
     Costo = models.IntegerField(help_text="Valor total del pedido")      
+    Sol_cocina = models.BooleanField(default=0)
+    Listo = models.BooleanField(default=0)
 
     def __int__(self):
-        return self.costo
+        return self.ID
     
 
 class Reserva_Mesa(models.Model):
@@ -125,3 +128,12 @@ class Sol_Ingredientes(models.Model):
     def __int__(self):
         return self.ID_Solicitud_Ingrediente
 		
+
+class Descripción_Pedidos_Historico(models.Model):
+    ID = models.AutoField(primary_key=True, help_text="Id")
+    ID_Boleta = models.ForeignKey(Boletas, on_delete=models.CASCADE, help_text="Id de la Boleta")
+    ID_Platos = models.ForeignKey(Platos, on_delete=models.CASCADE, help_text="Id del plato")
+    Costo = models.IntegerField(help_text="Valor total del pedido")
+
+    def int(self):
+        return self.Costo
