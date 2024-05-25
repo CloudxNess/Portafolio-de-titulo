@@ -64,7 +64,7 @@
             <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
               <th scope="row">{{ x.ID_Platos.Nombre }}</th>
               <td>${{ x.Costo }}</td>    
-              <td><button type="button" class="btn btn-outline-danger">Eliminar </button></td>                      
+              <td><a href="{% url 'eliminapedidolista' mesa x.ID %}" class="btn btn-outline-danger">Eliminar</a></td>                      
             </tr>
           {% endfor %}
         </tbody>

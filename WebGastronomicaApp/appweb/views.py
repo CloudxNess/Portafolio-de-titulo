@@ -505,6 +505,11 @@ def termina_pedido (request, Mesaa):
     return redirect("ingresopedidomesa",Mesa=Mesaa )
 
 
+def eliminapedidolista (request, Mesaa, pedido):
+    
+    pedidoelimina = get_object_or_404(Descripción_Pedidos, ID=pedido)
+    pedidoelimina.delete()
+    return redirect("ingresopedidomesa",Mesa=Mesaa )
 
 
 def pedidolista (request, Mesaa, Plato):
