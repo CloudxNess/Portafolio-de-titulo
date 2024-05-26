@@ -608,3 +608,29 @@ def pedidosingresadoscocina(request):
 
 
     return render(request,"mantenedor/cocinero/pedidosingresadoscocina.html",data)
+
+
+
+
+def estadopedidog (request):
+     
+    pedidos =  Descripción_Pedidos.objects.all()
+
+    data = {
+        "pedidos": pedidos,
+          }
+
+
+    return render(request, "mantenedor/garzon/estadopedidog.html", data)
+
+
+
+def estadopedidoc (request):
+     
+    pedidos =  Descripción_Pedidos.objects.all()
+
+    data = {
+        "pedidos": pedidos,
+          }
+
+    return render(request, "mantenedor/cocinero/estadopedidoc.html", data)
