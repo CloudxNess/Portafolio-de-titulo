@@ -499,10 +499,30 @@ def inicia_pedido (request, Mesaa):
 
 
 def termina_pedido (request, Mesaa):
-    
     pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
+    valor=0
+    pedidos = get_list_or_404(Descripción_Pedidos, ID_Pedido=Mesaa)
+    mes = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    for X in pedidos:
+        valor = X.Costo + valor
+    boleta=Boletas.objects.create(ID_Mesa=mes,Costo_Total=valor)
+    bol=boleta.ID_Boleta
+    for Y in pedidos:
+        pedi_histo=Descripción_Pedidos_Historico.objects.create(ID_Boleta=boleta,ID_Platos=Y.ID_Platos,Costo=Y.Costo)
     pedido.delete()
-    return redirect("ingresopedidomesa",Mesa=Mesaa )
+    return redirect("boleta",Boleta=bol )
+
+def boleta (request, Boleta):
+
+    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
+    hist = get_list_or_404(Descripción_Pedidos_Historico, ID_Boleta=Boleta)
+    data = {
+        'mi_boleta' : bol ,
+        'mis_peticiones' : hist
+    }
+
+
+    return render (request,"mantenedor/garzon/boleta.html",data)
 
 
 def eliminapedidolista (request, Mesaa, pedido):
