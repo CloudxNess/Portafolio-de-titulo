@@ -21,11 +21,11 @@
           </thead>
           <tbody>
             {% for y in pedidos %}
-              {% if y.Sol_cocina == 1 or y.Listo == 1 %}
-                <tr class="{% if y.Listo == 1 %}table-success{% elif y.Sol_cocina == 1 %}table-warning{% endif %}">
-                  <td>{{ y.ID_Platos.Nombre }}</td>
-                  <td>{{ y.ID_Pedido.ID_Mesa.Nombre_Mesa }}</td>
-                  <td>
+              {% if y.Listo == 0 %}
+                <tr>
+                  <td style="background-color: yellow;">{{ y.ID_Platos.Nombre }}</td>
+                  <td style="background-color: yellow;">{{ y.ID_Pedido.ID_Mesa.Nombre_Mesa }}</td>
+                  <td style="background-color: yellow;">
                     {% if y.Listo == 1 %}
                       <span class="badge bg-success">Plato Listo</span>
                     {% elif y.Sol_cocina == 1 %}
@@ -33,13 +33,32 @@
                     {% endif %}
                   </td>
                   {% if y.Listo == 0 %}
-                    <td>
+                    <td style="background-color: yellow;">
                       <a href="{% url 'estadoplatolisto' y.ID %}" class="btn btn-primary btn-sm">Cambiar a Listo</a>
                     </td>
                   {% else %}
                     <td></td> 
                   {% endif %}
                 </tr>
+              {% elif y.Listo == 1 %}
+              <tr>
+                <td style="background-color: green">{{ y.ID_Platos.Nombre }}</td>
+                <td style="background-color: green">{{ y.ID_Pedido.ID_Mesa.Nombre_Mesa }}</td>
+                <td style="background-color: green">
+                  {% if y.Listo == 1 %}
+                    <span class="badge bg-success">Plato Listo</span>
+                  {% elif y.Sol_cocina == 1 %}
+                    <span class="badge bg-warning text-dark">Plato Solicitado</span>
+                  {% endif %}
+                </td>
+                {% if y.Listo == 0 %}
+                <td style="background-color: green">
+                    <a href="{% url 'estadoplatolisto' y.ID %}" class="btn btn-primary btn-sm">Cambiar a Listo</a>
+                  </td>
+                {% else %}
+                  <td style="background-color: green"></td>
+                {% endif %}
+              </tr>
               {% endif %}
             {% endfor %}
           </tbody>
