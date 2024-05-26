@@ -4,103 +4,57 @@
 
 {% block contenido %}
 
-
-
-    <div class="container">
-      <div class="row mt-4">
-        <div class="col-md">
-  
-          <div class="form-group row">
-            <label for="CodigoFactura" class="col-lg-3 col-form-label">Número de Mesa:</label>
-            <div class="col-lg-3">
-              <input type="text" disabled class="form-control" id="CodigoFactura" value="{{mi_boleta.ID_Mesa}}">
-            </div>
+<div class="d-flex justify-content-center">
+  <div class="container" style="width: 41%; border: 2px solid #000; border-radius: 4%;">
+    <div class="text-center">
+      <h2 class="mt-5 mb-5">Boleta Electronica</h2>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md">
+        <div class="form-group row">
+          <label for="CodigoFactura" class="col-lg-3 col-form-label">Número de Mesa:</label>
+          <div class="col-lg-3">
+            <input type="text" disabled class="form-control" id="CodigoFactura" value="{{mi_boleta.ID_Mesa}}">
           </div>
-  
-  
-          <div class="form-group row">
-            <label for="Fecha" class="col-lg-3 col-form-label">Fecha de emisión:</label>
-            <div class="col-lg-3">
-              <input type="text" disabled class="form-control" id="CodigoFactura" value="{{mi_boleta.Fecha}}">
-            </div>
+        </div>
+        <div class="form-group row">
+          <label for="Fecha" class="col-lg-3 col-form-label">Fecha de emisión:</label>
+          <div class="col-lg-3">
+            <input type="text" disabled class="form-control" id="CodigoFactura" value="{{mi_boleta.Fecha}}">
           </div>
-  
-          <div class="form-group row">
-            <label for="CodigoCliente" class="col-lg-3 col-form-label">ID Boleta:</label>
-            <div class="col-lg-3">
-              <input type="text" disabled class="form-control" id="CodigoFactura" value="{{mi_boleta.ID_Boleta}}">
-            </div>
+        </div>
+        <div class="form-group row">
+          <label for="CodigoCliente" class="col-lg-3 col-form-label">ID Boleta:</label>
+          <div class="col-lg-3">
+            <input type="text" disabled class="form-control" id="CodigoFactura" value="{{mi_boleta.ID_Boleta}}">
           </div>
-  
-  
         </div>
       </div>
-     <div class="text-center ">
-        <h2 class="mt-5 mb-5">Platos Solicitados</h2>
-      </div>
-  
-      <div class="row mt-4">
-        <div class="col-md">
-          
-          <table class="table table-striped">
-            <thead>
-              <tr>
-              <!--  <th>ID Plato</th> -->
-                <th>Descripción</th>
-                <th class="text-right">Precio Unitario </th>
-              </tr>
-            </thead>
-            {% for y in mis_peticiones %}
+    </div>
+    
+    <div class="row mt-4">
+      <div class="col-md text-center">
+        <table class="table table-striped">
+          <thead>
             <tr>
-            <!-- <td scope="row">{{ y.ID_Platos.ID_Plato }}</td> -->
+              <th>Descripción</th>
+              <th class="text-right">Precio Unitario </th>
+            </tr>
+          </thead>
+          {% for y in mis_peticiones %}
+          <tr>
             <td scope="row">{{ y.ID_Platos.Nombre }}</td>
             <td>${{ y.Costo }}</td>
-                </tr> 
-            {% endfor %}
-            
-            <th style="background-color: yellowgreen">Importe Total :</th>
-            <th scope="row" style="background-color: yellowgreen">{{mi_boleta.Costo_Total}}</th>
-            </tbody>
-          </table>
-          <button type="button" id="btnTerminarBoleta" class="btn btn-success">Boton Para Algo </button>
-        </div>
+          </tr>
+          {% endfor %}
+          <th style="background-color: yellowgreen">Importe Total :</th>
+          <th scope="row" style="background-color: yellowgreen">{{mi_boleta.Costo_Total}}</th>
+          </tbody>
+        </table>
+        <button type="button" id="btnTerminarBoleta" class="btn btn-success mx-auto">Pagar Servicio</button>
       </div>
-  
     </div>
-  
+  </div>
+</div>
 
-
-
-        {% endblock %}
-
-
-        <div class="container-fluid">
-          <div class="text-center">
-            <h2 class="mt-4">Boleta N° {{mi_boleta.ID_Boleta}} </h2>
-            <h2 class="mt-4">Fecha {{mi_boleta.Fecha}} </h2>
-        
-          
-          <div class="row justify-content-md-center">
-            <!-- Columna de la izquierda -->
-            <div class="col-6 d-flex flex-column text-center">
-              <div class="text-center ">
-                <h2 class="mt-5 mb-5">Platos Solicitados</h2>
-              </div>
-              <table class="table mt-3">
-                <thead>
-                  <tr class="border border-3 border border-black black-row">
-                    <th scope="col"><b>Producto</b></th>
-                    <th scope="col"><b>Precio</b></th>
-                  </tr>
-                </thead>
-                {% for y in mis_peticiones %}
-                <tbody>
-                  <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
-                      <th scope="row">{{ y.ID_Platos.Nombre }}</th>
-                      <td>${{ y.Costo }}</td>
-                    </tr> 
-                  {% endfor %}
-                </tbody>
-              </table>
-              <h2 class="mt-4">Total $ {{mi_boleta.Costo_Total}} </h2>
-            </div>
+{% endblock %}
