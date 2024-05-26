@@ -596,3 +596,15 @@ def actualizar_agendamiento(request, reserva):
         messages.error(request, "Mesa ya reservada")
 
     return redirect(to="listaragendamiento") 
+
+
+def pedidosingresadoscocina(request):
+
+    
+    mesaspedido =  Mesa.objects.all()
+    data = {
+        "Mesas": mesaspedido,
+          }
+
+
+    return render(request,"mantenedor/cocinero/pedidosingresadoscocina.html",data)
