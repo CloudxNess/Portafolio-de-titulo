@@ -3,40 +3,49 @@
 {% load crispy_forms_tags %}
 
 {% block contenido %}
-<div class="container-fluid">
-  <div class="text-center">
-
-  
-  <div class="row justify-content-md-center">
-    <!-- Columna de la izquierda -->
-    <div class="col-8 d-flex flex-column text-center">
-      <div class="text-center ">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="text-center">
         <h2 class="mt-5 mb-5">Platos Solicitados</h2>
       </div>
-      <table class="table mt-3">
-        <thead>
-          <tr class="border border-3 border border-black black-row">
-            <th scope="col"><b>Producto</b></th>
-            <th scope="col"><b>Mesa</b></th>
-            <th scope="col"><b>Estado</b></th>
-          </tr>
-        </thead>
-        {% for y in pedidos %}
-        <tbody>
-          <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
-              <th scope="row">{{ y.ID_Platos.Nombre }}</th>
-              <td>{{ y.ID_Pedido.ID_Mesa.Nombre_Mesa }}</td>
-              {% if y.Listo == 1 %}
-              <td><b>Plato Listo</b></td>
-              {% elif y.Sol_cocina == 1 %}
-              <td><b>Plato Solicitado</b></td>
-              {% else %}
-              <td><b>Plato No Solicitado</b></td>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Mesa</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Cambiar Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for y in pedidos %}
+              {% if y.Sol_cocina == 1 or y.Listo == 1 %}
+                <tr class="{% if y.Listo == 1 %}table-success{% elif y.Sol_cocina == 1 %}table-warning{% endif %}">
+                  <td>{{ y.ID_Platos.Nombre }}</td>
+                  <td>{{ y.ID_Pedido.ID_Mesa.Nombre_Mesa }}</td>
+                  <td>
+                    {% if y.Listo == 1 %}
+                      <span class="badge bg-success">Plato Listo</span>
+                    {% elif y.Sol_cocina == 1 %}
+                      <span class="badge bg-warning text-dark">Plato Solicitado</span>
+                    {% endif %}
+                  </td>
+                  {% if y.Listo == 0 %}
+                    <td>
+                      <a href="{% url 'estadoplatolisto' y.ID %}" class="btn btn-primary btn-sm">Cambiar a Listo</a>
+                    </td>
+                  {% else %}
+                    <td></td> 
+                  {% endif %}
+                </tr>
               {% endif %}
-
-            </tr> 
-          {% endfor %}
-        </tbody>
-      </table>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-    {% endblock %}
+  </div>
+</div>
+{% endblock %}
