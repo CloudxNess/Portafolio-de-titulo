@@ -39,4 +39,5 @@ urlpatterns = [
      path('enviapedidococina/<Mesaa>',enviapedidococina,name='enviapedidococina'),
      path('boleta/<Boleta>',boleta,name='boleta'),
      path('pedidosingresadoscocina',pedidosingresadoscocina,name='pedidosingresadoscocina'),
+     path('estadoplatolisto/<Id_pedido>',estadoplatolisto,name='estadoplatolisto'),
 ]

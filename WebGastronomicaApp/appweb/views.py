@@ -304,6 +304,15 @@ def activaplato(request, NombreBuscado):
     return redirect(to="menuadmin" )
 
 
+def estadoplatolisto(request, Id_pedido):
+
+    platom = get_object_or_404(Descripción_Pedidos, ID=Id_pedido)
+    platom.Listo=(1) 
+    platom.save()    
+    return redirect(to="estadopedidoc" )
+
+
+
 
 def desactivaplato(request, NombreBuscado):
 
@@ -493,6 +502,8 @@ def ingresopedidomesa (request,Mesa):
 
 def inicia_pedido (request, Mesaa):
     mesita = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    mesita.Estado_Ocupado=(1)
+    mesita.save()
     pedido = Pedidos.objects.create(ID_Pedido=Mesaa,Correo_Sol="ftecnofood@gmail.com",ID_Mesa=mesita,Estado="Sin Solicitud")
 
     return redirect("ingresopedidomesa",Mesa=Mesaa )
@@ -502,11 +513,17 @@ def termina_pedido_nulo (request, Mesaa):
     
     pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
     pedido.delete()
+    mesita = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    mesita.Estado_Ocupado=(0)
+    mesita.save()
     return redirect("ingresopedidomesa",Mesa=Mesaa )
 
 def termina_pedido (request, Mesaa):
     pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
     valor=0
+    mesita = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    mesita.Estado_Ocupado=(0)
+    mesita.save()
     pedidos = get_list_or_404(Descripción_Pedidos, ID_Pedido=Mesaa)
     mes = get_object_or_404(Mesa, ID_Mesa=Mesaa)
     for X in pedidos:
