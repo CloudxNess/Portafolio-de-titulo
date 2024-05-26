@@ -8,6 +8,8 @@
     <h2 class="mt-4">Carrito Mesa N° {{mesa}} </h2>
     {% if Pedi == None %}   
         <a href="{% url 'inicia_pedido' mesa %}" class="btn btn-secondary btn-sm">Iniciar Servicio</a>
+    {% elif  total_cantidad == 0%} 
+        <a href="{% url 'termina_pedido_nulo' mesa %}" class="btn btn-secondary btn-sm">Termina Servicio</a>
     {% else %} 
         <a href="{% url 'termina_pedido' mesa %}" class="btn btn-secondary btn-sm">Termina Servicio</a>
     {% endif %}

@@ -498,6 +498,12 @@ def inicia_pedido (request, Mesaa):
     return redirect("ingresopedidomesa",Mesa=Mesaa )
 
 
+def termina_pedido_nulo (request, Mesaa):
+    
+    pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
+    pedido.delete()
+    return redirect("ingresopedidomesa",Mesa=Mesaa )
+
 def termina_pedido (request, Mesaa):
     pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
     valor=0

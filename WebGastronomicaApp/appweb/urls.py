@@ -31,6 +31,7 @@ urlpatterns = [
      path('actualizar_agendamiento/<reserva>', actualizar_agendamiento, name='actualizar_agendamiento'),
      path('inicia_pedido/<Mesaa>',inicia_pedido,name='inicia_pedido'),
      path('termina_pedido/<Mesaa>',termina_pedido,name='termina_pedido'),
+     path('termina_pedido_nulo/<Mesaa>',termina_pedido_nulo,name='termina_pedido_nulo'),
      path('pedidolista/<Mesaa>/<Plato>',pedidolista,name='pedidolista'),
      path('eliminapedidolista/<Mesaa>/<pedido>',eliminapedidolista,name='eliminapedidolista'),
      path('enviapedidococina/<Mesaa>',enviapedidococina,name='enviapedidococina'),
