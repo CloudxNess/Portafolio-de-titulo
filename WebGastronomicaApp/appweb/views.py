@@ -651,3 +651,9 @@ def estadopedidoc (request):
           }
 
     return render(request, "mantenedor/cocinero/estadopedidoc.html", data)
+
+
+
+def pago (request) :
+
+    return render(request,"mantenedor/garzon/pago.html")
