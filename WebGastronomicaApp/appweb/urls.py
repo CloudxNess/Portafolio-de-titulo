@@ -41,4 +41,5 @@ urlpatterns = [
      path('pedidosingresadoscocina',pedidosingresadoscocina,name='pedidosingresadoscocina'),
      path('estadoplatolisto/<Id_pedido>',estadoplatolisto,name='estadoplatolisto'),
      path('pago',pago,name='pago'),
+     path('carrito',carrito,name='carrito')
 ]

@@ -674,3 +674,10 @@ def estadopedidoc (request):
 def pago (request) :
 
     return render(request,"mantenedor/garzon/pago.html")
+
+
+
+def carrito(request):
+    context = {}
+
+    return render(request, 'Carrito/carrito.html', context)
