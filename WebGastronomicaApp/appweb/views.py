@@ -14,6 +14,7 @@ from openpyxl.styles import Font, PatternFill
 from itertools import groupby
 from django.http import JsonResponse
 from django.core.mail import send_mail
+from django.db.models import Count
 
 
 
@@ -25,8 +26,24 @@ def splash(request):
     return render(request,"splash.html")
 
 def home(request):
-    return render(request, "index.html")
+    # 5 platos más vendidos
+    top_platos = Descripción_Pedidos_Historico.objects.values('ID_Platos').annotate(total=Count('ID_Platos')).order_by('-total')[:5]
 
+    # información adicional de cada plato
+    platos_data = []
+    for item in top_platos:
+        plato = Platos.objects.get(ID_Plato=item['ID_Platos'])
+        platos_data.append({
+            'nombre': plato.Nombre,
+            'imagen': plato.imagen.url if plato.imagen else None,
+            'costo': plato.Costo,
+            
+        })
+
+    context = {
+        'platos_data': platos_data,
+    }
+    return render(request, 'index.html', context)
 
 def menu(request):
     return render(request, "menu.html")
