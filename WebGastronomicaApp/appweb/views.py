@@ -26,8 +26,8 @@ def splash(request):
     return render(request,"splash.html")
 
 def home(request):
-    # 5 platos más vendidos
-    top_platos = Descripción_Pedidos_Historico.objects.values('ID_Platos').annotate(total=Count('ID_Platos')).order_by('-total')[:5]
+    # 6 platos más vendidos
+    top_platos = Descripción_Pedidos_Historico.objects.values('ID_Platos').annotate(total=Count('ID_Platos')).order_by('-total')[:6]
 
     # información adicional de cada plato
     platos_data = []
@@ -118,6 +118,7 @@ def registro (request):
         usu.email = correo
         usu.first_name = nombre
         usu.last_name = apellido
+        usu.is_staff=(1)
         grupo = Group.objects.get(name=grupo1)
         print (grupo)
     
@@ -681,3 +682,21 @@ def carrito(request):
     context = {}
 
     return render(request, 'Carrito/carrito.html', context)
+
+
+
+def funciones (request, Id_user) :
+ 
+    user = User.objects.get(id=Id_user) 
+    groups = user.groups.all()  
+    grupos = groups.first().id  
+
+    data = {
+        "usuario": Id_user,
+        "grupo": grupos
+    }
+        
+    return render(request,"funciones.html", data)
+
+
+

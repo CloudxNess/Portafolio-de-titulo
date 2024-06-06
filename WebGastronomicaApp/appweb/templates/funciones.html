@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+{% load static%}
+
+
+<h1>hola  {{grupo}} </h1>
+
+
+
+        
+        
+    {% if grupo == 1 %}
+    <h1>se accede como el primer grupo de usuarios  Administrador </h1>
+
+
+    
+    {% elif grupo == 2 %}
+    <h1>se accede como el segundo grupo de usuarios  Cocinero </h1>
+    {% elif grupo == 3 %}
+    <h1>se accede como el tercer grupo de usuarios  Garzon </h1>
+
+  {% endif %}
+
+
+
+
+
+
+  {% endblock %}
