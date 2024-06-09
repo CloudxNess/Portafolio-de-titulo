@@ -41,6 +41,7 @@
                         <div class="form-group">
                             <label for="banco">Banco:</label>
                             <select class="form-control" id="banco">
+                                <option>Seleccione Banco...</option>
                                 <option value="scotiabank">Scotiabank</option>
                                 <option value="santander">Banco Santander</option>
                                 <option value="santander_banefe">Banco Santander Banefe</option>
@@ -91,19 +92,18 @@
                         });
                         
                         setTimeout(function() {
-                            Swal.close(); // Cierra el SweetAlert
+                            Swal.close(); 
                             
-                            // Aquí podrías agregar el código para mostrar un SweetAlert de éxito
+                            
                             Swal.fire({
                                 icon: 'success',
                                 title: '¡Pago exitoso!',
                                 text: 'El pago se ha procesado correctamente.'
                             }).then(() => {
-                                // Redireccionar a la página de la boleta después de cerrar el SweetAlert
+                                
                                 window.location.href = "{% url 'boleta' mi_boleta.ID_Boleta %}";
                             });
-                        }, 3000); // Tiempo simulado para la validación del pago (3 segundos)
-                    } else {
+                        }, 3000); 
                         form.reportValidity();
                     }
                 });
