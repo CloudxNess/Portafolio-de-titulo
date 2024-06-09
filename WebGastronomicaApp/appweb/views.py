@@ -731,3 +731,14 @@ def funciones (request, Id_user) :
 
 
 
+def limpiarreserva(request):
+
+    mesas_reservadas = get_list_or_404(Mesa, Estado_Reservado=1)
+
+  
+    for x in mesas_reservadas:
+        x.Estado_Reservado = 0
+        x.save()
+
+    
+    return redirect(to="listaragendamiento")

@@ -42,5 +42,6 @@ urlpatterns = [
      path('estadoplatolisto/<Id_pedido>',estadoplatolisto,name='estadoplatolisto'),
      path('pago/<Boleta>',pago,name='pago'),
      path('carrito',carrito,name='carrito'),
-     path('funciones/<Id_user>',funciones,name='funciones')
+     path('funciones/<Id_user>',funciones,name='funciones'),
+     path('limpiarreserva',limpiarreserva,name='limpiarreserva')
 ]
