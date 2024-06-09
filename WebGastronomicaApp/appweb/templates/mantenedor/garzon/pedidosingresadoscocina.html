@@ -1,0 +1,96 @@
+
+
+{% extends 'base.html' %}
+
+{% block contenido %}
+{% load static %}
+<div class="container" style="height: 805px;">
+
+    <div class="cont-profesionales col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h1 style="text-align: center; margin-top: 1%; margin-bottom: 3%;">Cola De Pedidos y Reservas del dia</h1>
+
+        <div class="cont-listado row">
+            {% for x in Mesas %}
+            {% if x.ID_Mesa is 0  %}
+            {% else %}
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        {% if x.Estado_Ocupado %}
+                        <img src="{% static 'image/mesaa.png' %}" class="img-fluid rounded-start" alt="...">
+                        {% elif x.Estado_Reservado  %}
+                        <img src="{% static 'image/mesab.png' %}" class="img-fluid rounded-start" alt="...">
+                        {% else %}
+                        <img src="{% static 'image/mesac.png' %}" class="img-fluid rounded-start" alt="...">
+                        {% endif %}  
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ x.Nombre_Mesa }}</h5>
+                            <ul class="list-group list-group-flush">
+                            {% if  x.Estado_Reservado == 1 %} 
+                            {% for z in reservas %}
+                            {% if z.fecha == fecha_hoy  %}
+                            {% if z.ID_Mesa.ID_Mesa == x.ID_Mesa %}                  
+                                <li class="list-group-item"> Reserva de {{z.nombre}} para {{z.cantidad_comensales}} comensales para las {{z.hora}} </li>
+                              {% endif %} 
+                              {% endif %} 
+                              {% endfor %}
+                            </ul>
+                              {% else %}
+                              <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> No se tienen reservas para el dia de hoy</li>
+                              </ul>
+                              {% endif %} 
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{ forloop.counter }}">Detalle Pedido Actual</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+              <!-- Modal -->
+            <div class="modal fade" id="modal{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ forloop.counter }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel{{ forloop.counter }}">{{ x.Nombre_Mesa }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Contenido de los pedidos de las mesas -->
+                            <ul class="list-group list-group-flush">
+
+                            {% for y in pedidos %}
+                                {% if x.ID_Mesa == y.ID_Pedido.ID_Pedido %}
+
+                                     {% if y.Listo == 1 %}
+
+                                     <li class="list-group-item list-group-item-action list-group-item-success">el pedido N°{{ y.ID }} de {{ y.ID_Platos.Nombre }} esta listo para retirar</li> <br>
+
+
+                                    {% elif y.Sol_cocina == 1 %}
+
+                                    <li class="list-group-item list-group-item-action list-group-item-warning">el pedido N°{{ y.ID }} de {{ y.ID_Platos.Nombre }} esta en Preparacion </li><br>
+
+                                   
+                                    {% else %}
+
+                                    <li class="list-group-item list-group-item-action list-group-item-danger">el pedido N°{{ y.ID }} de {{ y.ID_Platos.Nombre }} no se ha solicitado a cocina </li><br>
+                                    {% endif %} 
+                                {% endif %} 
+                            {% endfor %}
+                        </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}  
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

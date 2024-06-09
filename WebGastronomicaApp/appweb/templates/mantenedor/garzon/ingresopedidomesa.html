@@ -21,7 +21,7 @@
       <div class="text-center">
         <h2 class="mt-5 mb-5">Menu de Platos</h2>
       </div>
-      <table class="table mt-3">
+      <table class="table mt-3 table-primary">
         <thead>
           <tr class="border border-3 border border-black black-row">
             <th scope="col"><b>Producto</b></th>
@@ -63,11 +63,19 @@
         </thead>
         <tbody>
           {% for x in Pedido %}
-            <tr class="border border-3 border border-black black-row" style="margin-bottom: 10px;">
+            {%if x.Sol_cocina == 1%}
+            <tr class="border border-3 border border-black black-row table-success" style="margin-bottom: 10px;">
+              <th scope="row">{{ x.ID_Platos.Nombre }}</th>
+              <td>${{ x.Costo }}</td>    
+              <td> Solcitado</td>                      
+            </tr>
+            {%else%}
+            <tr class="border border-3 border border-black black-row table-danger" style="margin-bottom: 10px;">
               <th scope="row">{{ x.ID_Platos.Nombre }}</th>
               <td>${{ x.Costo }}</td>    
               <td><a href="{% url 'eliminapedidolista' mesa x.ID %}" class="btn btn-outline-danger">Eliminar</a></td>                      
             </tr>
+            {%endif%}
           {% endfor %}
         </tbody>
       </table>

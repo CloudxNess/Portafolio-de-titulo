@@ -657,12 +657,19 @@ def pedidosingresadoscocina(request):
 
     
     mesaspedido =  Mesa.objects.all()
+    pedidos =  Descripción_Pedidos.objects.all()
+    reserv = Reserva_Mesa.objects.all()
+    fecha_hoy = timezone.localtime(timezone.now()).date()
+
     data = {
         "Mesas": mesaspedido,
+        "pedidos": pedidos,
+        "reservas": reserv,
+        "fecha_hoy":fecha_hoy
           }
 
 
-    return render(request,"mantenedor/cocinero/pedidosingresadoscocina.html",data)
+    return render(request,"mantenedor/garzon/pedidosingresadoscocina.html",data)
 
 
 
