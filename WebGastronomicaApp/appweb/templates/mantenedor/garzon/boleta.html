@@ -51,7 +51,7 @@
           <th scope="row" style="background-color: yellowgreen">{{mi_boleta.Costo_Total}}</th>
           </tbody>
         </table>
-        <a href="{% url 'pago' %}" id="btnTerminarBoleta" class="btn btn-success mx-auto">Pagar Servicio</a>
+        <a href="{% url 'pago' mi_boleta.ID_Boleta %}" id="btnTerminarBoleta" class="btn btn-success mx-auto">Pagar Servicio</a>
       </div>
     </div>
   </div>

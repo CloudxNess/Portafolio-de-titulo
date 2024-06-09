@@ -40,7 +40,7 @@ urlpatterns = [
      path('boleta/<Boleta>',boleta,name='boleta'),
      path('pedidosingresadoscocina',pedidosingresadoscocina,name='pedidosingresadoscocina'),
      path('estadoplatolisto/<Id_pedido>',estadoplatolisto,name='estadoplatolisto'),
-     path('pago',pago,name='pago'),
+     path('pago/<Boleta>',pago,name='pago'),
      path('carrito',carrito,name='carrito'),
      path('funciones/<Id_user>',funciones,name='funciones')
 ]

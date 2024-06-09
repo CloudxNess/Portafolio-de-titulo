@@ -672,10 +672,14 @@ def estadopedidoc (request):
 
 
 
-def pago (request) :
+def pago (request, Boleta) :
 
-    return render(request,"mantenedor/garzon/pago.html")
+    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
+    data = {
+        "mi_boleta": bol
+          }
 
+    return render(request,"mantenedor/garzon/pago.html",data)
 
 
 def carrito(request):
