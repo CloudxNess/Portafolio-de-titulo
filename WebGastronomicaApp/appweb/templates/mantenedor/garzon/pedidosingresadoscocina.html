@@ -42,7 +42,9 @@
                                 <li class="list-group-item"> No se tienen reservas para el dia de hoy</li>
                               </ul>
                               {% endif %} 
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{ forloop.counter }}">Detalle Pedido Actual</button>
+                              <div class="d-grid">
+                              <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#modal{{ forloop.counter }}">Detalle Pedido Actual</button>
+                              </div>
                         </div>
                     </div>
                 </div>
