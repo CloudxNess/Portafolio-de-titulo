@@ -34,15 +34,17 @@ https://www.youtube.com/watch?v=xXd6M2qeSVs&ab_channel=tutoExpress   Primero se 
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-05-06-2024
+Pendientes
 
-KPIS
-carrito Compra
-Simulacion Transbank
+KPIS / Pendiente
+carrito Compra /En proceso
+Simulacion Transbank/ Listo
 revisar la pagina de listar agendamiento 
-pulir el correo electronico
-pulir pagina de Ver Estado de Mesa de patrick
-Agregar para limpiar las reservas de las mesas
+pulir el correo electronico / Pendiente
+pulir pagina de Ver Estado de Mesa de patrick / Listo
+Agregar para limpiar las reservas de las mesas / Pendiente
+Hacer una Validacion para que no se pueda terminar el servicio  si es que los platos no han sido enviados a cocina 
+Desabilitar boton pagar servicio de boleta despues de pagar con simulacion transbank
 
