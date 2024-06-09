@@ -15,6 +15,7 @@ from itertools import groupby
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.db.models import Count
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 
@@ -615,10 +616,29 @@ def actualizar_agendamiento(request, reserva):
         anterior.save()
         messages.success(request, "Agendamiento Realizado con Exito...Enviando Correo de Confirmación al Cliente. ")
         
-        # Aqui es como enviaremos el correo Electronico ,el formato se modifica aqui  #
+        imagen_url = staticfiles_storage.url("static/image/TecnoFood.png")
+        mensaje_correo = f"""
+        Agendamiento Realizado Con Exito 
+
+        Detalles de la reserva:
+        Nombre: {Reserva.nombre}
+        Correo: {Reserva.correo}
+        Fecha: {Reserva.fecha}
+        Hora: {Reserva.hora}
+        Cantidad de comensales: {Reserva.cantidad_comensales}
+        Mesa: {nueva.Nombre_Mesa}
+        
+        <img src="{imagen_url}" alt="TecnoFood">
+
+
+        Gracias Por Preferirnos , Equipo TecnoFood
+
+       'ftecnofood@gmail.com'
+        """
+
         send_mail(
-            'Agendamiento Realizado',
-            'La Reserva Se ha Realizado Con Exito' ,
+            'Agendamiento Realizado' ,
+             mensaje_correo,
             'ftecnofood@gmail.com',
             [Reserva.correo], 
             fail_silently=False,
