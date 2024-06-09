@@ -44,7 +44,7 @@ class reservamesaForm(forms.ModelForm):
         fields = ["nombre", "correo", "fecha", "hora", "cantidad_comensales"]
         widgets = {
             "fecha": forms.DateInput(attrs={'type': 'date'}, format=('%Y-%m-%d')),
-            "hora": forms.TimeInput(attrs={'type': 'time'}, format=('%H:%M')),
+           "hora": forms.Select(choices=[(f"{h:02d}:{m:02d}", f"{h:02d}:{m:02d}") for h in range(10, 22) for m in [0, 30]], attrs={'class': 'form-control'}),
         }
 
     def clean_hora(self):
