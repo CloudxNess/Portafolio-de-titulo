@@ -40,11 +40,10 @@ Pendientes
 
 KPIS / Pendiente
 carrito Compra /En proceso
-Simulacion Transbank/ Listo
-revisar la pagina de listar agendamiento 
+revisar la pagina de listar agendamiento ( Revisar la funcion de los botones de listaragendamiento)
 pulir el correo electronico / Pendiente
-pulir pagina de Ver Estado de Mesa de patrick / Listo
-Agregar para limpiar las reservas de las mesas / Pendiente
+Agregar para limpiar las reservas de las mesas / Falta Pulir 
 Hacer una Validacion para que no se pueda terminar el servicio  si es que los platos no han sido enviados a cocina 
 Desabilitar boton pagar servicio de boleta despues de pagar con simulacion transbank
+Revisar Lista de Usuarios creados (Ver Usuarios los botones VER/ELIMINAR/EDITAR no funcionan)
 

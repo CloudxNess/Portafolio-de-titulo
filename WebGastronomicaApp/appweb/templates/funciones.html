@@ -1,53 +1,44 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-{% load static%}
+{% load static %}
 
-        
-    {% if grupo == 1 %}
-    
-    <div class="container">
-    <h1 style="text-align: center;">bienvenido  Administrador </h1> <br>
-      
+{% if grupo == 1 %}
+<div class="container">
+    <div class="header">
+        <h1>Bienvenido Administrador</h1>
+    </div>
+    <div class="buttons">
+        <a href="{% url 'registrouser' %}" class="button">Crear Usuarios</a>
+        <a href="{% url 'listarusuarios' %}" class="button">Ver Usuarios</a>
+        <a href="{% url 'agregarplato' %}" class="button">Crear Nuevo Plato</a>
+        <a href="{% url 'menuadmin' %}" class="button">Revisar Menu</a>
+        <a href="{% url 'listaringredientes' %}" class="button">Gestion De Bodega</a>
+        <a href="{% url 'mesas' %}" class="button">Disponibilidad de Mesas</a>
+        <a href="{% url 'listaragendamiento' %}" class="button">Revisar Agendamiento</a>
+        <a href="{% url 'agregaringrediente' %}" class="button">Agregar ingrediente</a>
+    </div>
+</div>
 
-    
-      <a href="{% url 'registrouser' %}" class="button">Crear Usuarios</a>
-      <a href="{% url 'listarusuarios' %}" class="button">Ver Usuarios</a>
-      <a href="{% url 'agregarplato' %}" class="button">Aprobar platos nuevos</a>
-      <a href="{% url 'menuadmin' %}" class="button">Revisar Menu</a>
-      <a href="{% url 'listaringredientes' %}" class="button">Bodega</a>
-      <a href="{% url 'mesas' %}" class="button">Revisar Mesas</a>
-      <a href="{% url 'listaragendamiento' %}" class="button">Revisar Agendamiento</a>
-      <a href="{% url 'agregaringrediente' %}" class="button">Agregar ingrediente</a>
-  </div>
-  
-  
-
-    
-    {% elif grupo == 2 %}
-
-    <div class="container">
-      <h1 style="text-align: center;">bienvenido  Cocinero </h1> <br>
-        
-  
-      
+{% elif grupo == 2 %}
+<div class="container">
+    <div class="header">
+        <h1>Bienvenido Cocinero</h1>
+    </div>
+    <div class="buttons">
         <a href="{% url 'agregarplato' %}" class="button">Nuevo Plato</a>
         <a href="{% url 'sol_ingredientes' %}" class="button">Solicitar Ingredientes</a>
         <a href="{% url 'estadopedidoc' %}" class="button">Platos Solicitados</a>
         <a href="{% url 'mesas' %}" class="button">Revisar Mesas</a>
-
     </div>
-    
+</div>
 
-
-    
-    {% elif grupo == 3 %}
-
-    <div class="container">
-      <h1 style="text-align: center;">bienvenido Garzon </h1> <br>
-        
-  
-      
+{% elif grupo == 3 %}
+<div class="container">
+    <div class="header">
+        <h1>Bienvenido Garzon</h1>
+    </div>
+    <div class="buttons">
         <a href="{% url 'pedidosingresadoscocina' %}" class="button">Estado Mesas</a>
         <a href="{% url 'mesasparapedido' %}" class="button">Iniciar Mesas</a>
         <a href="{% url 'estadopedidog' %}" class="button">Estado de Platos</a>
@@ -55,18 +46,26 @@
         <a href="{% url 'mesas' %}" class="button">Revisar Mesas</a>
         <a href="#" class="button">Revisar Mesas</a>
     </div>
-    
+</div>
+{% endif %}
 
-
-  {% endif %}
-
-
-  <style>
-
+<style>
     .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+    .header {
+        width: 100%;
+        text-align: center;
+    }
+    .buttons {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        gap: 50px;
+        justify-items: center;
     }
     .button {
         display: flex;
@@ -81,19 +80,14 @@
         font-weight: bold;
         box-shadow: 3px 3px black;
         transition: all 0.2s ease;
+        margin-left: 10%;
+        margin-top: 15%;
+        margin-right: 15%;
     }
     .button:hover {
         box-shadow: none;
         transform: translate(3px, 3px);
     }
-    .wide {
-        grid-column: span 2;
-        justify-self: center;
-    }
 </style>
-</head>
 
-
-
-
-  {% endblock %}
+{% endblock %}
