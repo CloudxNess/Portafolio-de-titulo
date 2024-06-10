@@ -1,28 +1,14 @@
 Desarrollo Pendiente para Proyecto de título 
 
-    Agregar Sweet Alert de Confirmación de Acción(¿Unidad de Medida Correcta?)    / Listo
-    Enviar Correo de Confirmacion para la Reserva de Mesa  / Listo
     Implementar Power Bi/ Matplotlib  para Inteligencia de Negocios  para Gráficos.
-    Iniciar sesión Segun Perfil de Usuario.
-    Implementar carrito de compras. 
+    
+   
     Funciones de Cocinero.
-        Cambiar Estado de Preparación de Plato.(Solicitado-En Preparación-Listo para entrega).
-        Enviar Solicitud de Ingredientes.
-        Registrar Nuevo Plato.
-    Funciones de Perfil Mesa.
-        Cálculo de Boleta.
-        Carrito de Compra
-    Funciones de Garzon.
-        Término de Servicio
-        Agregar Pedido a la Mesa
-        Ver Estado de Mesa 
-        Inicio de Servicio
-    Funciones Cliente
-        Carrito de Compra
+        Cambiar Estado de Preparación de Plato.(Solicitado-En Preparación-Listo para entrega)----> Revisar
     
     Realizar Minutas de Reunión
     Completar Matriz de Control de Cambios
-    Confirmar Reserva Mesa desde Administrador
+
 
 
 
@@ -33,19 +19,20 @@ https://www.youtube.com/watch?v=xXd6M2qeSVs&ab_channel=tutoExpress   Primero se 
 
 
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 Pendientes
 
-KPIS / Pendiente
+KPIS / Pendientea
 carrito Compra /En proceso
 revisar la pagina de listar agendamiento ( Revisar la funcion de los botones de listaragendamiento)
-pulir el correo electronico / Pendiente
 Agregar para limpiar las reservas de las mesas / Falta Pulir 
 Hacer una Validacion para que no se pueda terminar el servicio  si es que los platos no han sido enviados a cocina 
 Desabilitar boton pagar servicio de boleta despues de pagar con simulacion transbank
 Revisar Lista de Usuarios creados (Ver Usuarios los botones VER/ELIMINAR/EDITAR no funcionan)
+Eliminar Usuario
+Actualizar Usuario
+Incorporar en la Matriz de Control de Cambios el Uso de Api ( No se estan usando )
+
+
 
 Agregar 
 @login_required(login_url="/accounts/login") Para que no se pueda acceder a menos que este logueado
