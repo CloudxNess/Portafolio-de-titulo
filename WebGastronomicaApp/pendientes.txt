@@ -47,3 +47,7 @@ Hacer una Validacion para que no se pueda terminar el servicio  si es que los pl
 Desabilitar boton pagar servicio de boleta despues de pagar con simulacion transbank
 Revisar Lista de Usuarios creados (Ver Usuarios los botones VER/ELIMINAR/EDITAR no funcionan)
 
+Agregar 
+@login_required(login_url="/accounts/login") Para que no se pueda acceder a menos que este logueado
+@permission_required (['auth.add_user'], login_url="/") / para que solo acceda el perfil Correspondiente
+
