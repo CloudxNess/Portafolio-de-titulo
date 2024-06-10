@@ -16,7 +16,7 @@ from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.db.models import Count
 from django.contrib.staticfiles.storage import staticfiles_storage
-
+from .carro import Carro
 
 
 # Create your views here.
@@ -729,6 +729,48 @@ def funciones (request, Id_user) :
         
     return render(request,"funciones.html", data)
 
+###################################################################
+
+def agregar_plato (request, plato_id):
+    
+    carro=Carro(request)
+
+    plato=Platos.objects.get(ID_Plato=plato_id)
+    
+    carro.agregar(plato=plato)
+
+    return redirect("menu")
+
+
+def eliminar_plato (request, plato_id):
+    
+    carro=Carro(request)
+
+    plato=Platos.objects.get(ID_Plato=plato_id)
+    
+    carro.eliminar(plato=plato)
+
+    return redirect("menu")
+
+
+def restar_plato (request, plato_id):
+    
+    carro=Carro(request)
+
+    plato=Platos.objects.get(ID_Plato=plato_id)
+    
+    carro.restar_plato(plato=plato)
+
+    return redirect("menu")
+
+
+def limpiar_carro (request, plato_id):
+    
+    carro=Carro(request)
+    
+    carro.limpiar_carro()
+
+    return redirect("menu")
 
 
 def limpiarreserva(request):

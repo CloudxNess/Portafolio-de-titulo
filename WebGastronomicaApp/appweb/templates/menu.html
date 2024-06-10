@@ -4,6 +4,19 @@
 {% block contenido %}
 
 <div class="container">
+
+  <div style="float:right;">
+
+    {% if request.user.is_authenticated %}
+      {% include "Carrito/widget.html" %}
+    {% else %}
+
+      
+
+    {% endif %}
+
+  </div>
+
   <div class="row">
     {% for region, MenuP in platos_por_region.items %}
     <div class="col-md-12 mb-3">
@@ -16,16 +29,25 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ x.Nombre }}</h5>
                     <p class="card-text">{{ x.Descripcion }}</p>
-                    <p class="card-text">Costo: ${{ x.Costo }}</p> <button class="btn btn-outline-secondary add-btn">Agregar</button>
-                    
-                </div>
+                    <p class="card-text">Costo: ${{ x.Costo }}</p>
+                    {% if request.user.is_authenticated %}
+                      <a href="{% url 'agregar_plato' x.ID_Plato %}" class="btn btn-success">Agregar</a>
+                    {% else %}
+
+    
+
+                    {% endif %}
+                     
+                
+                  </div>
             </div>
         </div>
         {% endfor %}
       </div>
-    </div>
+    </div> 
     {% endfor %}
   </div>
 </div>
 
 {% endblock %}
+

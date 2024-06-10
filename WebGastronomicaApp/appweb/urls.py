@@ -43,5 +43,9 @@ urlpatterns = [
      path('pago/<Boleta>',pago,name='pago'),
      path('carrito',carrito,name='carrito'),
      path('funciones/<Id_user>',funciones,name='funciones'),
-     path('limpiarreserva',limpiarreserva,name='limpiarreserva')
+     path('limpiarreserva',limpiarreserva,name='limpiarreserva'),
+     path('agregar_plato/<int:plato_id>',agregar_plato, name="agregar_plato"),
+     path("eliminar/<int:plato_id>/",eliminar_plato, name="eliminar_plato"),
+     path("restar_plato/<int:plato_id>/",restar_plato, name="restar_plato"),
+     path("limpiar/",limpiar_carro, name="limpiar_carro")
 ]

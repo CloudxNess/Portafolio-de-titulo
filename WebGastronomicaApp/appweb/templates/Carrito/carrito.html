@@ -15,8 +15,8 @@
             <br>
             <table class="table">
                 <tr>
-                    <th><h5>Platos: <strong></strong></h5></th>
-                    <th><h5>Total:<strong> </strong></h5></th>
+                    <th><h5>Detalle Pedido: <strong></strong></h5></th>
+                    <th><h5>Total:${{costo_total_carro}}<strong> </strong></h5></th>
                     <th>
                         <a  style="float:right; margin:5px;" class="btn btn-success" href="">Pagar</a>
                     </th>
@@ -30,29 +30,27 @@
             <div style="display: flex; align-items: flex-stretch; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #ececec;">
                 <div style="flex:2"></div>
                 <div style="flex:2"><strong>Nombre Plato</strong></div>
-                <div style="flex:1"><strong>Precio</strong></div>
+                <div style="flex:1"><strong>Precio Unitario</strong></div>
                 <div style="flex:1"><strong>Cantidad</strong></div>
                 <div style="flex:1"><strong>Total</strong></div>
             </div>
 
             
-
-            <div style="display: flex; align-items: flex-stretch; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #ececec;">
-                <div style="flex:2"><img class="row-image" src="""></div>
-                <div style="flex:2"><p>Plato Prueba</p></div>
-                <div style="flex:1"><p>$6990</p></div>
-                <div style="flex:1">
-                    <p class="quantity">2</p>
-                    <div class="quantity">
-                        <img style="width: 12px; cursor: pointer; display: block; margin-top: 5px; transition:.1s;" src="{% static  'image/arrow-up.png' %}">
-                
-                        <img style="width: 12px; cursor: pointer; display: block; margin-top: 5px; transition:.1s;" src="{% static  'image/arrow-down.png' %}">
+            {% if request.session.carro.items %}
+                {% for key, value in request.session.carro.items %}
+                <div style="display: flex; align-items: flex-stretch; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #ececec;">
+                    <div style="flex:2"><img class="row-image" src="{{value.imagen}}" style="height: 50px;"></div>
+                    <div style="flex:2"><p> {{value.nombre}} </p></div>
+                    <div style="flex:1"><p>${{value.preciop}}</p></div>
+                    <div style="flex:1">
+                        <p class="quantity">{{value.cantidad}}</p>
                     </div>
-                </div>
-                <div style="flex:1"><p>$32</p></div>
-            </div> 
+                    <div style="flex:1"><p>${{value.precio}}</p></div>
+                </div> 
             
+                {% endfor %}
 
+            {% endif %}
         </div>
         
         
