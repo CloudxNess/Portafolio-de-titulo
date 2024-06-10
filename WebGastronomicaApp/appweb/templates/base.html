@@ -18,70 +18,63 @@
 
 <body>
 
-<!--  Navbar -->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'index' %}"><img class="logo"src="{% static 'image/TecnoFood.png' %}" alt="Logo" style="width:75px;height:65px;"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        
-        
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'index' %}">
+      <img class="logo" src="{% static 'image/TecnoFood.png' %}" alt="Logo" style="width:75px;height:65px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         {% if user.is_authenticated and user.is_staff == False %}
-        
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Bienvenido {{user.username}}
           </a>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="#">Compra en Linea</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'reservamesa' %}">Reserva Aqui</a>
-          </li>
-          
-        </ul>
-
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Compra en Linea</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'reservamesa' %}">Reserva Aqui</a>
+        </li>
         {% elif user.is_authenticated and user.is_staff %}
-        
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Bienvenido {{user.username}}
           </a>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'funciones' user.id %}">Funciones </a>
-          </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'funciones' user.id %}">Funciones</a>
+        </li>
         {% else %}
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Login</a>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'menu' %}">Menu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'reservamesa' %}">Reserva Aqui</a>
-          </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'reservamesa' %}">Reserva Aqui</a>
+        </li>
+        {% endif %}
+      </ul>
 
-          
-
-      {% endif %}
-
-
-          {% if user.is_authenticated %}
-
-          <a href="{% url 'logout' %}" class="btn btn-dark"  >Cerrar Sesion</a> 
-          
-          {% endif %}
-
-        </form>
+      {% if user.is_authenticated %}
+      <div class="ms-auto">
+        <a href="{% url 'logout' %}" class="btn btn-dark">Cerrar Sesion</a>
       </div>
+      {% endif %}
+      
     </div>
-    
-  </nav>
+  </div>
+</nav>
+<!-- Fin Navbar -->
 
-  <!-- Fin Navbar -->
 
 
 
