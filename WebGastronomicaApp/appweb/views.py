@@ -764,7 +764,7 @@ def restar_plato (request, plato_id):
     return redirect("menu")
 
 
-def limpiar_carro (request, plato_id):
+def limpiar_carro (request):
     
     carro=Carro(request)
     
