@@ -792,3 +792,24 @@ def eliminar_colaborador(request, username):
     colaborador.delete()
     messages.success(request,"Colaborador eliminado correctamente")
     return redirect(to="listarusuarios")
+
+
+def modificar_colaborador(request, rut):
+
+    colaborador = get_object_or_404(Usuarios, rut=rut)
+
+    data = {
+        "form": agregarform(instance=colaborador)
+    }
+
+    if request.method == 'POST':
+        formulario = agregarform(data=request.POST, instance=colaborador)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="listarusuarios")
+        else:
+            data["mensaje"] = "Hubo un error"
+            data["form"] =  formulario
+
+
+    return render(request, "mantenedor/admin/listarusuarios.html", data)
