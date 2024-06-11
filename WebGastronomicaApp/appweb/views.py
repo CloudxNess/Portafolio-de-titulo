@@ -784,3 +784,11 @@ def limpiarreserva(request):
 
     
     return redirect(to="listaragendamiento")
+
+
+def eliminar_colaborador(request, username):
+    colaborador = get_object_or_404(User, username=username)
+
+    colaborador.delete()
+    messages.success(request,"Colaborador eliminado correctamente")
+    return redirect(to="listarusuarios")
