@@ -17,6 +17,7 @@ from django.core.mail import send_mail
 from django.db.models import Count
 from django.contrib.staticfiles.storage import staticfiles_storage
 from .carro import Carro
+from datetime import datetime
 
 
 # Create your views here.
@@ -772,15 +773,20 @@ def limpiar_carro (request):
 
     return redirect("menu")
 
-
 def limpiarreserva(request):
 
-    mesas_reservadas = get_list_or_404(Mesa, Estado_Reservado=1)
-
-  
-    for x in mesas_reservadas:
-        x.Estado_Reservado = 0
-        x.save()
+    actual = datetime.now().time()
+    if not (actual >= datetime.strptime("22:00", "%H:%M").time() or actual < datetime.strptime("08:00", "%H:%M").time()):
+        messages.error(request, "Esta función solo se puede utilizar en horario no habil")
+        return redirect("listaragendamiento")
+    try:
+        mesas_reservadas = get_list_or_404(Mesa, Estado_Reservado=1)
+        for x in mesas_reservadas:
+            x.Estado_Reservado = 0
+            x.save()
+    except :
+        messages.error(request,"No se tienen mesas reservadas")
+        return redirect("listaragendamiento" )
 
     
     return redirect(to="listaragendamiento")
