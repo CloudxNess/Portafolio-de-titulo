@@ -525,6 +525,12 @@ def termina_pedido_nulo (request, Mesaa):
 
 def termina_pedido (request, Mesaa):
     pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
+    pedidos = get_list_or_404(Descripción_Pedidos, ID_Pedido=pedido)
+    for pedido in pedidos:
+        if not pedido.Sol_cocina:
+            messages.error(request, "No se puede terminar el servicio. Algunos platos aún no han sido solicitados o eliminados.")
+            return redirect("ingresopedidomesa",Mesa=Mesaa ) 
+
     valor=0
     mesita = get_object_or_404(Mesa, ID_Mesa=Mesaa)
     mesita.Estado_Ocupado=(0)
