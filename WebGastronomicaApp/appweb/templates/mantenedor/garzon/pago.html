@@ -101,7 +101,7 @@
                                 text: 'El pago se ha procesado correctamente.'
                             }).then(() => {
                                 
-                                window.location.href = "{% url 'boleta' mi_boleta.ID_Boleta %}";
+                                window.location.href = "{% url 'pagado' mi_boleta.ID_Boleta %}";
                             });
                         }, 3000); 
                         form.reportValidity();

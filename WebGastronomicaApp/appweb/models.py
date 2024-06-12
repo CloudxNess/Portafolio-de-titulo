@@ -79,6 +79,7 @@ class Boletas(models.Model):
     ID_Mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, help_text="Id del pedido")
     Fecha = models.DateTimeField(default=timezone.now)
     Costo_Total = models.IntegerField(help_text="Valor total de atención")
+    Pagado = models.BooleanField(default=0)
 
     def __str__(self):
         return str(self.ID_Boleta)

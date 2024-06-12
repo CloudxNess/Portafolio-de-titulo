@@ -695,6 +695,16 @@ def pago (request, Boleta) :
     return render(request,"mantenedor/garzon/pago.html",data)
 
 
+def pagado (request, Boleta) :
+
+    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
+    bol.Pagado=(1)
+    bol.save()
+
+
+    return redirect("boleta",Boleta=Boleta )
+
+
 def carrito(request):
     context = {}
 
