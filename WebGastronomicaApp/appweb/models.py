@@ -55,15 +55,6 @@ class Bodega(models.Model):
         return str(self.ID_Ing_Bod)
     
 
-class Receta(models.Model):
-    ID_Ingrediente_Receta = models.AutoField(primary_key=True,help_text="Id del ingrediente") 
-    ID_Plato = models.ForeignKey(Platos, on_delete=models.CASCADE, help_text="Id del plato")
-    ID_Ingrediente_Bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, help_text="Id del ingrediente en bodega")
-    Cantidad_Ingredientes = models.IntegerField(help_text="Cantidad de ingredientes necesarios")
-
-    def __int__ (self):
-        return self.ID_Ingrediente_Receta
-
 
 class Mesa (models.Model):
     ID_Mesa = models.AutoField(primary_key=True, help_text="Id de la mesa")
@@ -134,6 +125,7 @@ class Descripción_Pedidos_Historico(models.Model):
     ID_Boleta = models.ForeignKey(Boletas, on_delete=models.CASCADE, help_text="Id de la Boleta")
     ID_Platos = models.ForeignKey(Platos, on_delete=models.CASCADE, help_text="Id del plato")
     Costo = models.IntegerField(help_text="Valor total del pedido")
+    fecha_y_hora = models.DateTimeField(default=timezone.now)
 
     def int(self):
         return self.Costo

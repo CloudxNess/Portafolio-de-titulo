@@ -33,10 +33,6 @@ class PlatosAdmin(admin.ModelAdmin):
     search_fields = ['Nombre', 'Region']
 
 
-class RecetaAdmin(admin.ModelAdmin):
-    list_display = ['ID_Ingrediente_Receta']
-    search_fields = ['ID_Ingrediente_Receta']
-
 
 class Descripción_PedidosAdmin(admin.ModelAdmin):
     list_display = ['ID_Pedido', 'Costo']
@@ -64,7 +60,6 @@ admin.site.register(Pedidos, PedidoAdmin)
 admin.site.register(Ingredientes, IngredientesAdmin)
 admin.site.register(Bodega, BodegaAdmin)
 admin.site.register(Platos, PlatosAdmin)
-admin.site.register(Receta, RecetaAdmin)
 admin.site.register(Descripción_Pedidos, Descripción_PedidosAdmin)
 admin.site.register(Boletas, BoletasAdmin)
 admin.site.register(Usuarios, UsuariosAdmin)
