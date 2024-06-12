@@ -13,8 +13,11 @@
     {% csrf_token %}
 
     {{ form | crispy}}
-    <div class="d-grid gap-2 col-6 mx-auto">
-    <button type="submit"  class="btn btn-primary" >Modificar</button>
+    <div class=" col-6 mx-auto">
+    <button type="submit"  class="btn btn-primary btn-lg" >Modificar</button> 
+    <button type="cancel" class="btn btn-danger btn-lg">Cancelar</button>
+    
+
     </div>
   </form>
   </div>

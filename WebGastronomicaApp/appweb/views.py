@@ -47,8 +47,6 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
-def menu(request):
-    return render(request, "menu.html")
 
 
 def reservamesa(request):
@@ -294,6 +292,11 @@ def menuadmin(request):
 
 def modificarmenu(request, NombreBuscado):
 
+    actual = datetime.now().time()
+    if not (actual >= datetime.strptime("20:00", "%H:%M").time() or actual < datetime.strptime("08:00", "%H:%M").time()):
+        messages.error(request, "Esta función solo se puede utilizar en horario no habil")
+        return redirect("menuadmin")
+
     platom = get_object_or_404(Platos, Nombre=NombreBuscado)
 
     data = {
@@ -388,24 +391,6 @@ def DescargarReporteExcel(request):
         response['Content-Disposition'] = 'attachment; filename=Reporte_Inventario.xlsx'
         wb.save(response)
         return response
-    
-
-
-def menu(request):
-
-    Menu_platos = Platos.objects.all().filter(Disponibilidad=True)
-
-    data = {
-        "MenuP" : Menu_platos
-    }
-    
-
-
-
-    return render(request,"menu.html", data)
-
-
-
     
    
 def menu(request):
@@ -792,24 +777,24 @@ def limpiarreserva(request):
     return redirect(to="listaragendamiento")
 
 
-def eliminar_colaborador(request, username):
-    colaborador = get_object_or_404(User, username=username)
+def eliminar_colaborador(request, usuario):
+    colaborador = get_object_or_404(User, username=usuario)
 
     colaborador.delete()
     messages.success(request,"Colaborador eliminado correctamente")
     return redirect(to="listarusuarios")
 
 
-def modificar_colaborador(request, rut):
+def modificar_colaborador(request, usuario):
 
-    colaborador = get_object_or_404(Usuarios, rut=rut)
+    colaborador = get_object_or_404(User, username=usuario)
 
     data = {
-        "form": agregarform(instance=colaborador)
+        "form": AgregaruserForm(instance=colaborador)
     }
 
     if request.method == 'POST':
-        formulario = agregarform(data=request.POST, instance=colaborador)
+        formulario = AgregaruserForm(data=request.POST, instance=colaborador)
         if formulario.is_valid():
             formulario.save()
             return redirect(to="listarusuarios")
@@ -818,4 +803,21 @@ def modificar_colaborador(request, rut):
             data["form"] =  formulario
 
 
-    return render(request, "mantenedor/admin/listarusuarios.html", data)
+    return render(request, "mantenedor/admin/modificar_colaborador.html", data)
+
+
+
+
+
+def listapedidosonline(request):
+
+    mesita = get_object_or_404(Mesa, ID_Mesa=0)
+    Lista_pedidos = Pedidos.objects.filter(ID_Mesa=mesita)
+    pedidos =  Descripción_Pedidos.objects.all()
+
+    data = {
+        "Lista_pedidos": Lista_pedidos,
+        "detalle_pedidos":pedidos
+    }
+
+    return render(request, "menu.html", data)   

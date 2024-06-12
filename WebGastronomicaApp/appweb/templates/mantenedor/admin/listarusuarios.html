@@ -17,8 +17,8 @@
     <thead>
       <tr class="border border-3  border border-black">
         <th scope="col"><b>Nombre</b></th>
-        <th scope="col"><b>Rut</b></th>
-        <th scope="col"><b>Perfil</b></th>
+        <th scope="col"><b>Apeliido</b></th>
+        <th scope="col"><b>Correo</b></th>
       </tr>
 
     </thead>
@@ -26,14 +26,13 @@
         {% for x in Usuarios %}
         
         <tr class="border border-3 border border-black ;" >
-            <th scope="row" >{{x.username}}</th>
-            <td>Rut</td>
-            <td>Perfil</td>
+            <th scope="row" >{{x.first_name}}</th>
+            <td>{{x.last_name}}</td>
+            <td>{{x.email}}</td>
             <td>
               <div class="d-flex justify-content-center">
-                  <a href="" class="btn btn-primary btn-sm mx-1 flex-fill text-center">Ver</a>
                   <a href="{% url 'eliminar_colaborador' x.username %}" class="btn btn-danger btn-sm mx-1 flex-fill text-center">Eliminar</a>
-                  <a href="{% url 'modificar_colaborador' x.pk %}" class="btn btn-secondary btn-sm mx-1 flex-fill text-center">Editar</a>
+                  <a href="{% url 'modificar_colaborador' x.username %}" class="btn btn-secondary btn-sm mx-1 flex-fill text-center">Editar</a>
               </div>
           </td>
           

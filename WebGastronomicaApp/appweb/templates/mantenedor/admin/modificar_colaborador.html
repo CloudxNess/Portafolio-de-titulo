@@ -3,14 +3,14 @@
 {% block contenido %}
 <div class="container mt-5">
   <div class="text-center">
-    <h2 class="mt-4">Modificar Mantencion</h2>  
+    <h2 class="mt-4">Modificar Colaborador</h2>  
   </div>
   <h3>{{mensaje}}</h3>
   <form id="formAgregar" method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form_modificar | crispy }}
+    {{ form | crispy }}
     <button type="submit" class="btn btn-primary">Modificar</button>
-    <button type="reset" class="btn btn-danger">Limpiar</button>
+    <button type="cancel" class="btn btn-danger">Cancelar</button>
 
 </form>
 </div>

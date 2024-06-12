@@ -48,6 +48,6 @@ urlpatterns = [
      path("eliminar/<int:plato_id>/",eliminar_plato, name="eliminar_plato"),
      path("restar_plato/<int:plato_id>/",restar_plato, name="restar_plato"),
      path("limpiar/",limpiar_carro, name="limpiar_carro"),
-     path('eliminar_colaborador/<username>', eliminar_colaborador,name='eliminar_colaborador'),
-     path('modificar_colaborador/<rut>', modificar_colaborador,name='modificar_colaborador'),
+     path('eliminar_colaborador/<usuario>', eliminar_colaborador,name='eliminar_colaborador'),
+     path('modificar_colaborador/<usuario>', modificar_colaborador,name='modificar_colaborador'),
 ]

@@ -1,6 +1,26 @@
 from django import forms
 from .models import *
 from datetime import time
+from django.contrib.auth.models import User,Group
+
+class AgregarForm(forms.ModelForm):
+    groups = forms.ModelMultipleChoiceField(
+        queryset=Group.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+class AgregaruserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email','groups']  # Especifica los campos que necesitas
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
+
 
 class agregarform(forms.ModelForm):
     class Meta:
@@ -63,3 +83,5 @@ class BodegaForm(forms.ModelForm):
     class Meta:
         model = Bodega
         fields = ['Cantidad']  # Campos que se pueden editar en el formulario
+
+
