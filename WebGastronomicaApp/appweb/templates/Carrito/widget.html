@@ -73,18 +73,20 @@
         
         </tr>
         {% if request.session.carro.items %}
-        <tr>
-                    
-            <td colspan="3">
+            
+            <tr> 
+                <td colspan="3">
         
-                <a href="{% url 'carrito' %}" class="btn btn-light"> Detalle de Compra</a>
-                <a href="{% url 'limpiar_carro' %}" class="btn btn-light"> Limpiar Carrito</a>
+                    <a href="{% url 'inicia_pedido_online'%}" class="btn btn-light"> Detalle de Compra</a>
+                    <a href="{% url 'limpiar_carro' %}" class="btn btn-light"> Limpiar Carrito</a>
         
-            </td>
-                    
-        
-        </tr>
+                </td>
+            </tr>
+            
         {% endif %}
+
+       
+
     </tfoot>
         
 </table>

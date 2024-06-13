@@ -1,9 +1,62 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block contenido %}
-{% load static%}
 
-<h3> Boleta Compra Online</h3>
-
+<div class="d-flex justify-content-center">
+  <div class="container" style="width: 41%; border: 2px solid #000; border-radius: 4%;">
+    <div class="text-center">
+      <h2 class="mt-5 mb-5">Boleta Electronica</h2>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md">
+        <div class="form-group row">
+          <label for="CodigoFactura" class="col-lg-3 col-form-label">Número de Mesa:</label>
+          <div class="col-lg-3">
+            <input type="text" disabled class="form-control" id="CodigoFactura" value="{{boleta.ID_Mesa}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="Fecha" class="col-lg-3 col-form-label">Fecha de emisión:</label>
+          <div class="col-lg-3">
+            <input type="text" disabled class="form-control" id="CodigoFactura" value="{{mi_boleta.Fecha}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="CodigoCliente" class="col-lg-3 col-form-label">ID Boleta:</label>
+          <div class="col-lg-3">
+            <input type="text" disabled class="form-control" id="CodigoFactura" value="{{mi_boleta.ID_Boleta}}">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mt-4">
+      <div class="col-md text-center">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Descripción</th>
+              <th class="text-right">Precio Unitario </th>
+            </tr>
+          </thead>
+          {% for y in mis_peticiones %}
+          <tr>
+            <td scope="row">{{ y.ID_Platos.Nombre }}</td>
+            <td>${{ y.Costo }}</td>
+          </tr>
+          {% endfor %}
+          <th style="background-color: yellowgreen">Importe Total :</th>
+          <th scope="row" style="background-color: yellowgreen">{{mi_boleta.Costo_Total}}</th>
+          </tbody>
+        </table>
+        {% if mi_boleta.Pagado == 0 %}
+        <a href="{% url 'pago' mi_boleta.ID_Boleta %}" id="btnTerminarBoleta" class="btn btn-success mx-auto">Pagar Servicio</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

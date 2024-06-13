@@ -603,6 +603,7 @@ def enviapedidococina (request, Mesaa):
 
 
 @login_required(login_url="/accounts/login")
+
 def pedidolista (request, Mesaa, Plato):
     try:
         pedido = Pedidos.objects.get(ID_Pedido=Mesaa)
@@ -802,11 +803,14 @@ def restar_plato (request, plato_id):
 def limpiar_carro (request):
     
     carro=Carro(request)
-    
     carro.limpiar_carro()
-
+    
     return redirect("menu")
 
+def eliminarP (request):
+    eliminarpedido = get_object_or_404(Pedidos, ID_Pedido=0)
+    eliminarpedido.delete()
+    return redirect("menu")
 
 @login_required(login_url="/accounts/login")
 def limpiarreserva(request):
@@ -858,19 +862,92 @@ def modificar_colaborador(request, usuario):
 
     return render(request, "mantenedor/admin/modificar_colaborador.html", data)
 
+##################################################################################################
 
 
+def lista_pedidos_online(request):
+    mesap = get_object_or_404(Mesa, ID_Mesa=0)
+    Lista_pedido = Pedidos.objects.filter(ID_Mesa = mesap)
+    pedidos = Descripción_Pedidos.objects.all()
 
-@login_required(login_url="/accounts/login")
-def listapedidosonline(request):
+    data={
+        "Lista_pedido": Lista_pedido,
+        "detalle_pedido": pedidos
+    }
+    return render (request, "Carrito/boletaonline.html", data)
 
+
+def inicia_pedido_online (request):
     mesita = get_object_or_404(Mesa, ID_Mesa=0)
-    Lista_pedidos = Pedidos.objects.filter(ID_Mesa=mesita)
-    pedidos =  Descripción_Pedidos.objects.all()
+    mesita.Estado_Ocupado=(1)
+    mesita.save()
+    pedido = Pedidos.objects.create(ID_Pedido=0 ,Correo_Sol="ftecnofood@gmail.com",ID_Mesa=mesita,Estado="Sin Solicitud")
 
+    return redirect("carrito")
+
+
+
+
+def pedido_online_cocina (request, plato, cantidad):
+    cant = int(cantidad) + 1
+    while True:
+        cant -= 1
+        platop = get_object_or_404(Platos, ID_Plato=plato)
+        pedidop= get_object_or_404(Pedidos, ID_Pedido=0)
+        solicitud = Descripción_Pedidos.objects.create(ID_Pedido=pedidop,ID_Platos=platop,Costo=platop.Costo)
+        if int(cant) >> 1:
+            continue
+        else:
+            break 
+    return redirect("carrito")
+
+
+def termino_pedido_online (request, Mesaa):
+    pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
+    valort=0
+    mesap = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    mesap.Estado_Ocupado=(0)
+    mesap.save()
+    pedidot = get_list_or_404(Descripción_Pedidos, ID_Pedido=Mesaa)
+    mes = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    for X in pedidot:
+        valort = X.Costo + valort
+    boleta=Boletas.objects.create(ID_Mesa=mes,Costo_Total=valort)
+    bol=boleta.ID_Boleta
+    for Y in pedidot:
+        pedi_histo=Descripción_Pedidos_Historico.objects.create(ID_Boleta=boleta,ID_Platos=Y.ID_Platos,Costo=Y.Costo)
+    pedido.delete()
+    return redirect("boletaonline")
+
+def boleta_online(request, Boleta):
+
+    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
+    hist = get_list_or_404(Descripción_Pedidos_Historico, ID_Boleta=Boleta)
     data = {
-        "Lista_pedidos": Lista_pedidos,
-        "detalle_pedidos":pedidos
+        'mi_boleta' : bol ,
+        'mis_peticiones' : hist
     }
 
-    return render(request, "menu.html", data)   
+
+    return render (request,"mantenedor/garzon/boleta.html",data)
+
+
+def pago_online (request, Boleta) :
+
+    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
+    data = {
+        "mi_boleta": bol
+          }
+
+    return render(request,"mantenedor/garzon/pago.html",data)
+
+
+def boletaonline (request):
+    return render(request, "Carrito/boletaonline.html")
+
+
+
+    
+
+
+

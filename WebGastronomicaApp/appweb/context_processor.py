@@ -5,3 +5,6 @@ def costo_total_carro(request):
             total=total+(int(value["precio"]))
     
     return {"costo_total_carro":total}
+
+
+

@@ -51,4 +51,12 @@ urlpatterns = [
      path("limpiar/",limpiar_carro, name="limpiar_carro"),
      path('eliminar_colaborador/<usuario>', eliminar_colaborador,name='eliminar_colaborador'),
      path('modificar_colaborador/<usuario>', modificar_colaborador,name='modificar_colaborador'),
+     path('eliminar_colaborador/<username>', eliminar_colaborador,name='eliminar_colaborador'),
+     path('modificar_colaborador/<rut>', modificar_colaborador,name='modificar_colaborador'),
+     path('inicia_pedido_online', inicia_pedido_online,name='inicia_pedido_online'),
+     path('lista_pedidos_online', lista_pedidos_online,name='lista_pedidos_online'),
+     path('pedido_online_cocina/<plato>/<cantidad>', pedido_online_cocina,name='pedido_online_cocina'),
+     path('termino_pedido_online/<Mesaa>', termino_pedido_online,name='termino_pedido_online'),
+     path('boletaonline', boletaonline,name='boletaonline'),
+     path('eliminarP', eliminarP,name='eliminarP'),
 ]
