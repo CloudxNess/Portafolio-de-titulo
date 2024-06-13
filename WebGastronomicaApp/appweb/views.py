@@ -69,8 +69,8 @@ def reservamesa(request):
 
     return render(request, "reservamesa.html", data)
 
-
-def login (request):
+###esta page se llamaba login pero si la dejo como tal da problemas y los usuarios no se autologean 
+def login_page (request):
     return render(request,"registration/login.html")
 
 @login_required(login_url="/accounts/login")
@@ -122,14 +122,13 @@ def registro (request):
         try:
             usu.save()
             usu.groups.add(grupo)
-            user = authenticate(username=usu.username, password=password)
-            login(request, user)
-            
-        except:
-            data["mensaje"] = "hubo un error"
+            messages.success(request, "Usuario Creado Exitosamente")
+            return redirect(to="registro")
+                  
+        except Exception as e:
+            data["mensaje"] = f"Hubo un error: {e}"
+            messages.error(request, data["mensaje"])
         
-        messages.success(request,"Usuario Creado Exitosamente")
-        return redirect(to="index")
 
     return render(request,"registration/registro.html")
 
@@ -146,32 +145,35 @@ def registro_cli (request):
         usuario=request.POST.get("usuario")
         apellido=request.POST.get("apellido")
         correo=request.POST.get("correo")
-        password=request.POST.get("password")
+        passw=request.POST.get("password")
         
         usu = User()
-        usu.set_password(password)
+        usu.set_password(passw)
         usu.username = usuario
         usu.email = correo
         usu.first_name = nombre
         usu.last_name = apellido
         grupo = Group.objects.get(name="Cliente")
-    
         try:
             usu.save()
             usu.groups.add(grupo)
-            user = authenticate(username=usu.username, password=password)
-            login(request, user)
+            user = authenticate(username=usuario, password=passw)
+            print("Authenticated user:", user)  # Debugging statement
+            if user is not None:
+                login(request, user) 
+                messages.success(request, "Usuario Creado Exitosamente")
+                return redirect("index")
+        except Exception as e:
+            data["mensaje"] = f"Hubo un error: {e}"
+            messages.error(request, data["mensaje"])
             
-        except:
-            data["mensaje"] = "hubo un error"
         
-        messages.success(request,"Usuario Creado Exitosamente")
-        return redirect(to="home")
+        
 
     return render(request,"registration/registro_cli.html")
 
 
-
+############################################### No se que hace esta funcion  ##############################
 @login_required(login_url="/accounts/login")
 def registrouser (request):
     data = {
