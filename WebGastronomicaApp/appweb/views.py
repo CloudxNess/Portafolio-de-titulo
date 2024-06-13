@@ -308,7 +308,7 @@ def menuadmin(request):
 def modificarmenu(request, NombreBuscado):
 
     actual = datetime.now().time()
-    if not (actual >= datetime.strptime("20:00", "%H:%M").time() or actual < datetime.strptime("08:00", "%H:%M").time()):
+    if not (actual >= datetime.strptime("22:30", "%H:%M").time() or actual < datetime.strptime("08:00", "%H:%M").time()):
         messages.error(request, "Esta función solo se puede utilizar en horario no habil")
         return redirect("menuadmin")
 
@@ -569,7 +569,7 @@ def termina_pedido (request, Mesaa):
     for Y in pedidos:
         pedi_histo=Descripción_Pedidos_Historico.objects.create(ID_Boleta=boleta,ID_Platos=Y.ID_Platos,Costo=Y.Costo)
     pedido.delete()
-    return redirect("boleta",Boleta=bol )
+    return redirect("boleta")
 
 
 @login_required(login_url="/accounts/login")
@@ -776,6 +776,7 @@ def agregar_plato (request, plato_id):
     plato=Platos.objects.get(ID_Plato=plato_id)
     
     carro.agregar(plato=plato)
+    todos = carro
 
     return redirect("menu")
 
@@ -810,8 +811,10 @@ def limpiar_carro (request):
     return redirect("menu")
 
 def eliminarP (request):
+    
     eliminarpedido = get_object_or_404(Pedidos, ID_Pedido=0)
     eliminarpedido.delete()
+    
     return redirect("menu")
 
 @login_required(login_url="/accounts/login")
@@ -868,15 +871,8 @@ def modificar_colaborador(request, usuario):
 
 
 def lista_pedidos_online(request):
-    mesap = get_object_or_404(Mesa, ID_Mesa=0)
-    Lista_pedido = Pedidos.objects.filter(ID_Mesa = mesap)
-    pedidos = Descripción_Pedidos.objects.all()
-
-    data={
-        "Lista_pedido": Lista_pedido,
-        "detalle_pedido": pedidos
-    }
-    return render (request, "Carrito/boletaonline.html", data)
+    
+    return render (request, "Carrito/boletaonline.html")
 
 
 def inicia_pedido_online (request):
@@ -891,6 +887,7 @@ def inicia_pedido_online (request):
 
 
 def pedido_online_cocina (request, plato, cantidad):
+
     cant = int(cantidad) + 1
     while True:
         cant -= 1
@@ -919,33 +916,21 @@ def termino_pedido_online (request, Mesaa):
     for Y in pedidot:
         pedi_histo=Descripción_Pedidos_Historico.objects.create(ID_Boleta=boleta,ID_Platos=Y.ID_Platos,Costo=Y.Costo)
     pedido.delete()
-    return redirect("boletaonline")
-
-def boleta_online(request, Boleta):
-
-    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
-    hist = get_list_or_404(Descripción_Pedidos_Historico, ID_Boleta=Boleta)
+    
+    bol = get_object_or_404(Boletas, ID_Boleta=bol)
+    hist = get_list_or_404(Descripción_Pedidos_Historico, ID_Boleta=bol)
     data = {
         'mi_boleta' : bol ,
         'mis_peticiones' : hist
     }
 
 
-    return render (request,"mantenedor/garzon/boleta.html",data)
+    return render (request,"Carrito/boletaonline.html",data)
 
 
-def pago_online (request, Boleta) :
-
-    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
-    data = {
-        "mi_boleta": bol
-          }
-
-    return render(request,"mantenedor/garzon/pago.html",data)
 
 
-def boletaonline (request):
-    return render(request, "Carrito/boletaonline.html")
+
 
 
 

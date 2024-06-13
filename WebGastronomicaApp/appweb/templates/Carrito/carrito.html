@@ -41,6 +41,7 @@
             
             {% if request.session.carro.items %}
                 {% for key, value in request.session.carro.items %}
+                
                 <div style="display: flex; align-items: flex-stretch; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #ececec;">
                     <div style="flex:2"><img class="row-image" src="{{value.imagen}}" style="height: 50px;"></div>
                     <div style="flex:2"><p> {{value.nombre}} </p></div>
