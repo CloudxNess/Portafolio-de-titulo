@@ -18,6 +18,7 @@ from django.db.models import Count
 from django.contrib.staticfiles.storage import staticfiles_storage
 from .carro import Carro
 from datetime import datetime
+import json
 
 
 def splash(request):
@@ -776,7 +777,7 @@ def agregar_plato (request, plato_id):
     plato=Platos.objects.get(ID_Plato=plato_id)
     
     carro.agregar(plato=plato)
-    todos = carro
+    
 
     return redirect("menu")
 
@@ -886,18 +887,22 @@ def inicia_pedido_online (request):
 
 
 
-def pedido_online_cocina (request, plato, cantidad):
+def pedido_online_cocina (request):
+   
+    carro = Carro(request)
 
-    cant = int(cantidad) + 1
-    while True:
-        cant -= 1
-        platop = get_object_or_404(Platos, ID_Plato=plato)
-        pedidop= get_object_or_404(Pedidos, ID_Pedido=0)
-        solicitud = Descripción_Pedidos.objects.create(ID_Pedido=pedidop,ID_Platos=platop,Costo=platop.Costo)
-        if int(cant) >> 1:
-            continue
-        else:
-            break 
+    for key, item in carro.carro.items():
+
+        cant = int(item["cantidad"]) + 1
+        while True:
+            cant -= 1
+            platop = get_object_or_404(Platos, ID_Plato=item["plato_id"])
+            pedidop= get_object_or_404(Pedidos, ID_Pedido=0)
+            solicitud = Descripción_Pedidos.objects.create(ID_Pedido=pedidop,ID_Platos=platop,Costo=platop.Costo)
+            if int(cant) >> 1:
+                continue
+            else:
+                break 
     return redirect("carrito")
 
 
@@ -923,7 +928,7 @@ def termino_pedido_online (request, Mesaa):
         'mi_boleta' : bol ,
         'mis_peticiones' : hist
     }
-
+    
 
     return render (request,"Carrito/boletaonline.html",data)
 

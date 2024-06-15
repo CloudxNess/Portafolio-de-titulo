@@ -1,8 +1,10 @@
+
 class Carro:
     def __init__(self, request):
         self.request=request
         self.session=request.session
         carro=self.session.get("carro")
+        self.items_agregados = []
         if not carro:
             carro = self.session["carro"]={}
         
@@ -30,6 +32,8 @@ class Carro:
     def guardar_carro(self):
         self.session["carro"]=self.carro
         self.session.modified=True
+
+
 
     def eliminar(self, plato):
         plato.id=str(plato.ID_Plato)

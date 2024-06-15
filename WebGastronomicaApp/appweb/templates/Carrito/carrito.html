@@ -21,6 +21,9 @@
                             
                         <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'termino_pedido_online' 0 %}">Pagar</a>
                         
+                        <a  style=margin:5px;" class="btn btn-success" href=" {% url 'pedido_online_cocina' %} ">Prueba 1</a>
+                        
+                        
                     </th>
                 </tr>
             </table>
@@ -35,7 +38,7 @@
                 <div style="flex:1"><strong>Precio Unitario</strong></div>
                 <div style="flex:1"><strong>Cantidad</strong></div>
                 <div style="flex:1"><strong>Total</strong></div>
-                <div style="flex:1"><strong>boton</strong></div>
+                
             </div>
 
             
@@ -50,9 +53,7 @@
                         <p class="quantity">{{value.cantidad}}</p>
                     </div>
                     <div style="flex:1"><p>${{value.precio}}</p></div>
-                    <div style="flex:1">
-                    <a  style=margin:5px;" class="btn btn-success" href=" {% url 'pedido_online_cocina' value.plato_id value.cantidad %} ">agregar</a>
-                    </div>
+                    
                 </div> 
             
                 {% endfor %}
