@@ -1,12 +1,8 @@
 Desarrollo Pendiente para Proyecto de título 
 
     Implementar Power Bi/ Matplotlib  para Inteligencia de Negocios  para Gráficos.
-    
-   
-    Funciones de Cocinero.
-        Cambiar Estado de Preparación de Plato.(Solicitado-En Preparación-Listo para entrega)----> Revisar
-    
-    Realizar Minutas de Reunión
+
+
     Completar Matriz de Control de Cambios
 
 
@@ -23,13 +19,6 @@ Pendientes
 
 KPIS / Pendientea
 carrito Compra /En proceso
-revisar la pagina de listar agendamiento ( Revisar la funcion de los botones de listaragendamiento)
-Agregar para limpiar las reservas de las mesas / Falta Pulir 
-Hacer una Validacion para que no se pueda terminar el servicio  si es que los platos no han sido enviados a cocina 
-Desabilitar boton pagar servicio de boleta despues de pagar con simulacion transbank
-Revisar Lista de Usuarios creados (Ver Usuarios los botones VER/ELIMINAR/EDITAR no funcionan)
-Eliminar Usuario
-Actualizar Usuario
 Incorporar en la Matriz de Control de Cambios el Uso de Api ( No se estan usando )
 
 
