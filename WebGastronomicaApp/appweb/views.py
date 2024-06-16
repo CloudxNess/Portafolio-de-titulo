@@ -760,8 +760,16 @@ def funciones (request, Id_user) :
 ###Funciones del Carrito ####
 
 @login_required(login_url="/accounts/login")
-def carrito(request):
-    context = {}
+def carrito(request, id_ped):
+
+
+    pedidop= get_object_or_404(Pedidos, ID_Pedido=id_ped)
+    context = {
+
+        "pedido": pedidop
+
+
+    }
 
     return render(request, 'Carrito/carrito.html', context)
 
@@ -872,20 +880,17 @@ def lista_pedidos_online(request):
     return render (request, "Carrito/boletaonline.html")
 
 
-def inicia_pedido_online (request):
+def inicia_pedido_online (request, email):
     mesita = get_object_or_404(Mesa, ID_Mesa=0)
-    mesita.Estado_Ocupado=(1)
-    mesita.save()
-    pedido = Pedidos.objects.create(Correo_Sol="ftecnofood@gmail.com",ID_Mesa=mesita,Estado="Sin Solicitud")
-
-    return redirect("carrito")
+    pedido = Pedidos.objects.create(Correo_Sol=email,ID_Mesa=mesita,Estado="Sin Solicitud")
+    id_pe = pedido.ID_Pedido
+    return redirect("carrito", id_ped=id_pe)
 
 
-
-
-def pedido_online_cocina (request):
+def pedido_online_cocina(request, id_ped):
    
     carro = Carro(request)
+    mesap = get_object_or_404(Mesa, ID_Mesa=0)
 
     for key, item in carro.carro.items():
 
@@ -893,7 +898,7 @@ def pedido_online_cocina (request):
         while True:
             cant -= 1
             platop = get_object_or_404(Platos, ID_Plato=item["plato_id"])
-            pedidop= get_object_or_404(Pedidos, ID_Pedido=0)
+            pedidop= get_object_or_404(Pedidos, ID_Pedido=id_ped)
             solicitud = Descripción_Pedidos.objects.create(ID_Pedido=pedidop,ID_Platos=platop,Costo=platop.Costo)
             if int(cant) >> 1:
                 continue
@@ -901,16 +906,14 @@ def pedido_online_cocina (request):
                 break 
     
     
-    pedido = get_object_or_404(Pedidos, ID_Pedido=0)
+    pedido = get_object_or_404(Pedidos, ID_Pedido=id_ped)
     valort=0
-    mesap = get_object_or_404(Mesa, ID_Mesa=0)
-    mesap.Estado_Ocupado=(0)
-    mesap.save()
-    pedidot = get_list_or_404(Descripción_Pedidos, ID_Pedido=0)
-    mes = get_object_or_404(Mesa, ID_Mesa=0)
+    pedidot = get_list_or_404(Descripción_Pedidos, ID_Pedido=pedido)
     for X in pedidot:
         valort = X.Costo + valort
-    boleta=Boletas.objects.create(ID_Mesa=mes,Costo_Total=valort)
+        X.Sol_cocina=(1)
+        X.save()
+    boleta=Boletas.objects.create(ID_Mesa=mesap,Costo_Total=valort)
     bol=boleta.ID_Boleta
     for Y in pedidot:
         pedi_histo=Descripción_Pedidos_Historico.objects.create(ID_Boleta=boleta,ID_Platos=Y.ID_Platos,Costo=Y.Costo)
@@ -961,8 +964,7 @@ def boleta_online (request, Boleta):
     return render (request,"Carrito/boletaonline.html",data)
 
 
-def correo_boleta(request, Boleta):
-    if request.method == 'POST':
+def correo_boleta(request, email ):
         carro = Carro(request)
         mensaje= """
         Gracias por su compra
@@ -988,7 +990,7 @@ def correo_boleta(request, Boleta):
 
         """
 
-        email = request.POST['email']
+        
         messages.success(request, "Correo enviado con exito , espere confirmación de pedido listo")
            
         send_mail(
@@ -1001,21 +1003,65 @@ def correo_boleta(request, Boleta):
         
         carro.limpiar_carro()
 
-        pedido = get_object_or_404(Pedidos, ID_Pedido=0)
-        pedido.delete()
+        ped = get_list_or_404(Pedidos, Correo_Sol=email)
+        ultimo_pedido = ped[-1]
+        ultimo_pedido.Estado = "Solicitado a Cocina  UwU"
+        ultimo_pedido.save()
 
 
         return redirect(to="menu")
 
 
 
+@login_required(login_url="/accounts/login")
+def estadopedidoonline (request):
+
+    mesap = get_object_or_404(Mesa, ID_Mesa=0)
+    pedidos =  Pedidos.objects.all().filter(ID_Mesa=mesap)
+
+    data = {
+        "pedidos": pedidos,
+          }
+
+    return render(request, "mantenedor/garzon/Estadopedidoonline.html", data)
 
 
 
+
+def terminapedidoonline (request, pedido):
+    
+    pedidoelimina = get_object_or_404(Pedidos, ID_Pedido=pedido)
+    
 
 
 
     
+    mensaje= """
+
+        Su compra ya esta disponible para el retiro
+        
+        Gracias por preferirnos,
+        Equipo TecnoFood
+        
+
+        'ftecnofood@gmail.com'
+
+        """
+
+        
+    messages.success(request, "Correo enviado con exito , espere confirmación de pedido listo")
+           
+    send_mail(
+            'Pedido Realizado',
+            mensaje,
+            'ftecnofood@gmail.com',
+            [pedidoelimina.Correo_Sol],
+            fail_silently=False,
+        )
+
+    pedidoelimina.delete()
+
+    return redirect("estadopedidoonline" )
 
 
 

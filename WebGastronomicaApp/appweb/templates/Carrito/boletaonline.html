@@ -55,13 +55,9 @@
         <a href="{% url 'pago_online' mi_boleta.ID_Boleta %}" id="btnTerminarBoleta" class="btn btn-success mx-auto">Pagar Servicio</a>
         {% endif %}
         {% if mi_boleta.Pagado == 1 %}
-        <h6>Ingrese su correo para recibir detalle</h6>
-        <form method="post" action="{% url 'correo_boleta' mi_boleta.ID_Boleta %}">
-          {% csrf_token %}
-          <label for="email">Correo Electrónico:</label>
-          <input type="email" id="email" name="email" required>
-          <button type="submit">Enviar</button>
-        </form>     
+        <h6>Para Terminar el proceso Favor precione el Boton </h6>
+        <a href="{% url 'correo_boleta' user.email %}"  class="btn btn-success mx-auto">Precione Aqui</a>
+      
         {% endif %}
        
       </div>

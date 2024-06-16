@@ -18,7 +18,7 @@
                     <th><h5>Detalle Pedido:<strong></strong></h5></th>
                     <th><h5>Total: ${{costo_total_carro}}<strong> </strong></h5></th>
                     <th>                        
-                        <a  style="float:right; margin:5px;" class="btn btn-success" href=" {% url 'pedido_online_cocina' %} ">Realizar pedido</a>
+                        <a  style="float:right; margin:5px;" class="btn btn-success" href=" {% url 'pedido_online_cocina' pedido.ID_Pedido %} ">Realizar pedido</a>
                     </th>
                 </tr>
             </table>
