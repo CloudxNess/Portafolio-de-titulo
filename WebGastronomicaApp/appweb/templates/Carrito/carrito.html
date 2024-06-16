@@ -15,15 +15,10 @@
             <br>
             <table class="table">
                 <tr>
-                    <th><h5>Detalle Pedido: <strong></strong></h5></th>
-                    <th><h5>Total:${{costo_total_carro}}<strong> </strong></h5></th>
-                    <th>
-                            
-                        <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'termino_pedido_online' 0 %}">Pagar</a>
-                        
-                        <a  style=margin:5px;" class="btn btn-success" href=" {% url 'pedido_online_cocina' %} ">Prueba 1</a>
-                        
-                        
+                    <th><h5>Detalle Pedido:<strong></strong></h5></th>
+                    <th><h5>Total: ${{costo_total_carro}}<strong> </strong></h5></th>
+                    <th>                        
+                        <a  style="float:right; margin:5px;" class="btn btn-success" href=" {% url 'pedido_online_cocina' %} ">Realizar pedido</a>
                     </th>
                 </tr>
             </table>
@@ -64,6 +59,20 @@
         
 
 </div>
+
+{% if mensaje %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            title: 'Éxito',
+            text: '{{ mensaje }}',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+    });
+</script>
+
+{% endif %}
 
 {% endblock %}
 

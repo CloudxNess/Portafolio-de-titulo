@@ -640,7 +640,6 @@ def actualizar_agendamiento(request, reserva):
         anterior.save()
         messages.success(request, "Agendamiento Realizado con Exito...Enviando Correo de Confirmación al Cliente. ")
         
-        imagen_url = staticfiles_storage.url("static/image/TecnoFood.png")
         mensaje_correo = f"""
         Agendamiento Realizado Con Exito 
 
@@ -652,9 +651,6 @@ def actualizar_agendamiento(request, reserva):
         Cantidad de comensales: {Reserva.cantidad_comensales}
         Mesa: {nueva.Nombre_Mesa}
         
-        <img src="{imagen_url}" alt="TecnoFood">
-
-
         Gracias Por Preferirnos , Equipo TecnoFood
 
        'ftecnofood@gmail.com'
@@ -880,7 +876,7 @@ def inicia_pedido_online (request):
     mesita = get_object_or_404(Mesa, ID_Mesa=0)
     mesita.Estado_Ocupado=(1)
     mesita.save()
-    pedido = Pedidos.objects.create(ID_Pedido=0 ,Correo_Sol="ftecnofood@gmail.com",ID_Mesa=mesita,Estado="Sin Solicitud")
+    pedido = Pedidos.objects.create(Correo_Sol="ftecnofood@gmail.com",ID_Mesa=mesita,Estado="Sin Solicitud")
 
     return redirect("carrito")
 
@@ -903,34 +899,114 @@ def pedido_online_cocina (request):
                 continue
             else:
                 break 
-    return redirect("carrito")
-
-
-def termino_pedido_online (request, Mesaa):
-    pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
+    
+    
+    pedido = get_object_or_404(Pedidos, ID_Pedido=0)
     valort=0
-    mesap = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    mesap = get_object_or_404(Mesa, ID_Mesa=0)
     mesap.Estado_Ocupado=(0)
     mesap.save()
-    pedidot = get_list_or_404(Descripción_Pedidos, ID_Pedido=Mesaa)
-    mes = get_object_or_404(Mesa, ID_Mesa=Mesaa)
+    pedidot = get_list_or_404(Descripción_Pedidos, ID_Pedido=0)
+    mes = get_object_or_404(Mesa, ID_Mesa=0)
     for X in pedidot:
         valort = X.Costo + valort
     boleta=Boletas.objects.create(ID_Mesa=mes,Costo_Total=valort)
     bol=boleta.ID_Boleta
     for Y in pedidot:
         pedi_histo=Descripción_Pedidos_Historico.objects.create(ID_Boleta=boleta,ID_Platos=Y.ID_Platos,Costo=Y.Costo)
-    pedido.delete()
     
     bol = get_object_or_404(Boletas, ID_Boleta=bol)
     hist = get_list_or_404(Descripción_Pedidos_Historico, ID_Boleta=bol)
     data = {
         'mi_boleta' : bol ,
         'mis_peticiones' : hist
+        
     }
     
+    messages.success(request, "Pedido realizado con exito")
+
+    return render (request,"Carrito/boletaonline.html",data)            
+
+
+def pago_online (request, Boleta) :
+
+    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
+    data = {
+        "mi_boleta": bol
+          }
+
+    return render(request,"Carrito/pagoonline.html",data)
+
+
+def pagado_online (request, Boleta) :
+
+    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
+    bol.Pagado=(1)
+    bol.save()
+
+ 
+    return redirect("boleta_online",Boleta=Boleta )
+
+
+def boleta_online (request, Boleta):
+
+    bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
+    hist = get_list_or_404(Descripción_Pedidos_Historico, ID_Boleta=Boleta)
+    data = {
+        'mi_boleta' : bol ,
+        'mis_peticiones' : hist
+    }
+
 
     return render (request,"Carrito/boletaonline.html",data)
+
+
+def correo_boleta(request, Boleta):
+    if request.method == 'POST':
+        carro = Carro(request)
+        mensaje= """
+        Gracias por su compra
+
+        Detalles de su pedido:
+        """
+
+        for key, item in carro.carro.items():
+        
+            mensaje += f"""
+            - {item["nombre"]}  X  {item["cantidad"]}
+                                        
+            """
+
+        mensaje += f"""
+            Total: {sum(int(item["precio"]) for item in carro.carro.values())}
+
+        Gracias por preferirnos,
+        Equipo TecnoFood
+        
+
+        'ftecnofood@gmail.com'
+
+        """
+
+        email = request.POST['email']
+        messages.success(request, "Correo enviado con exito , espere confirmación de pedido listo")
+           
+        send_mail(
+            'Pedido Realizado',
+            mensaje,
+            'ftecnofood@gmail.com',
+            [email],
+            fail_silently=False,
+        )
+        
+        carro.limpiar_carro()
+
+        pedido = get_object_or_404(Pedidos, ID_Pedido=0)
+        pedido.delete()
+
+
+        return redirect(to="menu")
+
 
 
 
