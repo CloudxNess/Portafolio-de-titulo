@@ -12,7 +12,6 @@
     {% else %}
 
       
-
     {% endif %}
 
   </div>
@@ -30,13 +29,7 @@
                     <h5 class="card-title">{{ x.Nombre }}</h5>
                     <p class="card-text">{{ x.Descripcion }}</p>
                     <p class="card-text">Costo: ${{ x.Costo }}</p>
-                    {% if request.user.is_authenticated %}
-                      <a href="{% url 'agregar_plato' x.ID_Plato %}" class="btn btn-success">Agregar</a>
-                    {% else %}
-
-    
-
-                    {% endif %}
+                  
                      
                 
                   </div>

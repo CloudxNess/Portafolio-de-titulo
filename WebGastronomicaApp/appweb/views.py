@@ -815,9 +815,9 @@ def limpiar_carro (request):
     
     return redirect("menu")
 
-def eliminarP (request):
+def eliminarP (request, id_ped):
     
-    eliminarpedido = get_object_or_404(Pedidos, ID_Pedido=0)
+    eliminarpedido = get_object_or_404(Pedidos, ID_Pedido=id_ped)
     eliminarpedido.delete()
     
     return redirect("menu")
@@ -1061,7 +1061,19 @@ def terminapedidoonline (request, pedido):
 
     pedidoelimina.delete()
 
-    return redirect("estadopedidoonline" )
 
+
+def menupedidoonline(request):
+    Menu_Platos = Platos.objects.filter(Disponibilidad=True).order_by('Region')
+
+    platos_por_region = {}
+    for region, MenuP in groupby(Menu_Platos, key=lambda x: x.Region):
+        platos_por_region[region] = list(MenuP)
+
+    data = {
+        "platos_por_region": platos_por_region
+    }
+    return render(request,"Carrito/menupedidoonline.html", data)
+   
 
 

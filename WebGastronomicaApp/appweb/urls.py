@@ -54,7 +54,7 @@ urlpatterns = [
      path('eliminar_colaborador/<username>', eliminar_colaborador,name='eliminar_colaborador'),
      path('modificar_colaborador/<rut>', modificar_colaborador,name='modificar_colaborador'),
      path('inicia_pedido_online/<email>', inicia_pedido_online,name='inicia_pedido_online'),
-     path('eliminarP', eliminarP,name='eliminarP'),
+     path('eliminarP/<id_ped>', eliminarP,name='eliminarP'),
      path('pago_online/<Boleta>', pago_online,name='pago_online'),
      path('pagado_online/<Boleta>',pagado_online,name='pagado_online'),
      path('boleta_online/<Boleta>',boleta_online,name='boleta_online'),
@@ -62,4 +62,5 @@ urlpatterns = [
      path('estadopedidoonline',estadopedidoonline,name='estadopedidoonline'),
      path('pedido_online_cocina/<id_ped>', pedido_online_cocina,name='pedido_online_cocina'),
      path('terminapedidoonline/<pedido>', terminapedidoonline,name='terminapedidoonline'),
+     path('menupedidoonline', menupedidoonline,name='menupedidoonline'),
 ]
