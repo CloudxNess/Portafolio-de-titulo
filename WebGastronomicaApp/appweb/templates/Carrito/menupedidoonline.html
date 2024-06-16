@@ -7,75 +7,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú </title>
-    <style>
-        .menu-item {
-            display: flex;
-            align-items: center;
-            background-color: yellow;
-            margin: 30px;
-            padding: 20px;
-            width: 1300px;
-            border-radius: 10px;
-        }
-        .menu-item img {
-            width: 100px;
-            height: auto;
-            border-radius: 10px;
-            margin-right: 20px;
-        }
-        .menu-item div {
-            flex-grow: 1;
-        }
-        .menu-item h2 {
-            margin: 0;
-        }
-        .menu-item p {
-            margin: 5px 0 0;
-            max-width: 70%; 
-            overflow: hidden;
-        }
-        .menu-item .price {
-            font-size: 1.5em;
-            color: black;
-        }
-    </style>
+    <title>Menú</title>
 </head> 
 <body>
-    <div style="float:right;">
-  
-      {% if request.user.is_authenticated %}
-        {% include "Carrito/widget.html" %}
-      {% else %}
-  
-        
-      {% endif %}
-  
+    <div class="fixed-widget">
+        {% if request.user.is_authenticated %}
+            {% include "Carrito/widget.html" %}
+        {% else %}
+        {% endif %}
     </div>
-  <h1>Menú</h1>
-  {% for region, MenuP in platos_por_region.items %}
-    
-    <h2>{{ region }}</h2>
-      {% for x in MenuP %}
-      
-      <div class="menu-item">
-          <img src="{{ x.imagen.url }}">
-          <div>
-              <h2>{{ x.Nombre }}</h2>
-              <p>{{ x.Descripcion }}</p>
-          </div>
-          <div class="price">${{ x.Costo }}</div>
-          <button type="button" class="btn btn-success">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-              <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
-            </svg>
-            Agregar
-          </button>
-      </div>
-      {% endfor %}
-  {% endfor %}
+    <h1 style="text-align: center;">Menú</h1>
+    {% for region, MenuP in platos_por_region.items %}
+        <div class="menu-container">
+            <h2 class="region-title">{{ region }}</h2>
+            {% for x in MenuP %}
+                <div class="menu-item">
+                    <img src="{{ x.imagen.url }}">
+                    <div class="menu-info">
+                        <h2>{{ x.Nombre }}</h2>
+                        <p>{{ x.Descripcion }}</p>
+                    </div>
+                    <div class="price-container">
+                        <div class="price">${{ x.Costo }}</div>
+                        <button type="button" class="btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+                            </svg>
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 </body>
 </html>
-
+<style>
+  .fixed-widget {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000; 
+      margin-top: 5%;
+  }
+  .menu-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .region-title {
+      margin-left: 30px;
+  }
+  .menu-item {
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+      background-color: white;
+      margin: 30px;
+      padding: 20px;
+      width: 1300px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  .menu-item img {
+      width: 100px;
+      height: auto;
+      border-radius: 10px;
+      margin-right: 20px;
+  }
+  .menu-info {
+      flex-grow: 1;
+      margin-right: 20px;
+      max-width: 700px; 
+  }
+  .menu-info p {
+      margin: 5px 0 0;
+      white-space: normal;
+  }
+  .price-container {
+      display: flex;
+      align-items: center;
+      width: 200px; 
+  }
+  .price {
+      font-size: 1.5em;
+      color: black;
+      white-space: nowrap;
+      margin-right: 20px;
+  }
+  .menu-item .btn {
+      white-space: nowrap;
+  }
+</style>
 {% endblock %}
-
