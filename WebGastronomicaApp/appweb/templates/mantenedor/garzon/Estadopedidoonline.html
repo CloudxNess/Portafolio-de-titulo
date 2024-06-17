@@ -13,7 +13,7 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th scope="col">Producto</th>
+              <th scope="col">ID</th>
               <th scope="col">Estado</th>
               <th scope="col">Correo cliente</th>
               <th scope="col">Cambiar Estado</th>
@@ -25,6 +25,7 @@
                   <td style="background-color: yellow;">{{ y.ID_Pedido }}</td>
                   <td style="background-color: yellow;">{{ y.Estado }}</td>
                   <td style="background-color: yellow;">{{ y.Correo_Sol }}</td>
+                  
                   {% if y.Estado == "Solicitado a Cocina" %}
                   <td style="background-color: yellow;"><a href="{% url 'solicitar_retiro_pedido' y.ID_Pedido  %}" class="btn btn-primary">Solicitar retiro</a></td>  
                   {% else %}

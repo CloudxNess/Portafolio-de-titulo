@@ -1029,11 +1029,12 @@ def estadopedidoonline (request):
 
 
 def solicitar_retiro_pedido (request, pedido):
-    
-    pedidoelimina = get_object_or_404(Pedidos, ID_Pedido=pedido)
 
-        
-    mensaje= """
+    pedidoelimina = get_object_or_404(Pedidos, ID_Pedido=pedido)
+    descripciones = Descripción_Pedidos.objects.filter(ID_Pedido=pedidoelimina)
+
+    if all(descripcion.Listo for descripcion in descripciones):    
+        mensaje= """
 
         Estimado/a Cliente,
 
@@ -1051,18 +1052,20 @@ def solicitar_retiro_pedido (request, pedido):
         """
 
         
-    messages.success(request, "Correo enviado con exito , espere por retiro de cliente")
+        messages.success(request, "Correo enviado con exito , espere por retiro de cliente")
            
-    send_mail(
-            'Pedido Realizado',
-            mensaje,
-            'ftecnofood@gmail.com',
-            [pedidoelimina.Correo_Sol],
-            fail_silently=False,
-        )
-    
-    pedidoelimina.Estado=("Esperar retiro cliente")
-    pedidoelimina.save()
+        send_mail(
+                'Pedido Realizado',
+                mensaje,
+                'ftecnofood@gmail.com',
+                [pedidoelimina.Correo_Sol],
+                fail_silently=False,
+            )
+        
+        pedidoelimina.Estado=("Esperar retiro cliente")
+        pedidoelimina.save()
+    else:
+        messages.error(request, "El pedido no se encuentra listo para el retiro, espere confirmación de cocina")
 
     return redirect("estadopedidoonline")
     
