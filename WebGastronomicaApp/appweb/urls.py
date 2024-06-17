@@ -61,6 +61,8 @@ urlpatterns = [
      path('correo_boleta/<email>',correo_boleta,name='correo_boleta'),
      path('estadopedidoonline',estadopedidoonline,name='estadopedidoonline'),
      path('pedido_online_cocina/<id_ped>', pedido_online_cocina,name='pedido_online_cocina'),
-     path('terminapedidoonline/<pedido>', terminapedidoonline,name='terminapedidoonline'),
+     path('solicitar_retiro_pedido/<pedido>', solicitar_retiro_pedido,name='solicitar_retiro_pedido'),
      path('menupedidoonline', menupedidoonline,name='menupedidoonline'),
+     path('terminapedidoonline/<pedido>', terminapedidoonline,name='terminapedidoonline'),
+     
 ]

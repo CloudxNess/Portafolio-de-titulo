@@ -783,7 +783,7 @@ def agregar_plato (request, plato_id):
     carro.agregar(plato=plato)
     
 
-    return redirect("menu")
+    return redirect("menupedidoonline")
 
 @login_required(login_url="/accounts/login")
 def eliminar_plato (request, plato_id):
@@ -794,7 +794,7 @@ def eliminar_plato (request, plato_id):
     
     carro.eliminar(plato=plato)
 
-    return redirect("menu")
+    return redirect("menupedidoonline")
 
 @login_required(login_url="/accounts/login")
 def restar_plato (request, plato_id):
@@ -805,7 +805,7 @@ def restar_plato (request, plato_id):
     
     carro.restar_plato(plato=plato)
 
-    return redirect("menu")
+    return redirect("menupedidoonline")
 
 @login_required(login_url="/accounts/login")
 def limpiar_carro (request):
@@ -813,14 +813,14 @@ def limpiar_carro (request):
     carro=Carro(request)
     carro.limpiar_carro()
     
-    return redirect("menu")
+    return redirect("menupedidoonline")
 
 def eliminarP (request, id_ped):
     
     eliminarpedido = get_object_or_404(Pedidos, ID_Pedido=id_ped)
     eliminarpedido.delete()
     
-    return redirect("menu")
+    return redirect("menupedidoonline")
 
 @login_required(login_url="/accounts/login")
 def limpiarreserva(request):
@@ -980,7 +980,7 @@ def correo_boleta(request, email ):
             """
 
         mensaje += f"""
-            Total: {sum(int(item["precio"]) for item in carro.carro.values())}
+            Total: ${sum(int(item["precio"]) for item in carro.carro.values())}
 
         Gracias por preferirnos,
         Equipo TecnoFood
@@ -1005,11 +1005,11 @@ def correo_boleta(request, email ):
 
         ped = get_list_or_404(Pedidos, Correo_Sol=email)
         ultimo_pedido = ped[-1]
-        ultimo_pedido.Estado = "Solicitado a Cocina  UwU"
+        ultimo_pedido.Estado = "Solicitado a Cocina"
         ultimo_pedido.save()
 
 
-        return redirect(to="menu")
+        return redirect(to="menupedidoonline")
 
 
 
@@ -1028,28 +1028,30 @@ def estadopedidoonline (request):
 
 
 
-def terminapedidoonline (request, pedido):
+def solicitar_retiro_pedido (request, pedido):
     
     pedidoelimina = get_object_or_404(Pedidos, ID_Pedido=pedido)
-    
 
-
-
-    
+        
     mensaje= """
 
-        Su compra ya esta disponible para el retiro
-        
-        Gracias por preferirnos,
-        Equipo TecnoFood
-        
+        Estimado/a Cliente,
 
-        'ftecnofood@gmail.com'
+        Nos complace informarle que su pedido ya está listo para ser retirado.
+
+        Agradecemos su preferencia y esperamos servirle nuevamente en el futuro.
+
+        Atentamente,
+        Equipo TecnoFood
+
+        Correo de contacto: ftecnofood@gmail.com
+
+
 
         """
 
         
-    messages.success(request, "Correo enviado con exito , espere confirmación de pedido listo")
+    messages.success(request, "Correo enviado con exito , espere por retiro de cliente")
            
     send_mail(
             'Pedido Realizado',
@@ -1058,8 +1060,20 @@ def terminapedidoonline (request, pedido):
             [pedidoelimina.Correo_Sol],
             fail_silently=False,
         )
+    
+    pedidoelimina.Estado=("Esperar retiro cliente")
+    pedidoelimina.save()
 
+    return redirect("estadopedidoonline")
+    
+
+def terminapedidoonline (request, pedido):
+    
+    pedidoelimina = get_object_or_404(Pedidos, ID_Pedido=pedido)
     pedidoelimina.delete()
+    messages.success(request, "Pedido entregado al cliente")
+
+    return redirect("estadopedidoonline")    
 
 
 

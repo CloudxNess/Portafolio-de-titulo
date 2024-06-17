@@ -14,8 +14,8 @@
           <thead>
             <tr>
               <th scope="col">Producto</th>
-              <th scope="col">Mesa</th>
               <th scope="col">Estado</th>
+              <th scope="col">Correo cliente</th>
               <th scope="col">Cambiar Estado</th>
             </tr>
           </thead>
@@ -25,8 +25,11 @@
                   <td style="background-color: yellow;">{{ y.ID_Pedido }}</td>
                   <td style="background-color: yellow;">{{ y.Estado }}</td>
                   <td style="background-color: yellow;">{{ y.Correo_Sol }}</td>
-                  <td style="background-color: yellow;"><a href="{% url 'terminapedidoonline' y.ID_Pedido  %}" class="btn btn-secondary btn-sm">Terminar Pedido</a></td>
-                 
+                  {% if y.Estado == "Solicitado a Cocina" %}
+                  <td style="background-color: yellow;"><a href="{% url 'solicitar_retiro_pedido' y.ID_Pedido  %}" class="btn btn-primary">Solicitar retiro</a></td>  
+                  {% else %}
+                  <td style="background-color: yellow;"><a href="{% url 'terminapedidoonline' y.ID_Pedido %}" class="btn btn-primary">Terminar pedido</a></td>
+                  {% endif %}
             {% endfor %}
           </tbody>
         </table>

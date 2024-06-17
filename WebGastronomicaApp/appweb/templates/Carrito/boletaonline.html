@@ -55,8 +55,8 @@
         <a href="{% url 'pago_online' mi_boleta.ID_Boleta %}" id="btnTerminarBoleta" class="btn btn-success mx-auto">Pagar Servicio</a>
         {% endif %}
         {% if mi_boleta.Pagado == 1 %}
-        <h6>Para Terminar el proceso Favor precione el Boton </h6>
-        <a href="{% url 'correo_boleta' user.email %}"  class="btn btn-success mx-auto">Precione Aqui</a>
+        <h6>Para Terminar el proceso Favor presione el Botón </h6>
+        <a href="{% url 'correo_boleta' user.email %}"  class="btn btn-success mx-auto">Presione Aqui</a>
       
         {% endif %}
        

@@ -5,17 +5,6 @@
 
 <div class="container">
 
-  <div style="float:right;">
-
-    {% if request.user.is_authenticated %}
-      {% include "Carrito/widget.html" %}
-    {% else %}
-
-      
-    {% endif %}
-
-  </div>
-
   <div class="row">
     <h1 style="text-align: center;">Menú</h1>
     {% for region, MenuP in platos_por_region.items %}
