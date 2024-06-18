@@ -572,7 +572,7 @@ def termina_pedido (request, Mesaa):
     for Y in pedidos:
         pedi_histo=Descripción_Pedidos_Historico.objects.create(ID_Boleta=boleta,ID_Platos=Y.ID_Platos,Costo=Y.Costo)
     pedido.delete()
-    return redirect("boleta")
+    return redirect("boleta",Boleta=bol)
 
 
 @login_required(login_url="/accounts/login")
