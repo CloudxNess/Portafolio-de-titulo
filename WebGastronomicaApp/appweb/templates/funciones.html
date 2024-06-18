@@ -6,7 +6,7 @@
 {% if grupo == 1 %}
 <div class="container">
     <div class="header">
-        <h1>Bienvenido Administrador</h1>
+        <h1>Bienvenido Administrador <i class="fa-solid fa-user-tie"></i></h1>
     </div>
     <div class="buttons">
         <a href="{% url 'registro' %}" class="button">Crear Usuarios</a>
@@ -23,7 +23,7 @@
 {% elif grupo == 2 %}
 <div class="container">
     <div class="header">
-        <h1>Bienvenido Cocinero</h1>
+        <h1>Bienvenido Cocinero <i class="fa-solid fa-kitchen-set"></i> </h1> 
     </div>
     <div class="buttons">
         <a href="{% url 'agregarplato' %}" class="button">Nuevo Plato</a>
@@ -36,7 +36,7 @@
 {% elif grupo == 3 %}
 <div class="container">
     <div class="header">
-        <h1>Bienvenido Garzon</h1>
+        <h1>Bienvenido Garzon <i class="fa-solid fa-bell-concierge"></i></h1>
     </div>
     <div class="buttons">
         <a href="{% url 'pedidosingresadoscocina' %}" class="button">Estado Mesas</a>

@@ -20,12 +20,16 @@ class Usuarios(models.Model):
 
 ## No se sabe si se usa la tabla
 
+############################################################################
+region_choices = ("América del Norte", "América del Norte"),("América del Sur","América del Sur"),("Europa","Europa"),("África","África"),("Asia","Asia"),("Oceanía","Oceanía")
+############################################################################
+
 
 class Platos(models.Model):
     ID_Plato = models.AutoField(primary_key=True, help_text="Id del plato")
     Nombre = models.CharField(max_length=50)
     Costo = models.IntegerField()
-    Region = models.CharField(max_length=50)
+    Region = models.CharField(max_length=50, choices=region_choices)
     Cantidad_Comensales = models.IntegerField()
     Descripcion = models.TextField(max_length=200)
     Disponibilidad = models.BooleanField(default=0)

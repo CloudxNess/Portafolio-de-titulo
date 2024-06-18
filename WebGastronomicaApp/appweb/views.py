@@ -84,7 +84,9 @@ def agregarplato(request):
             formulario = platosform(data=request.POST,files=request.FILES)
 
             if formulario.is_valid():
+                messages.success(request, "Plato creado con exito, espere aprobación de administrador")
                 formulario.save()
+                 
             else:
                 data["mensaje"] = "Error"
                 data["form_agregarplato"] = formulario
