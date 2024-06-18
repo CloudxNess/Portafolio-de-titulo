@@ -16,34 +16,24 @@
           {% else %}
         
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="prof int">
-              <figure>
-                <a href="#">          
-              
-                    {% if x.Estado_Ocupado %}
-                    <a href="#" ><img width="150" height="150" src="{% static 'image/mesaa.png' %}"
-                      class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">  </a>   
-                      {% elif x.Estado_Reservado  %}
-                      <img width="150" height="150" src="{% static 'image/mesab.png' %}"
-                      class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">
-
-                      {% else %}
-                      <img width="150" height="150" src="{% static 'image/mesac.png' %}"
-                      class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">
-                      
-
-                  {% endif %}                 
-              
-                 
-                  </a>
-                
-                <h4 class="nombre" style="margin-left:12%;">{{x.Nombre_Mesa}} </h4>
-                <a href="{% url 'ingresopedidomesa' x.ID_Mesa %}" class="btn btn-primary btn-sm" style="margin-left: 5%;"> Ingresar Pedido </a>
-                <span class="cargo" style="display: none;">O_O</span>
-               
-              </figure>
+            <div class="card mb-3" style="border: 2px solid black; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+                <figure class="text-center">
+                    <a href="#">
+                        {% if x.Estado_Ocupado %}
+                        <img width="150" height="150" src="{% static 'image/mesaa.png' %}" class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">
+                        {% elif x.Estado_Reservado %}
+                        <img width="150" height="150" src="{% static 'image/mesab.png' %}" class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">
+                        {% else %}
+                        <img width="150" height="150" src="{% static 'image/mesac.png' %}" class="img-responsive wp-post-image" alt="" decoding="async" loading="lazy">
+                        {% endif %}
+                    </a>
+                    <h4 class="nombre">{{ x.Nombre_Mesa }}</h4>
+                    <a href="{% url 'ingresopedidomesa' x.ID_Mesa %}" class="btn btn-primary btn-sm">Ingresar Pedido</a>
+                    <span class="cargo" style="display: none;">O_O</span>
+                </figure>
             </div>
-          </div>
+        </div>
+        
           {% endif %}  
 
           
