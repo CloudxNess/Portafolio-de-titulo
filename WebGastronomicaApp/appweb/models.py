@@ -21,7 +21,7 @@ class Usuarios(models.Model):
 ## No se sabe si se usa la tabla
 
 ############################################################################
-region_choices = ("América del Norte", "América del Norte"),("América del Sur","América del Sur"),("Europa","Europa"),("África","África"),("Asia","Asia"),("Oceanía","Oceanía")
+region_choices = ("América del Norte", "América del Norte"),("América del Sur","América del Sur"),("Europa","Europa"),("África","África"),("Asia","Asia"),("Bebestibles","Bebestibles")
 ############################################################################
 
 
