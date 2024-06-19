@@ -75,6 +75,7 @@ def login_page (request):
     return render(request,"registration/login.html")
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_group'], login_url="/")
 def agregarplato(request):
 
     data = {"form_agregarplato" : platosform}
@@ -178,6 +179,7 @@ def registro_cli (request):
 
 ############################################### No se que hace esta funcion  ##############################
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def registrouser (request):
     data = {
         'form' : agregarform
@@ -188,6 +190,7 @@ def registrouser (request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_group'], login_url="/")
 def mesas (request):
      
     mesastb =  Mesa.objects.all()
@@ -202,6 +205,7 @@ def mesas (request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def listaringredientes (request):
     peticiones = Sol_Ingredientes.objects.all()
     ingredientes = Bodega.objects.all()
@@ -215,7 +219,8 @@ def listaringredientes (request):
 
 
 
-@login_required(login_url="/accounts/login") 
+@login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/") 
 def agregaringredientes(request):
 
     
@@ -256,6 +261,7 @@ def agregaringredientes(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_group'], login_url="/")
 def sol_ingredientes(request):
 
     data = {"form_solicitaringrediente" : Sol_Ingredientesform}
@@ -279,6 +285,7 @@ def sol_ingredientes(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def listarusuarios(request):
 
     Usuarios_local = User.objects.all()
@@ -294,6 +301,7 @@ def listarusuarios(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def menuadmin(request):
 
     Menu_local = Platos.objects.all()
@@ -308,6 +316,7 @@ def menuadmin(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def modificarmenu(request, NombreBuscado):
 
     actual = datetime.now().time()
@@ -337,6 +346,7 @@ def modificarmenu(request, NombreBuscado):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def activaplato(request, NombreBuscado):
 
     platom = get_object_or_404(Platos, Nombre=NombreBuscado)
@@ -346,6 +356,7 @@ def activaplato(request, NombreBuscado):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_group'], login_url="/")
 def estadoplatolisto(request, Id_pedido):
 
     platom = get_object_or_404(Descripción_Pedidos, ID=Id_pedido)
@@ -356,6 +367,7 @@ def estadoplatolisto(request, Id_pedido):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def desactivaplato(request, NombreBuscado):
 
     platom = get_object_or_404(Platos, Nombre=NombreBuscado)
@@ -366,6 +378,7 @@ def desactivaplato(request, NombreBuscado):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def DescargarReporteExcel(request):
     ingrediente = Bodega.objects.all()
 
@@ -429,6 +442,7 @@ def menu(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def modificarIngrediente(request, NombreBuscado):
 
     ModificarI = get_object_or_404(Bodega, Nombre=NombreBuscado)
@@ -453,6 +467,7 @@ def modificarIngrediente(request, NombreBuscado):
  
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def actualizar_ingrediente2(request, ingredientebusca):
 
     ingre = get_object_or_404(Bodega, ID_Ing_Bod=ingredientebusca)
@@ -464,6 +479,7 @@ def actualizar_ingrediente2(request, ingredientebusca):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def descuenta_ingrediente(request, IdSolicitud):
 
     Soli = get_object_or_404(Sol_Ingredientes, ID_Solicitud_Ingrediente=IdSolicitud)
@@ -482,6 +498,7 @@ def descuenta_ingrediente(request, IdSolicitud):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def listaragendamiento(request):
 
     Agendamientos = Reserva_Mesa.objects.all()
@@ -496,6 +513,7 @@ def listaragendamiento(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def mesasparapedido (request):
 
     mesaspedido =  Mesa.objects.all()
@@ -505,6 +523,7 @@ def mesasparapedido (request):
     return render(request, "mantenedor/garzon/mesasparapedido.html", data)
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def ingresopedidomesa (request,Mesa):
 
     Menu_local = Platos.objects.all()
@@ -530,6 +549,7 @@ def ingresopedidomesa (request,Mesa):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def inicia_pedido (request, Mesaa):
     mesita = get_object_or_404(Mesa, ID_Mesa=Mesaa)
     mesita.Estado_Ocupado=(1)
@@ -541,6 +561,7 @@ def inicia_pedido (request, Mesaa):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def termina_pedido_nulo (request, Mesaa):
     
     pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
@@ -551,11 +572,12 @@ def termina_pedido_nulo (request, Mesaa):
     return redirect("ingresopedidomesa",Mesa=Mesaa )
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def termina_pedido (request, Mesaa):
     pedido = get_object_or_404(Pedidos, ID_Pedido=Mesaa)
     pedidos = get_list_or_404(Descripción_Pedidos, ID_Pedido=pedido)
-    for pedido in pedidos:
-        if not pedido.Sol_cocina:
+    for pedidoss in pedidos:
+        if not pedidoss.Sol_cocina:
             messages.error(request, "No se puede terminar el servicio. Algunos platos aún no han sido solicitados o eliminados.")
             return redirect("ingresopedidomesa",Mesa=Mesaa ) 
 
@@ -576,6 +598,7 @@ def termina_pedido (request, Mesaa):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def boleta (request, Boleta):
 
     bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
@@ -590,6 +613,7 @@ def boleta (request, Boleta):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def eliminapedidolista (request, Mesaa, pedido):
     
     pedidoelimina = get_object_or_404(Descripción_Pedidos, ID=pedido)
@@ -598,6 +622,7 @@ def eliminapedidolista (request, Mesaa, pedido):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def enviapedidococina (request, Mesaa):
     
     pedidos = get_list_or_404(Descripción_Pedidos, ID_Pedido=Mesaa)
@@ -608,7 +633,7 @@ def enviapedidococina (request, Mesaa):
 
 
 @login_required(login_url="/accounts/login")
-
+@permission_required (['auth.view_user'], login_url="/")
 def pedidolista (request, Mesaa, Plato):
     try:
         pedido = Pedidos.objects.get(ID_Pedido=Mesaa)
@@ -626,6 +651,7 @@ def pedidolista (request, Mesaa, Plato):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def actualizar_agendamiento(request, reserva):     
     Reserva = get_object_or_404(Reserva_Mesa, ID_reserva=reserva)
     mesa = request.POST.get("mesa")
@@ -676,6 +702,7 @@ def actualizar_agendamiento(request, reserva):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_group'], login_url="/")
 def pedidosingresadoscocina(request):
 
     
@@ -697,6 +724,7 @@ def pedidosingresadoscocina(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def estadopedidog (request):
      
     pedidos =  Descripción_Pedidos.objects.all()
@@ -710,6 +738,7 @@ def estadopedidog (request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_group'], login_url="/")
 def estadopedidoc (request):
      
     pedidos =  Descripción_Pedidos.objects.all()
@@ -722,6 +751,7 @@ def estadopedidoc (request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def pago (request, Boleta) :
 
     bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
@@ -733,6 +763,7 @@ def pago (request, Boleta) :
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def pagado (request, Boleta) :
 
     bol = get_object_or_404(Boletas, ID_Boleta=Boleta)
@@ -825,6 +856,7 @@ def eliminarP (request, id_ped):
     return redirect("menupedidoonline")
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def limpiarreserva(request):
 
     actual = datetime.now().time()
@@ -845,6 +877,7 @@ def limpiarreserva(request):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def eliminar_colaborador(request, usuario):
     colaborador = get_object_or_404(User, username=usuario)
 
@@ -854,6 +887,7 @@ def eliminar_colaborador(request, usuario):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.add_user'], login_url="/")
 def modificar_colaborador(request, usuario):
 
     colaborador = get_object_or_404(User, username=usuario)
@@ -874,7 +908,7 @@ def modificar_colaborador(request, usuario):
 
     return render(request, "mantenedor/admin/modificar_colaborador.html", data)
 
-##################################################################################################
+##########         Codigo del carrito de compras           ######################
 
 
 def lista_pedidos_online(request):
@@ -1016,6 +1050,7 @@ def correo_boleta(request, email ):
 
 
 @login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def estadopedidoonline (request):
 
     mesap = get_object_or_404(Mesa, ID_Mesa=0)
@@ -1028,8 +1063,8 @@ def estadopedidoonline (request):
     return render(request, "mantenedor/garzon/Estadopedidoonline.html", data)
 
 
-
-
+@login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def solicitar_retiro_pedido (request, pedido):
 
     pedidoelimina = get_object_or_404(Pedidos, ID_Pedido=pedido)
@@ -1071,7 +1106,8 @@ def solicitar_retiro_pedido (request, pedido):
 
     return redirect("estadopedidoonline")
     
-
+@login_required(login_url="/accounts/login")
+@permission_required (['auth.view_user'], login_url="/")
 def terminapedidoonline (request, pedido):
     
     pedidoelimina = get_object_or_404(Pedidos, ID_Pedido=pedido)
@@ -1080,8 +1116,7 @@ def terminapedidoonline (request, pedido):
 
     return redirect("estadopedidoonline")    
 
-
-
+@login_required(login_url="/accounts/login")
 def menupedidoonline(request):
     Menu_Platos = Platos.objects.filter(Disponibilidad=True).order_by('Region')
 
