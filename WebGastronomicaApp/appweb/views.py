@@ -1129,5 +1129,6 @@ def menupedidoonline(request):
     }
     return render(request,"Carrito/menupedidoonline.html", data)
    
-
+def reportes(request):
+    return render(request,"mantenedor/admin/reportes.html")
 

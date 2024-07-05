@@ -64,5 +64,6 @@ urlpatterns = [
      path('solicitar_retiro_pedido/<pedido>', solicitar_retiro_pedido,name='solicitar_retiro_pedido'),
      path('menupedidoonline', menupedidoonline,name='menupedidoonline'),
      path('terminapedidoonline/<pedido>', terminapedidoonline,name='terminapedidoonline'),
+     path('reportes', reportes,name='reportes'),
      
 ]

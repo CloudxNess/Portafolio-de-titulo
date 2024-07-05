@@ -1,11 +1,5 @@
-Desarrollo Pendiente para Proyecto de título 
-
-    Implementar Power Bi/ Matplotlib  para Inteligencia de Negocios  para Gráficos.
-
-
-    Completar Matriz de Control de Cambios
-
-
+cuenta que se usa en power BI
+matyflen@zabru.onmicrosoft.com
 
 
 Correo : ftecnofood@gmail.com
@@ -27,3 +21,15 @@ Agregar
 @login_required(login_url="/accounts/login") Para que no se pueda acceder a menos que este logueado
 @permission_required (['auth.add_user'], login_url="/") / para que solo acceda el perfil Correspondiente
 
+cocinero  
+@permission_required (['auth.view_group'], login_url="/")
+
+garzon
+@permission_required (['auth.view_user'], login_url="/")
+
+Ambos
+@permission_required (['auth.add_group'], login_url="/")
+
+
+Admin 
+@permission_required (['auth.add_user'], login_url="/")
